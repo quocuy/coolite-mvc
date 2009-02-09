@@ -1,11 +1,11 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
-<%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+<%--<%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>--%>
 
 <script runat="server">
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.TextItem1.DataBind();
+        //this.TextItem1.DataBind();
     }
 </script>
 
@@ -15,7 +15,7 @@
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <%--<h2><%= Html.Encode(ViewData["Message"]) %></h2>--%>
-    <ext:Store ID="Store1" runat="server" RemoteSort="true">
+    <%--<ext:Store ID="Store1" runat="server" RemoteSort="true">
         <Proxy>
             <ext:HttpProxy Url="/Data/GetCustomers/" />
         </Proxy>
@@ -34,10 +34,9 @@
             <ext:Parameter Name="sort" Value="CustomerName" />
         </BaseParams>
         <SortInfo Field="CompanyName" Direction="ASC" />
-    </ext:Store>
+    </ext:Store>--%>
     
-    <% Html.rende %>
-    <ext:FitLayout runat="server">
+    <%--<ext:FitLayout runat="server">
         <ext:GridPanel 
             ID="GridPanel1" 
             runat="server" 
@@ -73,5 +72,5 @@
             </BottomBar>
             <LoadMask ShowMask="true"  />
         </ext:GridPanel>
-    </ext:FitLayout>
+    </ext:FitLayout>--%>
 </asp:Content>

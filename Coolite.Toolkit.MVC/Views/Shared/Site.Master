@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <ext:ScriptManager ID="ScriptManager1" runat="server" />
+    <ext:ScriptManager ID="ScriptManager1" runat="server" SourceFormatting="true" />
     
     <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
@@ -22,7 +22,7 @@
                 <North Collapsible="True" Split="True">
                     <ext:Panel ID="Panel1" runat="server" Height="100" Title="North">
                         <Body>
-                            <div><% Html.RenderPartial("LogOnUserControl"); %></div>
+                            <%--<div><% Html.RenderPartial("LogOnUserControl"); %></div>--%>
                             
                             <ul id="menu">              
                                 <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
