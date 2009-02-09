@@ -1,0 +1,75 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <title></title>
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <ext:ScriptManager ID="ScriptManager1" runat="server" />
+    
+    <ext:ViewPort ID="ViewPort1" runat="server">
+        <Body>
+            <ext:BorderLayout ID="BorderLayout1" runat="server">
+                <North Collapsible="True" Split="True">
+                    <ext:Panel ID="Panel1" runat="server" Height="100" Title="North">
+                        <Body>
+                            <div><% Html.RenderPartial("LogOnUserControl"); %></div>
+                            
+                            <ul id="menu">              
+                                <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
+                                <li><%= Html.ActionLink("About", "About", "Home")%></li>
+                            </ul>
+                        </Body>
+                    </ext:Panel>
+                </North>
+                <East Collapsible="true" Split="true">
+                    <ext:Panel ID="Panel2" runat="server" Title="East" Width="175">
+                        <Body>
+                            <ext:FitLayout ID="FitLayout1" runat="server">
+                                <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" TabPosition="Bottom"
+                                    Title="Title">
+                                    <Tabs>
+                                        <ext:Tab ID="Tab1" runat="server" Title="Tab 1" />
+                                        <ext:Tab ID="Tab2" runat="server" Title="Tab 2" />
+                                    </Tabs>
+                                </ext:TabPanel>
+                            </ext:FitLayout>
+                        </Body>
+                    </ext:Panel>
+                </East>
+                <South Collapsible="true" Split="true">
+                    <ext:Panel ID="Panel3" runat="server" Height="100" Title="South" />
+                </South>
+                <West Collapsible="true" Split="true">
+                    <ext:Panel ID="Panel4" runat="server" Title="West" Width="175">
+                        <Body>
+                            <ext:Accordion ID="Accordion1" runat="server" Animate="true">
+                                <ext:Panel ID="Panel5" runat="server" Border="false" Collapsed="True" Icon="FolderGo"
+                                    Title="Item 1" />
+                                <ext:Panel ID="Panel6" runat="server" Border="false" Collapsed="true" Icon="FolderWrench"
+                                    Title="Item 2" />
+                            </ext:Accordion>
+                        </Body>
+                    </ext:Panel>
+                </West>
+                <Center>
+                    <ext:Panel ID="Panel7" runat="server" Border="false" Header="false">
+                        <Body>
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                        </Body>
+                    </ext:Panel>
+                </Center>
+            </ext:BorderLayout>
+        </Body>
+    </ext:ViewPort>
+</body>
+</html>
