@@ -12,15 +12,21 @@
         <title></title>
     </asp:ContentPlaceHolder>
 </head>
-
 <body>
-    <ext:ScriptManager ID="ScriptManager1" runat="server" SourceFormatting="true" />
+    <ext:ScriptManager ID="ScriptManager1" runat="server" />
     
     <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
             <ext:BorderLayout ID="BorderLayout1" runat="server">
                 <North Collapsible="True" Split="True">
                     <ext:Panel ID="Panel1" runat="server" Height="100" Title="North">
+                        <TopBar>
+                            <ext:Toolbar ID="tbNorth" runat="server">
+                                <Items>
+                                    <ext:Button runat="server" Text="Click" />
+                                </Items>
+                            </ext:Toolbar>
+                        </TopBar>
                         <Body>
                             <%--<div><% Html.RenderPartial("LogOnUserControl"); %></div>--%>
                             
