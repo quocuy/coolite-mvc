@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Coolite.Ext.Web, Version=0.7.0.253, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL" />
-    <Reference Include="Coolite.Utilities, Version=1.0.0.8633, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL" />
+    <Reference Include="Coolite.Utilities, Version=1.0.0.27119, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
