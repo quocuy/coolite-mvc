@@ -2,13 +2,6 @@
 
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
-<script runat="server">
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        this.TextItem1.DataBind();
-    }
-</script>
-
 <asp:Content ID="indexHead" ContentPlaceHolderID="head" runat="server">
     <title>Home Page</title>
 </asp:Content>
@@ -20,7 +13,7 @@
             <ext:HttpProxy Url="/Data/GetCustomers/" />
         </Proxy>
         <Reader>
-            <ext:JsonReader Root="results" TotalProperty="total">
+            <ext:JsonReader Root="data" TotalProperty="totalCount">
                 <Fields>
                     <ext:RecordField Name="CustomerID" />
                     <ext:RecordField Name="CompanyName" SortDir="ASC" />
@@ -36,7 +29,7 @@
         <SortInfo Field="CompanyName" Direction="ASC" />
     </ext:Store>
     
-    <ext:FitLayout runat="server">
+    <ext:FitLayout ID="indexFitLayout1" runat="server">
         <ext:GridPanel 
             ID="GridPanel1" 
             runat="server" 
@@ -56,11 +49,11 @@
                 <ext:Toolbar ID="Toolbar1" runat="server">
                     <Items>
                         <ext:ToolbarTextItem ID="TextItem1" runat="server" Text="<%# DateTime.Now.ToString() %>" />
-                        <ext:ToolbarFill runat="server" />
+                        <ext:ToolbarFill ID="indexFiller1" runat="server" />
                         <ext:Button ID="Button1" runat="server" Text="Save">
                             <AjaxEvents>
                                 <Click Url="/Home/GetTimestamp/">
-                                    <EventMask ShowMask="true" />
+                                    <EventMask ShowMask="true" MinDelay="5000" />
                                 </Click>
                             </AjaxEvents>
                         </ext:Button>

@@ -10,7 +10,7 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         public void GetTimestamp()
         {
-            string script = string.Concat("Ext.get(Toolbar1.items.items[0].el).update(", JSON.Serialize(DateTime.Now.ToString()), ")");
+            string script = string.Concat("TextItem1.setText(", JSON.Serialize(DateTime.Now.ToString()), ")");
             new AjaxResponse(script).Return();
         }
 

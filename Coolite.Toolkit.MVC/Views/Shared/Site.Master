@@ -23,7 +23,7 @@
                         <TopBar>
                             <ext:Toolbar ID="tbNorth" runat="server">
                                 <Items>
-                                    <ext:Button runat="server" Text="Click" />
+                                    <ext:Button ID="NorthButton" runat="server" Text="Click" />
                                 </Items>
                             </ext:Toolbar>
                         </TopBar>

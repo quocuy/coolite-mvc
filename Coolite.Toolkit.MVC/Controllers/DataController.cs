@@ -43,9 +43,12 @@ namespace Coolite.Toolkit.MVC.Controllers
 
             query = query.Skip(start).Take(limit);
             string script = JSON.Serialize(query);
-            string json = string.Concat("{\"total\": \"", totalRecords, "\", \"results\":", script, "}");
-
-            CompressionUtils.GZipResponse(json);
+            StoreResponseData sr = new StoreResponseData();
+            sr.TotalCount = totalRecords;
+            sr.Data = script;
+            sr.Return();
+            //string json = string.Concat("{\"total\": \"", totalRecords, "\", \"results\":", script, "}");
+            //CompressionUtils.GZipResponse(json);
         }
     }
 }
