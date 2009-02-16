@@ -31,8 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coolite.Ext.Web, Version=0.7.0.253, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL" />
-    <Reference Include="Coolite.Utilities, Version=1.0.0.27119, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL" />
+    <Reference Include="Coolite.Ext.Web, Version=0.7.1.40588, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\svn.coolite\trunk\Coolite.Ext.Web\bin\Debug\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Coolite.Utilities, Version=1.0.0.37036, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\svn.coolite\trunk\Coolite.Ext.Web\bin\Debug\Coolite.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d31d9b795d1d0dc3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\svn.coolite\trunk\Coolite.Ext.Web\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
