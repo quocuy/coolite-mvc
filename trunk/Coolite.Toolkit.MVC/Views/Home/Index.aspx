@@ -33,8 +33,9 @@
         <ext:GridPanel 
             ID="GridPanel1" 
             runat="server" 
+            Header="false"
+            Border="false"
             StoreID="Store1" 
-            Title="Customers" 
             AutoExpandColumn="CompanyName">
             <ColumnModel runat="server">
                 <Columns> 
@@ -50,10 +51,10 @@
                     <Items>
                         <ext:ToolbarTextItem ID="TextItem1" runat="server" Text="<%# DateTime.Now.ToString() %>" />
                         <ext:ToolbarFill ID="indexFiller1" runat="server" />
-                        <ext:Button ID="Button1" runat="server" Text="Save">
+                        <ext:Button ID="Button1" runat="server" Text="Save" Icon="Disk">
                             <AjaxEvents>
                                 <Click Url="/Home/GetTimestamp/">
-                                    <EventMask ShowMask="true" MinDelay="5000" />
+                                    <EventMask ShowMask="false" />
                                 </Click>
                             </AjaxEvents>
                         </ext:Button>

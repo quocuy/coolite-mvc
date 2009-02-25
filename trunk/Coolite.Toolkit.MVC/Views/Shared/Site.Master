@@ -18,31 +18,104 @@
     <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
             <ext:BorderLayout ID="BorderLayout1" runat="server">
-                <North Collapsible="True" Split="True">
-                    <ext:Panel ID="Panel1" runat="server" Height="100" Title="North">
-                        <TopBar>
+                <North Margins-Bottom="4">
+                    <ext:Panel ID="Panel1" runat="server" AutoHeight="true" Title="Northwind Traders" Border="true" Icon="World">
+                        <%--<TopBar>
                             <ext:Toolbar ID="tbNorth" runat="server">
                                 <Items>
-                                    <ext:Button ID="NorthButton" runat="server" Text="Click" />
+                                    <ext:Button ID="btnNorth" runat="server" Text="View">
+                                        <Menu>
+                                            <ext:Menu runat="server">
+                                                <Items>
+                                                    <ext:MenuItem runat="server" Text="Home">
+                                                        <Listeners>
+                                                            <Click Handler="window.location.href='/home/'" />
+                                                        </Listeners>
+                                                    </ext:MenuItem>
+                                                    <ext:MenuItem runat="server" Text="About">
+                                                        <Listeners>
+                                                            <Click Handler="window.location.href='/home/about/'" />
+                                                        </Listeners>
+                                                    </ext:MenuItem>
+                                                </Items>
+                                            </ext:Menu>
+                                        </Menu>
+                                    </ext:Button>
                                 </Items>
                             </ext:Toolbar>
-                        </TopBar>
-                        <Body>
-                            <%--<div><% Html.RenderPartial("LogOnUserControl"); %></div>--%>
+                        </TopBar>--%>
+                        <%--<Body>
+                            <div><% Html.RenderPartial("LogOnUserControl"); %></div>
                             
                             <ul id="menu">              
                                 <li><%= Html.ActionLink("Home", "Index", "Home")%></li>
                                 <li><%= Html.ActionLink("About", "About", "Home")%></li>
                             </ul>
-                        </Body>
+                        </Body>--%>
                     </ext:Panel>
                 </North>
+                <West Collapsible="true" Split="true">
+                    <ext:Panel ID="Panel4" runat="server" Title="&nbsp;" Width="225">
+                        <Body>
+                            <ext:Accordion ID="Accordion1" runat="server" Animate="true">
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Customers & Orders">
+                                    <Body>
+                                        <ext:FitLayout runat="server">
+                                            <ext:MenuPanel runat="server" Border="false">
+                                                <Menu>
+                                                    <Items>
+                                                        <ext:MenuItem runat="server" Text="Top Ten Orders by Sales Amount" Icon="ApplicationDouble" />
+                                                        <ext:MenuItem runat="server" Text="Customer Details" Icon="ApplicationForm" />
+                                                        <ext:MenuItem runat="server" Text="Customer List" Icon="ApplicationForm" />
+                                                        <ext:MenuItem runat="server" Text="Order Details" Icon="ApplicationForm" />
+                                                        <ext:MenuItem runat="server" Text="Order List" Icon="ApplicationForm">
+                                                            <Listeners>
+                                                                <Click Handler="#{tpMain}.addTab({
+                                                                        title:'Order List',
+                                                                        iconCls: 'icon-applicationform',
+                                                                        closable: true,
+                                                                        autoload: {
+                                                                            url: '/about/'
+                                                                        }
+                                                                    });" />
+                                                            </Listeners>
+                                                        </ext:MenuItem>
+                                                    </Items>
+                                                </Menu>
+                                            </ext:MenuPanel>
+                                        </ext:FitLayout>
+                                    </Body>
+                                </ext:Panel>
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Inventory & Purchasing" />
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Suppliers" />
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Shippers" />
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Reports" />
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Employees" />
+                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Supporting Objects" />
+                            </ext:Accordion>
+                        </Body>
+                    </ext:Panel>
+                </West> 
+                <Center>
+                    <ext:TabPanel ID="tpMain" runat="server" EnableTabScroll="true">
+                        <Tabs>
+                            <ext:Tab runat="server" Title="Home" Icon="ApplicationForm" Border="false" Html="Dashboard here..." BodyStyle="padding:5px;" />
+                            <ext:Tab runat="server" Title="Customers" Icon="User" Closable="true" Border="false">
+                                <Body>
+                                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                                </Body>
+                            </ext:Tab>
+                        </Tabs>
+                        <Plugins>
+                            <ext:TabCloseMenu runat="server" />
+                        </Plugins>
+                    </ext:TabPanel>
+                </Center>
                 <East Collapsible="true" Split="true">
                     <ext:Panel ID="Panel2" runat="server" Title="East" Width="175">
                         <Body>
                             <ext:FitLayout ID="FitLayout1" runat="server">
-                                <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" TabPosition="Bottom"
-                                    Title="Title">
+                                <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" TabPosition="Bottom" Title="Title">
                                     <Tabs>
                                         <ext:Tab ID="Tab1" runat="server" Title="Tab 1" />
                                         <ext:Tab ID="Tab2" runat="server" Title="Tab 2" />
@@ -52,28 +125,6 @@
                         </Body>
                     </ext:Panel>
                 </East>
-                <South Collapsible="true" Split="true">
-                    <ext:Panel ID="Panel3" runat="server" Height="100" Title="South" />
-                </South>
-                <West Collapsible="true" Split="true">
-                    <ext:Panel ID="Panel4" runat="server" Title="West" Width="175">
-                        <Body>
-                            <ext:Accordion ID="Accordion1" runat="server" Animate="true">
-                                <ext:Panel ID="Panel5" runat="server" Border="false" Collapsed="True" Icon="FolderGo"
-                                    Title="Item 1" />
-                                <ext:Panel ID="Panel6" runat="server" Border="false" Collapsed="true" Icon="FolderWrench"
-                                    Title="Item 2" />
-                            </ext:Accordion>
-                        </Body>
-                    </ext:Panel>
-                </West>
-                <Center>
-                    <ext:Panel ID="Panel7" runat="server" Border="false" Header="false">
-                        <Body>
-                            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-                        </Body>
-                    </ext:Panel>
-                </Center>
             </ext:BorderLayout>
         </Body>
     </ext:ViewPort>
