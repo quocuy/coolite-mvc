@@ -105,6 +105,9 @@
                                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                                 </Body>
                             </ext:Tab>
+                            <ext:Tab runat="server" Title="Form" Icon="ApplicationForm" Closable="true" Border="false">
+                               <AutoLoad Url="/Home/Form/" Mode="IFrame"></AutoLoad>
+                            </ext:Tab>
                         </Tabs>
                         <Plugins>
                             <ext:TabCloseMenu runat="server" />

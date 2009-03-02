@@ -116,6 +116,7 @@
     <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
     <Content Include="Views\Data\Get.aspx" />
+    <Content Include="Views\Home\Form.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.2.6.js" />
