@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
+using Coolite.Utilities;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
@@ -46,23 +47,26 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public ActionResult LogOn()
         {
-
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl)
+        public ActionResult LogOn(string txtUsername, string txtPassword, string rememberMe, string returnUrl)
         {
-
-            if (!ValidateLogOn(userName, password))
+            if (!ValidateLogOn(txtUsername, txtPassword))
             {
-                ViewData["rememberMe"] = rememberMe;
-                return View();
+                //ViewData["rememberMe"] = rememberMe;
+                //return View();
+                //return new Coolite.Ext.Web.MVC.JsonResult { ErrorMessage = "Validation error: Incorrect user name or password!" };
+                return new Coolite.Ext.Web.MVC.JsonResult("Ext.Msg.alert('Validation error', 'Incorrect user name or password!');");
             }
 
-            FormsAuth.SignIn(userName, rememberMe);
+            //emulate net delay
+            System.Threading.Thread.Sleep(2000);
+
+            FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);
@@ -72,6 +76,12 @@ namespace Coolite.Toolkit.MVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public ActionResult GoToLogin()
+        {
+            return RedirectToAction("LogOn", "Account");
+        }
+
 
         public ActionResult LogOff()
         {

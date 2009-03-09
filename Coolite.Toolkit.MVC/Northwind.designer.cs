@@ -36,6 +36,12 @@ namespace Coolite.Toolkit.MVC
     partial void InsertTerritory(Territory instance);
     partial void UpdateTerritory(Territory instance);
     partial void DeleteTerritory(Territory instance);
+    partial void InsertCustomerCustomerDemo(CustomerCustomerDemo instance);
+    partial void UpdateCustomerCustomerDemo(CustomerCustomerDemo instance);
+    partial void DeleteCustomerCustomerDemo(CustomerCustomerDemo instance);
+    partial void InsertCustomerDemographic(CustomerDemographic instance);
+    partial void UpdateCustomerDemographic(CustomerDemographic instance);
+    partial void DeleteCustomerDemographic(CustomerDemographic instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
@@ -45,9 +51,9 @@ namespace Coolite.Toolkit.MVC
     partial void InsertEmployeeTerritory(EmployeeTerritory instance);
     partial void UpdateEmployeeTerritory(EmployeeTerritory instance);
     partial void DeleteEmployeeTerritory(EmployeeTerritory instance);
-    partial void InsertOrderDetail(OrderDetail instance);
-    partial void UpdateOrderDetail(OrderDetail instance);
-    partial void DeleteOrderDetail(OrderDetail instance);
+    partial void InsertOrder_Detail(Order_Detail instance);
+    partial void UpdateOrder_Detail(Order_Detail instance);
+    partial void DeleteOrder_Detail(Order_Detail instance);
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
@@ -66,7 +72,7 @@ namespace Coolite.Toolkit.MVC
     #endregion
 		
 		public NorthwindDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NORTHWNDConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NORTHWNDConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -111,6 +117,22 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
+		public System.Data.Linq.Table<CustomerCustomerDemo> CustomerCustomerDemos
+		{
+			get
+			{
+				return this.GetTable<CustomerCustomerDemo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CustomerDemographic> CustomerDemographics
+		{
+			get
+			{
+				return this.GetTable<CustomerDemographic>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Customer> Customers
 		{
 			get
@@ -135,11 +157,11 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		public System.Data.Linq.Table<OrderDetail> OrderDetails
+		public System.Data.Linq.Table<Order_Detail> Order_Details
 		{
 			get
 			{
-				return this.GetTable<OrderDetail>();
+				return this.GetTable<Order_Detail>();
 			}
 		}
 		
@@ -181,6 +203,183 @@ namespace Coolite.Toolkit.MVC
 			{
 				return this.GetTable<Supplier>();
 			}
+		}
+		
+		public System.Data.Linq.Table<Alphabetical_list_of_product> Alphabetical_list_of_products
+		{
+			get
+			{
+				return this.GetTable<Alphabetical_list_of_product>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Summary_of_Sales_by_Year> Summary_of_Sales_by_Years
+		{
+			get
+			{
+				return this.GetTable<Summary_of_Sales_by_Year>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Category_Sales_for_1997> Category_Sales_for_1997s
+		{
+			get
+			{
+				return this.GetTable<Category_Sales_for_1997>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Current_Product_List> Current_Product_Lists
+		{
+			get
+			{
+				return this.GetTable<Current_Product_List>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer_and_Suppliers_by_City> Customer_and_Suppliers_by_Cities
+		{
+			get
+			{
+				return this.GetTable<Customer_and_Suppliers_by_City>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Invoice> Invoices
+		{
+			get
+			{
+				return this.GetTable<Invoice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Order_Details_Extended> Order_Details_Extendeds
+		{
+			get
+			{
+				return this.GetTable<Order_Details_Extended>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Order_Subtotal> Order_Subtotals
+		{
+			get
+			{
+				return this.GetTable<Order_Subtotal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Orders_Qry> Orders_Qries
+		{
+			get
+			{
+				return this.GetTable<Orders_Qry>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Product_Sales_for_1997> Product_Sales_for_1997s
+		{
+			get
+			{
+				return this.GetTable<Product_Sales_for_1997>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Products_Above_Average_Price> Products_Above_Average_Prices
+		{
+			get
+			{
+				return this.GetTable<Products_Above_Average_Price>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Products_by_Category> Products_by_Categories
+		{
+			get
+			{
+				return this.GetTable<Products_by_Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Quarterly_Order> Quarterly_Orders
+		{
+			get
+			{
+				return this.GetTable<Quarterly_Order>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Sales_by_Category> Sales_by_Categories
+		{
+			get
+			{
+				return this.GetTable<Sales_by_Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Sales_Totals_by_Amount> Sales_Totals_by_Amounts
+		{
+			get
+			{
+				return this.GetTable<Sales_Totals_by_Amount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Summary_of_Sales_by_Quarter> Summary_of_Sales_by_Quarters
+		{
+			get
+			{
+				return this.GetTable<Summary_of_Sales_by_Quarter>();
+			}
+		}
+		
+		[Function(Name="dbo.CustOrderHist")]
+		public ISingleResult<CustOrderHistResult> CustOrderHist([Parameter(Name="CustomerID", DbType="NChar(5)")] string customerID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID);
+			return ((ISingleResult<CustOrderHistResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.[Ten Most Expensive Products]")]
+		public ISingleResult<Ten_Most_Expensive_ProductsResult> Ten_Most_Expensive_Products()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Ten_Most_Expensive_ProductsResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.CustOrdersDetail")]
+		public ISingleResult<CustOrdersDetailResult> CustOrdersDetail([Parameter(Name="OrderID", DbType="Int")] System.Nullable<int> orderID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), orderID);
+			return ((ISingleResult<CustOrdersDetailResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.CustOrdersOrders")]
+		public ISingleResult<CustOrdersOrdersResult> CustOrdersOrders([Parameter(Name="CustomerID", DbType="NChar(5)")] string customerID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID);
+			return ((ISingleResult<CustOrdersOrdersResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.[Employee Sales by Country]")]
+		public ISingleResult<Employee_Sales_by_CountryResult> Employee_Sales_by_Country([Parameter(Name="Beginning_Date", DbType="DateTime")] System.Nullable<System.DateTime> beginning_Date, [Parameter(Name="Ending_Date", DbType="DateTime")] System.Nullable<System.DateTime> ending_Date)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), beginning_Date, ending_Date);
+			return ((ISingleResult<Employee_Sales_by_CountryResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.[Sales by Year]")]
+		public ISingleResult<Sales_by_YearResult> Sales_by_Year([Parameter(Name="Beginning_Date", DbType="DateTime")] System.Nullable<System.DateTime> beginning_Date, [Parameter(Name="Ending_Date", DbType="DateTime")] System.Nullable<System.DateTime> ending_Date)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), beginning_Date, ending_Date);
+			return ((ISingleResult<Sales_by_YearResult>)(result.ReturnValue));
+		}
+		
+		[Function(Name="dbo.SalesByCategory")]
+		public ISingleResult<SalesByCategoryResult> SalesByCategory([Parameter(Name="CategoryName", DbType="NVarChar(15)")] string categoryName, [Parameter(Name="OrdYear", DbType="NVarChar(4)")] string ordYear)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), categoryName, ordYear);
+			return ((ISingleResult<SalesByCategoryResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -525,6 +724,288 @@ namespace Coolite.Toolkit.MVC
 		}
 	}
 	
+	[Table(Name="dbo.CustomerCustomerDemo")]
+	public partial class CustomerCustomerDemo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CustomerID;
+		
+		private string _CustomerTypeID;
+		
+		private EntityRef<CustomerDemographic> _CustomerDemographic;
+		
+		private EntityRef<Customer> _Customer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerIDChanging(string value);
+    partial void OnCustomerIDChanged();
+    partial void OnCustomerTypeIDChanging(string value);
+    partial void OnCustomerTypeIDChanged();
+    #endregion
+		
+		public CustomerCustomerDemo()
+		{
+			this._CustomerDemographic = default(EntityRef<CustomerDemographic>);
+			this._Customer = default(EntityRef<Customer>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CustomerTypeID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerTypeID
+		{
+			get
+			{
+				return this._CustomerTypeID;
+			}
+			set
+			{
+				if ((this._CustomerTypeID != value))
+				{
+					if (this._CustomerDemographic.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerTypeID = value;
+					this.SendPropertyChanged("CustomerTypeID");
+					this.OnCustomerTypeIDChanged();
+				}
+			}
+		}
+		
+		[Association(Name="CustomerDemographic_CustomerCustomerDemo", Storage="_CustomerDemographic", ThisKey="CustomerTypeID", OtherKey="CustomerTypeID", IsForeignKey=true)]
+		public CustomerDemographic CustomerDemographic
+		{
+			get
+			{
+				return this._CustomerDemographic.Entity;
+			}
+			set
+			{
+				CustomerDemographic previousValue = this._CustomerDemographic.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDemographic.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDemographic.Entity = null;
+						previousValue.CustomerCustomerDemos.Remove(this);
+					}
+					this._CustomerDemographic.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerCustomerDemos.Add(this);
+						this._CustomerTypeID = value.CustomerTypeID;
+					}
+					else
+					{
+						this._CustomerTypeID = default(string);
+					}
+					this.SendPropertyChanged("CustomerDemographic");
+				}
+			}
+		}
+		
+		[Association(Name="Customer_CustomerCustomerDemo", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.CustomerCustomerDemos.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerCustomerDemos.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(string);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.CustomerDemographics")]
+	public partial class CustomerDemographic : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CustomerTypeID;
+		
+		private string _CustomerDesc;
+		
+		private EntitySet<CustomerCustomerDemo> _CustomerCustomerDemos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerTypeIDChanging(string value);
+    partial void OnCustomerTypeIDChanged();
+    partial void OnCustomerDescChanging(string value);
+    partial void OnCustomerDescChanged();
+    #endregion
+		
+		public CustomerDemographic()
+		{
+			this._CustomerCustomerDemos = new EntitySet<CustomerCustomerDemo>(new Action<CustomerCustomerDemo>(this.attach_CustomerCustomerDemos), new Action<CustomerCustomerDemo>(this.detach_CustomerCustomerDemos));
+			OnCreated();
+		}
+		
+		[Column(Storage="_CustomerTypeID", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerTypeID
+		{
+			get
+			{
+				return this._CustomerTypeID;
+			}
+			set
+			{
+				if ((this._CustomerTypeID != value))
+				{
+					this.OnCustomerTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerTypeID = value;
+					this.SendPropertyChanged("CustomerTypeID");
+					this.OnCustomerTypeIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CustomerDesc", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string CustomerDesc
+		{
+			get
+			{
+				return this._CustomerDesc;
+			}
+			set
+			{
+				if ((this._CustomerDesc != value))
+				{
+					this.OnCustomerDescChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerDesc = value;
+					this.SendPropertyChanged("CustomerDesc");
+					this.OnCustomerDescChanged();
+				}
+			}
+		}
+		
+		[Association(Name="CustomerDemographic_CustomerCustomerDemo", Storage="_CustomerCustomerDemos", ThisKey="CustomerTypeID", OtherKey="CustomerTypeID")]
+		public EntitySet<CustomerCustomerDemo> CustomerCustomerDemos
+		{
+			get
+			{
+				return this._CustomerCustomerDemos;
+			}
+			set
+			{
+				this._CustomerCustomerDemos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CustomerCustomerDemos(CustomerCustomerDemo entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDemographic = this;
+		}
+		
+		private void detach_CustomerCustomerDemos(CustomerCustomerDemo entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDemographic = null;
+		}
+	}
+	
 	[Table(Name="dbo.Customers")]
 	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -552,6 +1033,8 @@ namespace Coolite.Toolkit.MVC
 		private string _Phone;
 		
 		private string _Fax;
+		
+		private EntitySet<CustomerCustomerDemo> _CustomerCustomerDemos;
 		
 		private EntitySet<Order> _Orders;
 		
@@ -585,6 +1068,7 @@ namespace Coolite.Toolkit.MVC
 		
 		public Customer()
 		{
+			this._CustomerCustomerDemos = new EntitySet<CustomerCustomerDemo>(new Action<CustomerCustomerDemo>(this.attach_CustomerCustomerDemos), new Action<CustomerCustomerDemo>(this.detach_CustomerCustomerDemos));
 			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
 			OnCreated();
 		}
@@ -809,6 +1293,19 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
+		[Association(Name="Customer_CustomerCustomerDemo", Storage="_CustomerCustomerDemos", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<CustomerCustomerDemo> CustomerCustomerDemos
+		{
+			get
+			{
+				return this._CustomerCustomerDemos;
+			}
+			set
+			{
+				this._CustomerCustomerDemos.Assign(value);
+			}
+		}
+		
 		[Association(Name="Customer_Order", Storage="_Orders", ThisKey="CustomerID", OtherKey="CustomerID")]
 		public EntitySet<Order> Orders
 		{
@@ -840,6 +1337,18 @@ namespace Coolite.Toolkit.MVC
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_CustomerCustomerDemos(CustomerCustomerDemo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_CustomerCustomerDemos(CustomerCustomerDemo entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
 		}
 		
 		private void attach_Orders(Order entity)
@@ -1618,8 +2127,8 @@ namespace Coolite.Toolkit.MVC
 		}
 	}
 	
-	[Table(Name="dbo.OrderDetails")]
-	public partial class OrderDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.[Order Details]")]
+	public partial class Order_Detail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1654,7 +2163,7 @@ namespace Coolite.Toolkit.MVC
     partial void OnDiscountChanged();
     #endregion
 		
-		public OrderDetail()
+		public Order_Detail()
 		{
 			this._Order = default(EntityRef<Order>);
 			this._Product = default(EntityRef<Product>);
@@ -1769,7 +2278,7 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		[Association(Name="Order_OrderDetail", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
+		[Association(Name="Order_Order_Detail", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
 		public Order Order
 		{
 			get
@@ -1786,12 +2295,12 @@ namespace Coolite.Toolkit.MVC
 					if ((previousValue != null))
 					{
 						this._Order.Entity = null;
-						previousValue.OrderDetails.Remove(this);
+						previousValue.Order_Details.Remove(this);
 					}
 					this._Order.Entity = value;
 					if ((value != null))
 					{
-						value.OrderDetails.Add(this);
+						value.Order_Details.Add(this);
 						this._OrderID = value.OrderID;
 					}
 					else
@@ -1803,7 +2312,7 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		[Association(Name="Product_OrderDetail", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
+		[Association(Name="Product_Order_Detail", Storage="_Product", ThisKey="ProductID", OtherKey="ProductID", IsForeignKey=true)]
 		public Product Product
 		{
 			get
@@ -1820,12 +2329,12 @@ namespace Coolite.Toolkit.MVC
 					if ((previousValue != null))
 					{
 						this._Product.Entity = null;
-						previousValue.OrderDetails.Remove(this);
+						previousValue.Order_Details.Remove(this);
 					}
 					this._Product.Entity = value;
 					if ((value != null))
 					{
-						value.OrderDetails.Add(this);
+						value.Order_Details.Add(this);
 						this._ProductID = value.ProductID;
 					}
 					else
@@ -1892,7 +2401,7 @@ namespace Coolite.Toolkit.MVC
 		
 		private string _ShipCountry;
 		
-		private EntitySet<OrderDetail> _OrderDetails;
+		private EntitySet<Order_Detail> _Order_Details;
 		
 		private EntityRef<Customer> _Customer;
 		
@@ -1936,7 +2445,7 @@ namespace Coolite.Toolkit.MVC
 		
 		public Order()
 		{
-			this._OrderDetails = new EntitySet<OrderDetail>(new Action<OrderDetail>(this.attach_OrderDetails), new Action<OrderDetail>(this.detach_OrderDetails));
+			this._Order_Details = new EntitySet<Order_Detail>(new Action<Order_Detail>(this.attach_Order_Details), new Action<Order_Detail>(this.detach_Order_Details));
 			this._Customer = default(EntityRef<Customer>);
 			this._Employee = default(EntityRef<Employee>);
 			this._Shipper = default(EntityRef<Shipper>);
@@ -2235,16 +2744,16 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		[Association(Name="Order_OrderDetail", Storage="_OrderDetails", ThisKey="OrderID", OtherKey="OrderID")]
-		public EntitySet<OrderDetail> OrderDetails
+		[Association(Name="Order_Order_Detail", Storage="_Order_Details", ThisKey="OrderID", OtherKey="OrderID")]
+		public EntitySet<Order_Detail> Order_Details
 		{
 			get
 			{
-				return this._OrderDetails;
+				return this._Order_Details;
 			}
 			set
 			{
-				this._OrderDetails.Assign(value);
+				this._Order_Details.Assign(value);
 			}
 		}
 		
@@ -2370,13 +2879,13 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		private void attach_OrderDetails(OrderDetail entity)
+		private void attach_Order_Details(Order_Detail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Order = this;
 		}
 		
-		private void detach_OrderDetails(OrderDetail entity)
+		private void detach_Order_Details(Order_Detail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Order = null;
@@ -2409,7 +2918,7 @@ namespace Coolite.Toolkit.MVC
 		
 		private bool _Discontinued;
 		
-		private EntitySet<OrderDetail> _OrderDetails;
+		private EntitySet<Order_Detail> _Order_Details;
 		
 		private EntityRef<Category> _Category;
 		
@@ -2443,7 +2952,7 @@ namespace Coolite.Toolkit.MVC
 		
 		public Product()
 		{
-			this._OrderDetails = new EntitySet<OrderDetail>(new Action<OrderDetail>(this.attach_OrderDetails), new Action<OrderDetail>(this.detach_OrderDetails));
+			this._Order_Details = new EntitySet<Order_Detail>(new Action<Order_Detail>(this.attach_Order_Details), new Action<Order_Detail>(this.detach_Order_Details));
 			this._Category = default(EntityRef<Category>);
 			this._Supplier = default(EntityRef<Supplier>);
 			OnCreated();
@@ -2657,16 +3166,16 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		[Association(Name="Product_OrderDetail", Storage="_OrderDetails", ThisKey="ProductID", OtherKey="ProductID")]
-		public EntitySet<OrderDetail> OrderDetails
+		[Association(Name="Product_Order_Detail", Storage="_Order_Details", ThisKey="ProductID", OtherKey="ProductID")]
+		public EntitySet<Order_Detail> Order_Details
 		{
 			get
 			{
-				return this._OrderDetails;
+				return this._Order_Details;
 			}
 			set
 			{
-				this._OrderDetails.Assign(value);
+				this._Order_Details.Assign(value);
 			}
 		}
 		
@@ -2758,13 +3267,13 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
-		private void attach_OrderDetails(OrderDetail entity)
+		private void attach_Order_Details(Order_Detail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = this;
 		}
 		
-		private void detach_OrderDetails(OrderDetail entity)
+		private void detach_Order_Details(Order_Detail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
@@ -3374,6 +3883,2492 @@ namespace Coolite.Toolkit.MVC
 		{
 			this.SendPropertyChanging();
 			entity.Supplier = null;
+		}
+	}
+	
+	[Table(Name="dbo.[Alphabetical list of products]")]
+	public partial class Alphabetical_list_of_product
+	{
+		
+		private int _ProductID;
+		
+		private string _ProductName;
+		
+		private System.Nullable<int> _SupplierID;
+		
+		private System.Nullable<int> _CategoryID;
+		
+		private string _QuantityPerUnit;
+		
+		private System.Nullable<decimal> _UnitPrice;
+		
+		private System.Nullable<short> _UnitsInStock;
+		
+		private System.Nullable<short> _UnitsOnOrder;
+		
+		private System.Nullable<short> _ReorderLevel;
+		
+		private bool _Discontinued;
+		
+		private string _CategoryName;
+		
+		public Alphabetical_list_of_product()
+		{
+		}
+		
+		[Column(Storage="_ProductID", DbType="Int NOT NULL")]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					this._ProductID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_SupplierID", DbType="Int")]
+		public System.Nullable<int> SupplierID
+		{
+			get
+			{
+				return this._SupplierID;
+			}
+			set
+			{
+				if ((this._SupplierID != value))
+				{
+					this._SupplierID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CategoryID", DbType="Int")]
+		public System.Nullable<int> CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					this._CategoryID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_QuantityPerUnit", DbType="NVarChar(20)")]
+		public string QuantityPerUnit
+		{
+			get
+			{
+				return this._QuantityPerUnit;
+			}
+			set
+			{
+				if ((this._QuantityPerUnit != value))
+				{
+					this._QuantityPerUnit = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money")]
+		public System.Nullable<decimal> UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitsInStock", DbType="SmallInt")]
+		public System.Nullable<short> UnitsInStock
+		{
+			get
+			{
+				return this._UnitsInStock;
+			}
+			set
+			{
+				if ((this._UnitsInStock != value))
+				{
+					this._UnitsInStock = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitsOnOrder", DbType="SmallInt")]
+		public System.Nullable<short> UnitsOnOrder
+		{
+			get
+			{
+				return this._UnitsOnOrder;
+			}
+			set
+			{
+				if ((this._UnitsOnOrder != value))
+				{
+					this._UnitsOnOrder = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ReorderLevel", DbType="SmallInt")]
+		public System.Nullable<short> ReorderLevel
+		{
+			get
+			{
+				return this._ReorderLevel;
+			}
+			set
+			{
+				if ((this._ReorderLevel != value))
+				{
+					this._ReorderLevel = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Discontinued", DbType="Bit NOT NULL")]
+		public bool Discontinued
+		{
+			get
+			{
+				return this._Discontinued;
+			}
+			set
+			{
+				if ((this._Discontinued != value))
+				{
+					this._Discontinued = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CategoryName", DbType="NVarChar(15) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this._CategoryName = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Summary of Sales by Year]")]
+	public partial class Summary_of_Sales_by_Year
+	{
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private int _OrderID;
+		
+		private System.Nullable<decimal> _Subtotal;
+		
+		public Summary_of_Sales_by_Year()
+		{
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Subtotal", DbType="Money")]
+		public System.Nullable<decimal> Subtotal
+		{
+			get
+			{
+				return this._Subtotal;
+			}
+			set
+			{
+				if ((this._Subtotal != value))
+				{
+					this._Subtotal = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Category Sales for 1997]")]
+	public partial class Category_Sales_for_1997
+	{
+		
+		private string _CategoryName;
+		
+		private System.Nullable<decimal> _CategorySales;
+		
+		public Category_Sales_for_1997()
+		{
+		}
+		
+		[Column(Storage="_CategoryName", DbType="NVarChar(15) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this._CategoryName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CategorySales", DbType="Money")]
+		public System.Nullable<decimal> CategorySales
+		{
+			get
+			{
+				return this._CategorySales;
+			}
+			set
+			{
+				if ((this._CategorySales != value))
+				{
+					this._CategorySales = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Current Product List]")]
+	public partial class Current_Product_List
+	{
+		
+		private int _ProductID;
+		
+		private string _ProductName;
+		
+		public Current_Product_List()
+		{
+		}
+		
+		[Column(Storage="_ProductID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					this._ProductID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Customer and Suppliers by City]")]
+	public partial class Customer_and_Suppliers_by_City
+	{
+		
+		private string _City;
+		
+		private string _CompanyName;
+		
+		private string _ContactName;
+		
+		private string _Relationship;
+		
+		public Customer_and_Suppliers_by_City()
+		{
+		}
+		
+		[Column(Storage="_City", DbType="NVarChar(15)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ContactName", DbType="NVarChar(30)")]
+		public string ContactName
+		{
+			get
+			{
+				return this._ContactName;
+			}
+			set
+			{
+				if ((this._ContactName != value))
+				{
+					this._ContactName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Relationship", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		public string Relationship
+		{
+			get
+			{
+				return this._Relationship;
+			}
+			set
+			{
+				if ((this._Relationship != value))
+				{
+					this._Relationship = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.Invoices")]
+	public partial class Invoice
+	{
+		
+		private string _ShipName;
+		
+		private string _ShipAddress;
+		
+		private string _ShipCity;
+		
+		private string _ShipRegion;
+		
+		private string _ShipPostalCode;
+		
+		private string _ShipCountry;
+		
+		private string _CustomerID;
+		
+		private string _CustomerName;
+		
+		private string _Address;
+		
+		private string _City;
+		
+		private string _Region;
+		
+		private string _PostalCode;
+		
+		private string _Country;
+		
+		private string _Salesperson;
+		
+		private int _OrderID;
+		
+		private System.Nullable<System.DateTime> _OrderDate;
+		
+		private System.Nullable<System.DateTime> _RequiredDate;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private string _ShipperName;
+		
+		private int _ProductID;
+		
+		private string _ProductName;
+		
+		private decimal _UnitPrice;
+		
+		private short _Quantity;
+		
+		private float _Discount;
+		
+		private System.Nullable<decimal> _ExtendedPrice;
+		
+		private System.Nullable<decimal> _Freight;
+		
+		public Invoice()
+		{
+		}
+		
+		[Column(Storage="_ShipName", DbType="NVarChar(40)")]
+		public string ShipName
+		{
+			get
+			{
+				return this._ShipName;
+			}
+			set
+			{
+				if ((this._ShipName != value))
+				{
+					this._ShipName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipAddress", DbType="NVarChar(60)")]
+		public string ShipAddress
+		{
+			get
+			{
+				return this._ShipAddress;
+			}
+			set
+			{
+				if ((this._ShipAddress != value))
+				{
+					this._ShipAddress = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipCity", DbType="NVarChar(15)")]
+		public string ShipCity
+		{
+			get
+			{
+				return this._ShipCity;
+			}
+			set
+			{
+				if ((this._ShipCity != value))
+				{
+					this._ShipCity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipRegion", DbType="NVarChar(15)")]
+		public string ShipRegion
+		{
+			get
+			{
+				return this._ShipRegion;
+			}
+			set
+			{
+				if ((this._ShipRegion != value))
+				{
+					this._ShipRegion = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipPostalCode", DbType="NVarChar(10)")]
+		public string ShipPostalCode
+		{
+			get
+			{
+				return this._ShipPostalCode;
+			}
+			set
+			{
+				if ((this._ShipPostalCode != value))
+				{
+					this._ShipPostalCode = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipCountry", DbType="NVarChar(15)")]
+		public string ShipCountry
+		{
+			get
+			{
+				return this._ShipCountry;
+			}
+			set
+			{
+				if ((this._ShipCountry != value))
+				{
+					this._ShipCountry = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		public string CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CustomerName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Address", DbType="NVarChar(60)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_City", DbType="NVarChar(15)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Region", DbType="NVarChar(15)")]
+		public string Region
+		{
+			get
+			{
+				return this._Region;
+			}
+			set
+			{
+				if ((this._Region != value))
+				{
+					this._Region = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_PostalCode", DbType="NVarChar(10)")]
+		public string PostalCode
+		{
+			get
+			{
+				return this._PostalCode;
+			}
+			set
+			{
+				if ((this._PostalCode != value))
+				{
+					this._PostalCode = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Country", DbType="NVarChar(15)")]
+		public string Country
+		{
+			get
+			{
+				return this._Country;
+			}
+			set
+			{
+				if ((this._Country != value))
+				{
+					this._Country = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Salesperson", DbType="NVarChar(31) NOT NULL", CanBeNull=false)]
+		public string Salesperson
+		{
+			get
+			{
+				return this._Salesperson;
+			}
+			set
+			{
+				if ((this._Salesperson != value))
+				{
+					this._Salesperson = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> OrderDate
+		{
+			get
+			{
+				return this._OrderDate;
+			}
+			set
+			{
+				if ((this._OrderDate != value))
+				{
+					this._OrderDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_RequiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RequiredDate
+		{
+			get
+			{
+				return this._RequiredDate;
+			}
+			set
+			{
+				if ((this._RequiredDate != value))
+				{
+					this._RequiredDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipperName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ShipperName
+		{
+			get
+			{
+				return this._ShipperName;
+			}
+			set
+			{
+				if ((this._ShipperName != value))
+				{
+					this._ShipperName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductID", DbType="Int NOT NULL")]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					this._ProductID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money NOT NULL")]
+		public decimal UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Quantity", DbType="SmallInt NOT NULL")]
+		public short Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Discount", DbType="Real NOT NULL")]
+		public float Discount
+		{
+			get
+			{
+				return this._Discount;
+			}
+			set
+			{
+				if ((this._Discount != value))
+				{
+					this._Discount = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ExtendedPrice", DbType="Money")]
+		public System.Nullable<decimal> ExtendedPrice
+		{
+			get
+			{
+				return this._ExtendedPrice;
+			}
+			set
+			{
+				if ((this._ExtendedPrice != value))
+				{
+					this._ExtendedPrice = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Freight", DbType="Money")]
+		public System.Nullable<decimal> Freight
+		{
+			get
+			{
+				return this._Freight;
+			}
+			set
+			{
+				if ((this._Freight != value))
+				{
+					this._Freight = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Order Details Extended]")]
+	public partial class Order_Details_Extended
+	{
+		
+		private int _OrderID;
+		
+		private int _ProductID;
+		
+		private string _ProductName;
+		
+		private decimal _UnitPrice;
+		
+		private short _Quantity;
+		
+		private float _Discount;
+		
+		private System.Nullable<decimal> _ExtendedPrice;
+		
+		public Order_Details_Extended()
+		{
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductID", DbType="Int NOT NULL")]
+		public int ProductID
+		{
+			get
+			{
+				return this._ProductID;
+			}
+			set
+			{
+				if ((this._ProductID != value))
+				{
+					this._ProductID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money NOT NULL")]
+		public decimal UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Quantity", DbType="SmallInt NOT NULL")]
+		public short Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Discount", DbType="Real NOT NULL")]
+		public float Discount
+		{
+			get
+			{
+				return this._Discount;
+			}
+			set
+			{
+				if ((this._Discount != value))
+				{
+					this._Discount = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ExtendedPrice", DbType="Money")]
+		public System.Nullable<decimal> ExtendedPrice
+		{
+			get
+			{
+				return this._ExtendedPrice;
+			}
+			set
+			{
+				if ((this._ExtendedPrice != value))
+				{
+					this._ExtendedPrice = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Order Subtotals]")]
+	public partial class Order_Subtotal
+	{
+		
+		private int _OrderID;
+		
+		private System.Nullable<decimal> _Subtotal;
+		
+		public Order_Subtotal()
+		{
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Subtotal", DbType="Money")]
+		public System.Nullable<decimal> Subtotal
+		{
+			get
+			{
+				return this._Subtotal;
+			}
+			set
+			{
+				if ((this._Subtotal != value))
+				{
+					this._Subtotal = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Orders Qry]")]
+	public partial class Orders_Qry
+	{
+		
+		private int _OrderID;
+		
+		private string _CustomerID;
+		
+		private System.Nullable<int> _EmployeeID;
+		
+		private System.Nullable<System.DateTime> _OrderDate;
+		
+		private System.Nullable<System.DateTime> _RequiredDate;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private System.Nullable<int> _ShipVia;
+		
+		private System.Nullable<decimal> _Freight;
+		
+		private string _ShipName;
+		
+		private string _ShipAddress;
+		
+		private string _ShipCity;
+		
+		private string _ShipRegion;
+		
+		private string _ShipPostalCode;
+		
+		private string _ShipCountry;
+		
+		private string _CompanyName;
+		
+		private string _Address;
+		
+		private string _City;
+		
+		private string _Region;
+		
+		private string _PostalCode;
+		
+		private string _Country;
+		
+		public Orders_Qry()
+		{
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		public string CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_EmployeeID", DbType="Int")]
+		public System.Nullable<int> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> OrderDate
+		{
+			get
+			{
+				return this._OrderDate;
+			}
+			set
+			{
+				if ((this._OrderDate != value))
+				{
+					this._OrderDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_RequiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RequiredDate
+		{
+			get
+			{
+				return this._RequiredDate;
+			}
+			set
+			{
+				if ((this._RequiredDate != value))
+				{
+					this._RequiredDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipVia", DbType="Int")]
+		public System.Nullable<int> ShipVia
+		{
+			get
+			{
+				return this._ShipVia;
+			}
+			set
+			{
+				if ((this._ShipVia != value))
+				{
+					this._ShipVia = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Freight", DbType="Money")]
+		public System.Nullable<decimal> Freight
+		{
+			get
+			{
+				return this._Freight;
+			}
+			set
+			{
+				if ((this._Freight != value))
+				{
+					this._Freight = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipName", DbType="NVarChar(40)")]
+		public string ShipName
+		{
+			get
+			{
+				return this._ShipName;
+			}
+			set
+			{
+				if ((this._ShipName != value))
+				{
+					this._ShipName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipAddress", DbType="NVarChar(60)")]
+		public string ShipAddress
+		{
+			get
+			{
+				return this._ShipAddress;
+			}
+			set
+			{
+				if ((this._ShipAddress != value))
+				{
+					this._ShipAddress = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipCity", DbType="NVarChar(15)")]
+		public string ShipCity
+		{
+			get
+			{
+				return this._ShipCity;
+			}
+			set
+			{
+				if ((this._ShipCity != value))
+				{
+					this._ShipCity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipRegion", DbType="NVarChar(15)")]
+		public string ShipRegion
+		{
+			get
+			{
+				return this._ShipRegion;
+			}
+			set
+			{
+				if ((this._ShipRegion != value))
+				{
+					this._ShipRegion = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipPostalCode", DbType="NVarChar(10)")]
+		public string ShipPostalCode
+		{
+			get
+			{
+				return this._ShipPostalCode;
+			}
+			set
+			{
+				if ((this._ShipPostalCode != value))
+				{
+					this._ShipPostalCode = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShipCountry", DbType="NVarChar(15)")]
+		public string ShipCountry
+		{
+			get
+			{
+				return this._ShipCountry;
+			}
+			set
+			{
+				if ((this._ShipCountry != value))
+				{
+					this._ShipCountry = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Address", DbType="NVarChar(60)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_City", DbType="NVarChar(15)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Region", DbType="NVarChar(15)")]
+		public string Region
+		{
+			get
+			{
+				return this._Region;
+			}
+			set
+			{
+				if ((this._Region != value))
+				{
+					this._Region = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_PostalCode", DbType="NVarChar(10)")]
+		public string PostalCode
+		{
+			get
+			{
+				return this._PostalCode;
+			}
+			set
+			{
+				if ((this._PostalCode != value))
+				{
+					this._PostalCode = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Country", DbType="NVarChar(15)")]
+		public string Country
+		{
+			get
+			{
+				return this._Country;
+			}
+			set
+			{
+				if ((this._Country != value))
+				{
+					this._Country = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Product Sales for 1997]")]
+	public partial class Product_Sales_for_1997
+	{
+		
+		private string _CategoryName;
+		
+		private string _ProductName;
+		
+		private System.Nullable<decimal> _ProductSales;
+		
+		public Product_Sales_for_1997()
+		{
+		}
+		
+		[Column(Storage="_CategoryName", DbType="NVarChar(15) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this._CategoryName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductSales", DbType="Money")]
+		public System.Nullable<decimal> ProductSales
+		{
+			get
+			{
+				return this._ProductSales;
+			}
+			set
+			{
+				if ((this._ProductSales != value))
+				{
+					this._ProductSales = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Products Above Average Price]")]
+	public partial class Products_Above_Average_Price
+	{
+		
+		private string _ProductName;
+		
+		private System.Nullable<decimal> _UnitPrice;
+		
+		public Products_Above_Average_Price()
+		{
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money")]
+		public System.Nullable<decimal> UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Products by Category]")]
+	public partial class Products_by_Category
+	{
+		
+		private string _CategoryName;
+		
+		private string _ProductName;
+		
+		private string _QuantityPerUnit;
+		
+		private System.Nullable<short> _UnitsInStock;
+		
+		private bool _Discontinued;
+		
+		public Products_by_Category()
+		{
+		}
+		
+		[Column(Storage="_CategoryName", DbType="NVarChar(15) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this._CategoryName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_QuantityPerUnit", DbType="NVarChar(20)")]
+		public string QuantityPerUnit
+		{
+			get
+			{
+				return this._QuantityPerUnit;
+			}
+			set
+			{
+				if ((this._QuantityPerUnit != value))
+				{
+					this._QuantityPerUnit = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitsInStock", DbType="SmallInt")]
+		public System.Nullable<short> UnitsInStock
+		{
+			get
+			{
+				return this._UnitsInStock;
+			}
+			set
+			{
+				if ((this._UnitsInStock != value))
+				{
+					this._UnitsInStock = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Discontinued", DbType="Bit NOT NULL")]
+		public bool Discontinued
+		{
+			get
+			{
+				return this._Discontinued;
+			}
+			set
+			{
+				if ((this._Discontinued != value))
+				{
+					this._Discontinued = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Quarterly Orders]")]
+	public partial class Quarterly_Order
+	{
+		
+		private string _CustomerID;
+		
+		private string _CompanyName;
+		
+		private string _City;
+		
+		private string _Country;
+		
+		public Quarterly_Order()
+		{
+		}
+		
+		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		public string CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyName", DbType="NVarChar(40)")]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_City", DbType="NVarChar(15)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Country", DbType="NVarChar(15)")]
+		public string Country
+		{
+			get
+			{
+				return this._Country;
+			}
+			set
+			{
+				if ((this._Country != value))
+				{
+					this._Country = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Sales by Category]")]
+	public partial class Sales_by_Category
+	{
+		
+		private int _CategoryID;
+		
+		private string _CategoryName;
+		
+		private string _ProductName;
+		
+		private System.Nullable<decimal> _ProductSales;
+		
+		public Sales_by_Category()
+		{
+		}
+		
+		[Column(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					this._CategoryID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CategoryName", DbType="NVarChar(15) NOT NULL", CanBeNull=false)]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this._CategoryName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ProductSales", DbType="Money")]
+		public System.Nullable<decimal> ProductSales
+		{
+			get
+			{
+				return this._ProductSales;
+			}
+			set
+			{
+				if ((this._ProductSales != value))
+				{
+					this._ProductSales = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Sales Totals by Amount]")]
+	public partial class Sales_Totals_by_Amount
+	{
+		
+		private System.Nullable<decimal> _SaleAmount;
+		
+		private int _OrderID;
+		
+		private string _CompanyName;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		public Sales_Totals_by_Amount()
+		{
+		}
+		
+		[Column(Storage="_SaleAmount", DbType="Money")]
+		public System.Nullable<decimal> SaleAmount
+		{
+			get
+			{
+				return this._SaleAmount;
+			}
+			set
+			{
+				if ((this._SaleAmount != value))
+				{
+					this._SaleAmount = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Summary of Sales by Quarter]")]
+	public partial class Summary_of_Sales_by_Quarter
+	{
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private int _OrderID;
+		
+		private System.Nullable<decimal> _Subtotal;
+		
+		public Summary_of_Sales_by_Quarter()
+		{
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Subtotal", DbType="Money")]
+		public System.Nullable<decimal> Subtotal
+		{
+			get
+			{
+				return this._Subtotal;
+			}
+			set
+			{
+				if ((this._Subtotal != value))
+				{
+					this._Subtotal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class CustOrderHistResult
+	{
+		
+		private string _ProductName;
+		
+		private System.Nullable<int> _Total;
+		
+		public CustOrderHistResult()
+		{
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Total", DbType="Int")]
+		public System.Nullable<int> Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this._Total = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Ten_Most_Expensive_ProductsResult
+	{
+		
+		private string _TenMostExpensiveProducts;
+		
+		private System.Nullable<decimal> _UnitPrice;
+		
+		public Ten_Most_Expensive_ProductsResult()
+		{
+		}
+		
+		[Column(Storage="_TenMostExpensiveProducts", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string TenMostExpensiveProducts
+		{
+			get
+			{
+				return this._TenMostExpensiveProducts;
+			}
+			set
+			{
+				if ((this._TenMostExpensiveProducts != value))
+				{
+					this._TenMostExpensiveProducts = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money")]
+		public System.Nullable<decimal> UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+	}
+	
+	public partial class CustOrdersDetailResult
+	{
+		
+		private string _ProductName;
+		
+		private decimal _UnitPrice;
+		
+		private short _Quantity;
+		
+		private System.Nullable<int> _Discount;
+		
+		private System.Nullable<decimal> _ExtendedPrice;
+		
+		public CustOrdersDetailResult()
+		{
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitPrice", DbType="Money NOT NULL")]
+		public decimal UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Quantity", DbType="SmallInt NOT NULL")]
+		public short Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Discount", DbType="Int")]
+		public System.Nullable<int> Discount
+		{
+			get
+			{
+				return this._Discount;
+			}
+			set
+			{
+				if ((this._Discount != value))
+				{
+					this._Discount = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ExtendedPrice", DbType="Money")]
+		public System.Nullable<decimal> ExtendedPrice
+		{
+			get
+			{
+				return this._ExtendedPrice;
+			}
+			set
+			{
+				if ((this._ExtendedPrice != value))
+				{
+					this._ExtendedPrice = value;
+				}
+			}
+		}
+	}
+	
+	public partial class CustOrdersOrdersResult
+	{
+		
+		private int _OrderID;
+		
+		private System.Nullable<System.DateTime> _OrderDate;
+		
+		private System.Nullable<System.DateTime> _RequiredDate;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		public CustOrdersOrdersResult()
+		{
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> OrderDate
+		{
+			get
+			{
+				return this._OrderDate;
+			}
+			set
+			{
+				if ((this._OrderDate != value))
+				{
+					this._OrderDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_RequiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RequiredDate
+		{
+			get
+			{
+				return this._RequiredDate;
+			}
+			set
+			{
+				if ((this._RequiredDate != value))
+				{
+					this._RequiredDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Employee_Sales_by_CountryResult
+	{
+		
+		private string _Country;
+		
+		private string _LastName;
+		
+		private string _FirstName;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private int _OrderID;
+		
+		private System.Nullable<decimal> _SaleAmount;
+		
+		public Employee_Sales_by_CountryResult()
+		{
+		}
+		
+		[Column(Storage="_Country", DbType="NVarChar(15)")]
+		public string Country
+		{
+			get
+			{
+				return this._Country;
+			}
+			set
+			{
+				if ((this._Country != value))
+				{
+					this._Country = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_LastName", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_FirstName", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_SaleAmount", DbType="Money")]
+		public System.Nullable<decimal> SaleAmount
+		{
+			get
+			{
+				return this._SaleAmount;
+			}
+			set
+			{
+				if ((this._SaleAmount != value))
+				{
+					this._SaleAmount = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Sales_by_YearResult
+	{
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		private int _OrderID;
+		
+		private System.Nullable<decimal> _Subtotal;
+		
+		private string _Year;
+		
+		public Sales_by_YearResult()
+		{
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Subtotal", DbType="Money")]
+		public System.Nullable<decimal> Subtotal
+		{
+			get
+			{
+				return this._Subtotal;
+			}
+			set
+			{
+				if ((this._Subtotal != value))
+				{
+					this._Subtotal = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_Year", DbType="NVarChar(30)")]
+		public string Year
+		{
+			get
+			{
+				return this._Year;
+			}
+			set
+			{
+				if ((this._Year != value))
+				{
+					this._Year = value;
+				}
+			}
+		}
+	}
+	
+	public partial class SalesByCategoryResult
+	{
+		
+		private string _ProductName;
+		
+		private System.Nullable<decimal> _TotalPurchase;
+		
+		public SalesByCategoryResult()
+		{
+		}
+		
+		[Column(Storage="_ProductName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string ProductName
+		{
+			get
+			{
+				return this._ProductName;
+			}
+			set
+			{
+				if ((this._ProductName != value))
+				{
+					this._ProductName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_TotalPurchase", DbType="Decimal(0,0)")]
+		public System.Nullable<decimal> TotalPurchase
+		{
+			get
+			{
+				return this._TotalPurchase;
+			}
+			set
+			{
+				if ((this._TotalPurchase != value))
+				{
+					this._TotalPurchase = value;
+				}
+			}
 		}
 	}
 }
