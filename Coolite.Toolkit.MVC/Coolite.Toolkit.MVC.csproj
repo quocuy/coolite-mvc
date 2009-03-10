@@ -79,8 +79,11 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\StoreResult.cs" />
     <Compile Include="Code\JsonResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseDataController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -114,8 +117,11 @@
     <Content Include="Resources\ReferenceAssemblies\Coolite.Ext.Web.dll" />
     <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="Views\Customer\TopTenOrdersBySalesAmount.aspx" />
     <Content Include="Views\Data\Get.aspx" />
     <Content Include="Views\Home\Form.aspx" />
+    <Content Include="Views\Shared\WestMenu.ascx" />
+    <Content Include="Content\Site.Master.js" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.2.6.js" />
@@ -154,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\Customers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

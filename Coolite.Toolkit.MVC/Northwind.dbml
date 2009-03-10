@@ -333,6 +333,15 @@
       <Column Name="Subtotal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[Top Ten Orders By Sales Amount]" Member="Top_Ten_Orders_By_Sales_Amounts">
+    <Type Name="Top_Ten_Orders_By_Sales_Amount">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SaleAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="ShippedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.CustOrderHist" Method="CustOrderHist">
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.String" DbType="NChar(5)" />
     <ElementType Name="CustOrderHistResult">

@@ -64,7 +64,7 @@ namespace Coolite.Toolkit.MVC.Controllers
             }
 
             //emulate net delay
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
             if (!String.IsNullOrEmpty(returnUrl))
@@ -81,7 +81,6 @@ namespace Coolite.Toolkit.MVC.Controllers
         {
             return RedirectToAction("LogOn", "Account");
         }
-
 
         public ActionResult LogOff()
         {
