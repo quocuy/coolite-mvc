@@ -67,6 +67,7 @@ namespace Coolite.Toolkit.MVC.Controllers
             System.Threading.Thread.Sleep(1000);
 
             FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
+
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);
@@ -128,7 +129,7 @@ namespace Coolite.Toolkit.MVC.Controllers
         public ActionResult ChangePassword()
         {
 
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            this.ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
 
             return View();
         }
@@ -140,7 +141,7 @@ namespace Coolite.Toolkit.MVC.Controllers
         public ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
         {
 
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            this.ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
 
             if (!ValidateChangePassword(currentPassword, newPassword, confirmPassword))
             {
@@ -168,7 +169,6 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public ActionResult ChangePasswordSuccess()
         {
-
             return View();
         }
 
@@ -322,10 +322,7 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         private MembershipProvider _provider;
 
-        public AccountMembershipService()
-            : this(null)
-        {
-        }
+        public AccountMembershipService() : this(null) { }
 
         public AccountMembershipService(MembershipProvider provider)
         {

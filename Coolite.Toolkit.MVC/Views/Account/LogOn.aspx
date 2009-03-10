@@ -26,7 +26,7 @@
     </script>
 </head>
 <body>
-        <ext:ScriptManager ID="ScriptManager1" runat="server" CleanResourceUrl="false" InitScriptMode="Inline" ScriptMode="Debug" />
+        <ext:ScriptManager runat="server" CleanResourceUrl="false" InitScriptMode="Inline" />
         
         <ext:Window 
             ID="Window1" 
@@ -42,7 +42,13 @@
             BodyStyle="padding:5px;">
             <Body>
                 <ext:FitLayout runat="server">
-                    <ext:FormPanel ID="FormPanel1" runat="server" FormId="loginForm" Border="false" BodyStyle="background:transparent;" Url=<%# Html.AttributeEncode(Url.Action("LogOn")) %>>
+                    <ext:FormPanel 
+                        ID="FormPanel1" 
+                        runat="server" 
+                        FormID="loginForm" 
+                        Border="false" 
+                        BodyStyle="background:transparent;" 
+                        Url=<%# Html.AttributeEncode(Url.Action("LogOn")) %>>
                         <Anchors>
                             <ext:Anchor>
                                 <ext:TextField 
