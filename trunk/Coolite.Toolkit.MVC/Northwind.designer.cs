@@ -333,6 +333,14 @@ namespace Coolite.Toolkit.MVC
 			}
 		}
 		
+		public System.Data.Linq.Table<Top_Ten_Orders_By_Sales_Amount> Top_Ten_Orders_By_Sales_Amounts
+		{
+			get
+			{
+				return this.GetTable<Top_Ten_Orders_By_Sales_Amount>();
+			}
+		}
+		
 		[Function(Name="dbo.CustOrderHist")]
 		public ISingleResult<CustOrderHistResult> CustOrderHist([Parameter(Name="CustomerID", DbType="NChar(5)")] string customerID)
 		{
@@ -5861,6 +5869,105 @@ namespace Coolite.Toolkit.MVC
 				if ((this._Subtotal != value))
 				{
 					this._Subtotal = value;
+				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.[Top Ten Orders By Sales Amount]")]
+	public partial class Top_Ten_Orders_By_Sales_Amount
+	{
+		
+		private int _OrderID;
+		
+		private System.Nullable<System.DateTime> _OrderDate;
+		
+		private System.Nullable<decimal> _SaleAmount;
+		
+		private string _CompanyName;
+		
+		private System.Nullable<System.DateTime> _ShippedDate;
+		
+		public Top_Ten_Orders_By_Sales_Amount()
+		{
+		}
+		
+		[Column(Storage="_OrderID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_OrderDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> OrderDate
+		{
+			get
+			{
+				return this._OrderDate;
+			}
+			set
+			{
+				if ((this._OrderDate != value))
+				{
+					this._OrderDate = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_SaleAmount", DbType="Money")]
+		public System.Nullable<decimal> SaleAmount
+		{
+			get
+			{
+				return this._SaleAmount;
+			}
+			set
+			{
+				if ((this._SaleAmount != value))
+				{
+					this._SaleAmount = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_ShippedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ShippedDate
+		{
+			get
+			{
+				return this._ShippedDate;
+			}
+			set
+			{
+				if ((this._ShippedDate != value))
+				{
+					this._ShippedDate = value;
 				}
 			}
 		}
