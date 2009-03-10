@@ -8,6 +8,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Log On</title>    
+    
+    <script type="text/javascript">
+        function getQueryArgs() {
+            var args = new Object();
+            var query = location.search.substring(1);
+            var pairs = query.split("&");
+            for (var i = 0; i < pairs.length; i++) {
+                var pos = pairs[i].indexOf('=');
+                if (pos == -1) continue;
+                var argname = pairs[i].substring(0, pos);
+                var value = pairs[i].substring(pos + 1);
+                args[argname] = unescape(value);
+            }
+            return args;
+        }
+    </script>
 </head>
 <body>
         <ext:ScriptManager ID="ScriptManager1" runat="server" CleanResourceUrl="false" InitScriptMode="Inline" ScriptMode="Debug" />
@@ -63,8 +79,11 @@
                             </ext:Button>--%>
                             <ext:Button ID="Button1" runat="server" Text="Login" Icon="Accept">
                                 <AjaxEvents>
-                                    <Click Url="/Account/LogOn" FormID="loginForm" Method="POST">
+                                    <Click Url="/Account/LogOn" FormID="loginForm" CleanRequest="true" Method="POST">
                                         <EventMask ShowMask="true" />
+                                        <ExtraParams>
+                                            <ext:Parameter Name="ReturnUrl" Value="getQueryArgs().ReturnUrl" Mode="Raw" />
+                                        </ExtraParams>
                                     </Click>
                                 </AjaxEvents>
                             </ext:Button>

@@ -1,17 +1,34 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+<%@ Register src="WestMenu.ascx" tagname="WestMenu" tagprefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    
+<script runat="server">
+    protected void IsAuth(object sender, AjaxEventArgs e)
+    {
+        btnLogin.Hidden = HttpContext.Current.User.Identity.IsAuthenticated;
+        btnLogout.Hidden = !HttpContext.Current.User.Identity.IsAuthenticated;
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            TaskManager1.StopAll();
+        }
+        
+    }
+</script>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <link href="../../Content/ui.css" rel="stylesheet" type="text/css" />
+<head id="Head1" runat="server">
     <asp:ContentPlaceHolder ID="head" runat="server">
         <title></title>
     </asp:ContentPlaceHolder>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link href="../../Content/ui.css" rel="stylesheet" type="text/css" />
+    <ext:ScriptContainer ID="ScriptContainer1" runat="server"/>
+    <script src="../../Content/Site.Master.js" type="text/javascript"></script>   
+    
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server"/>
@@ -20,18 +37,16 @@
         <Body>
             <ext:BorderLayout ID="BorderLayout1" runat="server">
                 <North Margins-Bottom="4">
-                    <%--<ext:Panel ID="Panel1" runat="server" Title="Northwind Traders" Border="true" Icon="World" BodyStyle="display:none;">
-                    </ext:Panel>--%>
-                    <ext:Toolbar runat="server">
+                    <ext:Toolbar ID="Toolbar1" runat="server">
                         <Items>
-                            <ext:Label runat="server" Text="Northwind Traders" Icon="World"></ext:Label>
-                            <ext:ToolbarFill runat="server"></ext:ToolbarFill>
-                            <ext:ToolbarButton runat="server" Text="Login" Visible="<%# !HttpContext.Current.User.Identity.IsAuthenticated %>">
+                            <ext:Label ID="Label1" runat="server" Text="Northwind Traders" Icon="World"></ext:Label>
+                            <ext:ToolbarFill ID="ToolbarFill1" runat="server"></ext:ToolbarFill>
+                            <ext:ToolbarButton ID="btnLogin" runat="server" Icon="UserKey" Text="Login" Hidden="<%# HttpContext.Current.User.Identity.IsAuthenticated %>">
                                 <AjaxEvents>
                                     <Click Url="/Account/GoToLogin"></Click>
                                 </AjaxEvents>
                             </ext:ToolbarButton>
-                            <ext:ToolbarButton runat="server" Icon="DoorOut" Text="Logout" Visible="<%# HttpContext.Current.User.Identity.IsAuthenticated %>">
+                            <ext:ToolbarButton ID="btnLogout" runat="server" Icon="DoorOut" Text="Logout" Hidden="<%# !HttpContext.Current.User.Identity.IsAuthenticated %>">
                                 <AjaxEvents>
                                     <Click Url="/Account/LogOff"></Click>
                                 </AjaxEvents>
@@ -40,102 +55,23 @@
                     </ext:Toolbar>                    
                 </North>
                 <West Collapsible="true" Split="true">
-                    <ext:Panel ID="Panel4" runat="server" Title="&nbsp;" Width="225">
+                    <ext:Panel ID="Panel1" runat="server" Title="Northwind" Width="225">
                         <Body>
-                            <ext:Accordion ID="Accordion1" runat="server" Animate="true">
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Customers & Orders">
-                                    <Body>
-                                        <ext:FitLayout runat="server">
-                                            <ext:MenuPanel runat="server" Border="false" Cls="white-menu">
-                                                <Menu>
-                                                    <Items>
-                                                        <ext:MenuItem runat="server" Text="Top Ten Orders by Sales Amount" Icon="ApplicationDouble" />
-                                                        <ext:MenuItem runat="server" Text="Customer Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Customer List" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Order Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Order List" Icon="ApplicationForm"/>
-                                                    </Items>                                                    
-                                                </Menu>
-                                            </ext:MenuPanel>
-                                        </ext:FitLayout>
-                                    </Body>
-                                </ext:Panel>
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Inventory & Purchasing" Cls="white-menu">
-                                    <Body>
-                                        <ext:FitLayout runat="server">
-                                            <ext:MenuPanel runat="server" Border="false">
-                                                <Menu>
-                                                    <Items>
-                                                        <ext:MenuItem runat="server" Text="Inventory List" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Product Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Purchase Order Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Purchase Order List" Icon="ApplicationForm" />
-                                                    </Items>                                                    
-                                                </Menu>
-                                            </ext:MenuPanel>
-                                        </ext:FitLayout>
-                                    </Body>
-                                </ext:Panel>
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Suppliers" Cls="white-menu">
-                                    <Body>
-                                        <ext:FitLayout runat="server">
-                                            <ext:MenuPanel runat="server" Border="false">
-                                                <Menu>
-                                                    <Items>
-                                                        <ext:MenuItem runat="server" Text="Supplier Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Supplier List" Icon="ApplicationForm" />
-                                                    </Items>                                                    
-                                                </Menu>
-                                            </ext:MenuPanel>
-                                        </ext:FitLayout>
-                                    </Body>
-                                </ext:Panel>
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Shippers" Cls="white-menu">
-                                    <Body>
-                                        <ext:FitLayout runat="server">
-                                            <ext:MenuPanel runat="server" Border="false">
-                                                <Menu>
-                                                    <Items>
-                                                        <ext:MenuItem runat="server" Text="Shipper Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Shipper List" Icon="ApplicationForm" />
-                                                    </Items>                                                    
-                                                </Menu>
-                                            </ext:MenuPanel>
-                                        </ext:FitLayout>
-                                    </Body>
-                                </ext:Panel>
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Reports" Cls="white-menu">
-                                    
-                                </ext:Panel>
-                                <ext:Panel runat="server" Border="false" Collapsed="true" Title="Employees"  Cls="white-menu">
-                                    <Body>
-                                        <ext:FitLayout runat="server">
-                                            <ext:MenuPanel runat="server" Border="false">
-                                                <Menu>
-                                                    <Items>
-                                                        <ext:MenuItem runat="server" Text="Employee Details" Icon="ApplicationForm" />
-                                                        <ext:MenuItem runat="server" Text="Employee List" Icon="ApplicationForm" />
-                                                    </Items>                                                    
-                                                </Menu>
-                                            </ext:MenuPanel>
-                                        </ext:FitLayout>
-                                    </Body>
-                                </ext:Panel>
-                            </ext:Accordion>
+                            <uc1:WestMenu ID="WestMenu1" runat="server" />
                         </Body>
                     </ext:Panel>
                 </West> 
                 <Center>
                     <ext:TabPanel ID="tpMain" runat="server" EnableTabScroll="true">
                         <Tabs>
-                            <ext:Tab runat="server" Title="Home" Icon="ApplicationForm" Border="false" BodyStyle="padding:5px;">
+                            <ext:Tab ID="Tab1" runat="server" Title="Home" Icon="ApplicationForm" Border="false" BodyStyle="padding:5px;">
                                 <Body>
                                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                                 </Body>
-                            </ext:Tab>                            
+                            </ext:Tab>                        
                         </Tabs>
                         <Plugins>
-                            <ext:TabCloseMenu runat="server" />
+                            <ext:TabCloseMenu ID="TabCloseMenu1" runat="server" />
                         </Plugins>
                     </ext:TabPanel>
                 </Center>
@@ -145,8 +81,8 @@
                             <ext:FitLayout ID="FitLayout1" runat="server">
                                 <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" TabPosition="Bottom" Title="Title">
                                     <Tabs>
-                                        <ext:Tab ID="Tab1" runat="server" Title="Tab 1" />
-                                        <ext:Tab ID="Tab2" runat="server" Title="Tab 2" />
+                                        <ext:Tab ID="Tab2" runat="server" Title="Tab 1" />
+                                        <ext:Tab ID="Tab3" runat="server" Title="Tab 2" />
                                     </Tabs>
                                 </ext:TabPanel>
                             </ext:FitLayout>
@@ -156,5 +92,15 @@
             </ext:BorderLayout>
         </Body>
     </ext:ViewPort>
+    
+    <ext:TaskManager ID="TaskManager1" runat="server">
+        <Tasks>
+            <ext:Task TaskID="IsAuth" Interval="3000">
+                <AjaxEvents>
+                    <Update OnEvent="IsAuth"></Update>
+                </AjaxEvents>
+            </ext:Task>
+        </Tasks>
+    </ext:TaskManager>
 </body>
 </html>
