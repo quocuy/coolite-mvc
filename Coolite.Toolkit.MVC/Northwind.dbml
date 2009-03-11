@@ -34,23 +34,6 @@
       <Association Name="CustomerDemographic_CustomerCustomerDemo" Member="CustomerCustomerDemos" ThisKey="CustomerTypeID" OtherKey="CustomerTypeID" Type="CustomerCustomerDemo" />
     </Type>
   </Table>
-  <Table Name="dbo.Customers" Member="Customers">
-    <Type Name="Customer">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="ContactName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="Region" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Association Name="Customer_CustomerCustomerDemo" Member="CustomerCustomerDemos" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerCustomerDemo" />
-      <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
-    </Type>
-  </Table>
   <Table Name="dbo.Employees" Member="Employees">
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -73,7 +56,7 @@
       <Column Name="PhotoPath" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Employee_Employee" Member="Employees" ThisKey="EmployeeID" OtherKey="ReportsTo" Type="Employee" />
       <Association Name="Employee_EmployeeTerritory" Member="EmployeeTerritories" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="EmployeeTerritory" />
-      <Association Name="Employee_Order" Member="Orders" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Order" />
+      <Association Name="Employee_Order" Member="Orders" AccessModifier="Internal" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Order" />
       <Association Name="Employee_Employee" Member="Employee1" ThisKey="ReportsTo" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
@@ -112,10 +95,10 @@
       <Column Name="ShipRegion" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="ShipPostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="ShipCountry" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Association Name="Order_Order_Detail" Member="Order_Details" ThisKey="OrderID" OtherKey="OrderID" Type="Order_Detail" />
-      <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Order_Order_Detail" Member="Order_Details" AccessModifier="Internal" ThisKey="OrderID" OtherKey="OrderID" Type="Order_Detail" />
       <Association Name="Employee_Order" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
       <Association Name="Shipper_Order" Member="Shipper" ThisKey="ShipVia" OtherKey="ShipperID" Type="Shipper" IsForeignKey="true" />
+      <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Products" Member="Products">
@@ -147,7 +130,7 @@
       <Column Name="ShipperID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Association Name="Shipper_Order" Member="Orders" ThisKey="ShipperID" OtherKey="ShipVia" Type="Order" />
+      <Association Name="Shipper_Order" Member="Orders" AccessModifier="Internal" ThisKey="ShipperID" OtherKey="ShipVia" Type="Order" />
     </Type>
   </Table>
   <Table Name="dbo.Suppliers" Member="Suppliers">
@@ -340,6 +323,27 @@
       <Column Name="SaleAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="ShippedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
+      <Column Name="Mobile" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WebPage" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Customer_CustomerCustomerDemo" Member="CustomerCustomerDemos" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerCustomerDemo" />
+      <Association Name="Customer_Order" Member="Orders" AccessModifier="Internal" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
     </Type>
   </Table>
   <Function Name="dbo.CustOrderHist" Method="CustOrderHist">

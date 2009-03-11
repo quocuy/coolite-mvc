@@ -27,6 +27,20 @@ namespace Coolite.Ext.Web.MVC
             set { this.errorMessage = value; }
         }
 
+        private ParameterCollection extraParamsResponse;
+        public ParameterCollection ExtraParamsResponse
+        {
+            get
+            {
+                if (this.extraParamsResponse == null)
+                {
+                    this.extraParamsResponse = new ParameterCollection();
+                }
+
+                return this.extraParamsResponse;
+            }
+        }
+
         public override void ExecuteResult(ControllerContext context)
         {
             AjaxResponse response = new AjaxResponse();
@@ -41,6 +55,11 @@ namespace Coolite.Ext.Web.MVC
                 if (!string.IsNullOrEmpty(this.Script))
                 {
                     response.Script = string.Concat("<string>", this.Script);
+                }
+
+                if (this.ExtraParamsResponse.Count > 0)
+                {
+                    response.ExtraParamsResponse = this.ExtraParamsResponse.ToJsonObject();
                 }
             }
             
