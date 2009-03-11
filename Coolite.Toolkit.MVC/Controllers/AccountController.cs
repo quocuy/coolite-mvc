@@ -53,9 +53,6 @@ namespace Coolite.Toolkit.MVC.Controllers
                 //return new Coolite.Ext.Web.MVC.JsonResult("Ext.Msg.alert('Validation error', 'Incorrect user name or password!');");
             }
 
-            //emulate net delay
-            System.Threading.Thread.Sleep(1000);
-
             this.FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
 
             if (!String.IsNullOrEmpty(returnUrl))
