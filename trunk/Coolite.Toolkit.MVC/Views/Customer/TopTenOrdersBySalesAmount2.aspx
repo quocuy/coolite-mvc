@@ -112,11 +112,6 @@
                                 <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'error1'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
                             </Listeners>
                         </ext:Button>
-                        <ext:Button ID="Button4" runat="server" Text="Cancel">
-                            <Listeners>
-                                <Click Handler="#{FormPanel1}.form.reset();" />
-                            </Listeners>
-                        </ext:Button>
                     </Buttons>
                 </ext:FormPanel>
             </ext:FitLayout>

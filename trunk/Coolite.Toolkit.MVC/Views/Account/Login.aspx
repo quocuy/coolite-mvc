@@ -7,11 +7,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Northwind Traders</title>    
+    <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>    
 </head>
 <body>
-    <ext:ScriptManager runat="server" />
-    
+    <ext:ScriptManager ID="ScriptManager1" runat="server" />
     <ext:Window 
         ID="Window1" 
         runat="server" 
@@ -68,11 +67,11 @@
             </ext:FitLayout>
         </Body>
         <Buttons>
-            <ext:Button ID="Button1" runat="server" Text="Login" Icon="Accept">     
+            <%--<ext:Button ID="Button1" runat="server" Text="Login" Icon="Accept">     
                 <Listeners>
                     <Click Handler="#{FormPanel1}.form.submit({waitMsg:'Checking...'});" />
                 </Listeners>                           
-            </ext:Button>
+            </ext:Button>--%>
             <ext:Button ID="Button2" runat="server" Text="Login" Icon="Accept">
                 <AjaxEvents>
                     <Click 
@@ -87,6 +86,7 @@
                            buttons: Ext.Msg.OK,
                            icon:    Ext.MessageBox.ERROR
                         });">
+                        <EventMask MinDelay="1000" />
                         <ExtraParams>
                             <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).ReturnUrl || '/'" Mode="Raw" />
                         </ExtraParams>

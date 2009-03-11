@@ -8,16 +8,13 @@
     
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <asp:ContentPlaceHolder ID="head" runat="server">
-        <title></title>
-    </asp:ContentPlaceHolder>
+    <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <link href="/Content/ui.css" rel="stylesheet" type="text/css" />
     <ext:ScriptContainer runat="server" />
     <script src="/Content/Site.Master.js" type="text/javascript"></script>   
 </head>
 <body>
-
     <ext:ScriptManager ID="ScriptManager1" runat="server"/>
     <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
@@ -26,13 +23,43 @@
                     <ext:Toolbar ID="tbHeader" runat="server">
                         <Items>
                             <ext:Label ID="lblTitle" runat="server" Html='<%# this.ViewData["AppName"] %>' Icon="Coolite" />
-                            <ext:ToolbarFill runat="server" />
+                            <ext:ToolbarFill ID="fill1" runat="server" />
                             <ext:ToolbarButton ID="btnName" runat="server" Icon="StatusOnline" Text='<%# this.ViewData["Username"] %>'>
                                 <Menu>
                                     <ext:Menu ID="menu1" runat="server">
                                         <Items>
                                             <ext:MenuItem ID="menuProfile" Text="Profile" Icon="Magnifier" />
-                                            <ext:MenuItem ID="menuOptions" Text="Options" Icon="Wrench" />
+                                            <ext:MenuItem ID="menuOptions" Text="Options" Icon="Wrench">
+                                                <Menu>
+                                                    <ext:Menu ID="menu3" runat="server">
+                                                        <Items>
+                                                            <ext:MenuItem ID="menuTheme" Text="Choose a Theme...">
+                                                                <Menu>
+                                                                    <ext:Menu ID="menu4" runat="server">
+                                                                        <Items>
+                                                                            <ext:MenuItem ID="menuDefault" Text="Default">
+                                                                                <Listeners>
+                                                                                    <Click Handler="Coolite.Ext.setTheme('/extjs/resources/css/ext-all-embedded-css/coolite.axd');" />
+                                                                                </Listeners>
+                                                                            </ext:MenuItem>
+                                                                            <ext:MenuItem ID="MenuItem1" Text="Gray">
+                                                                                <Listeners>
+                                                                                    <Click Handler="Coolite.Ext.setTheme('/extjs/resources/css/xtheme-gray-embedded-css/coolite.axd');" />
+                                                                                </Listeners>
+                                                                            </ext:MenuItem>
+                                                                            <ext:MenuItem ID="MenuItem2" Text="Slate">
+                                                                                <Listeners>
+                                                                                    <Click Handler="Coolite.Ext.setTheme('/extjs/resources/css/xtheme-slate-embedded-css/coolite.axd');" />
+                                                                                </Listeners>
+                                                                            </ext:MenuItem>
+                                                                        </Items>
+                                                                    </ext:Menu>
+                                                                </Menu>
+                                                            </ext:MenuItem>
+                                                        </Items>
+                                                    </ext:Menu>
+                                                </Menu>
+                                            </ext:MenuItem>
                                         </Items>
                                     </ext:Menu>
                                 </Menu>
@@ -61,7 +88,7 @@
                     </ext:Toolbar>                    
                 </North>
                 <West Collapsible="true" Split="true" MarginsSummary="0 0 4 4">
-                    <ext:Panel ID="Panel1" runat="server" Title="Northwind" Width="225">
+                    <ext:Panel ID="Panel1" runat="server" Title="Explorer" Width="225">
                         <Body>
                             <uc1:WestMenu ID="WestMenu1" runat="server" />
                         </Body>
@@ -82,11 +109,11 @@
                     </ext:TabPanel>
                 </Center>
                 <East Collapsible="true" Split="true" MarginsSummary="0 4 4 0">
-                    <ext:Panel ID="Panel2" runat="server" Width="185" Border="false">
+                    <ext:Panel ID="Panel2" runat="server" Width="225" Border="false">
                         <Body>
                             <ext:BorderLayout ID="layoutWest" runat="server">
                                 <North>
-                                    <ext:Panel ID="Panel3" runat="server" Title="Properties" Icon="Cog" AutoHeight="true">
+                                    <ext:Panel ID="Panel3" runat="server" Title="Properties" AutoHeight="true">
                                         <Body>
                                             <ext:FitLayout ID="fitWest" runat="server">
                                                 <ext:TabPanel 

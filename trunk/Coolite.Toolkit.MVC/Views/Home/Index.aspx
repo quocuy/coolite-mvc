@@ -2,10 +2,6 @@
 
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
-<asp:Content ID="indexHead" ContentPlaceHolderID="head" runat="server">
-    <title>Home Page</title>
-</asp:Content>
-
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <ext:FitLayout ID="fitHome" runat="server">
         <ext:Panel ID="pnlHome" runat="server" Border="false" Html="Home Tab" />
