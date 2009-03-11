@@ -10,11 +10,15 @@
                         <Items>
                             <ext:MenuItem ID="wmMenuItem1" runat="server" Text="Top Ten Orders by Sales Amount" Icon="ApplicationDouble">
                                 <CustomConfig>
-                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount2" Mode="Value" />
+                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount" Mode="Value" />
                                 </CustomConfig>
                             </ext:MenuItem>
                             
-                            <ext:MenuItem ID="wmMenuItem2" runat="server" Text="Customer Details" Icon="ApplicationForm" />
+                            <ext:MenuItem ID="wmMenuItem2" runat="server" Text="Customer Details" Icon="ApplicationForm">
+                                <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Customer/CustomerDetails" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>
                             <ext:MenuItem ID="wmMenuItem3" runat="server" Text="Customer List" Icon="ApplicationForm" />
                             <ext:MenuItem ID="wmMenuItem4" runat="server" Text="Order Details" Icon="ApplicationForm" />
                             <ext:MenuItem ID="wmMenuItem5" runat="server" Text="Order List" Icon="ApplicationForm" />

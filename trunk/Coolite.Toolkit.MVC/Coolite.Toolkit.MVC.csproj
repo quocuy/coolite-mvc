@@ -117,7 +117,10 @@
     <Content Include="Resources\ReferenceAssemblies\Coolite.Ext.Web.dll" />
     <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
-    <Content Include="Views\Customer\TopTenOrdersBySalesAmount2.aspx" />
+    <Content Include="Views\Customer\CustomerDetails.aspx" />
+    <Content Include="Views\Customer\CustomerDetailsGeneral.ascx" />
+    <Content Include="Views\Customer\CustomerDetailsOrders.ascx" />
+    <Content Include="Views\Customer\TopTenOrdersBySalesAmount.aspx" />
     <Content Include="Views\Data\Get.aspx" />
     <Content Include="Views\Home\Form.aspx" />
     <Content Include="Views\Shared\WestMenu.ascx" />
