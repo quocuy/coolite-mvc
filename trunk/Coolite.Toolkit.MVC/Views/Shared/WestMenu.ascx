@@ -10,7 +10,7 @@
                         <Items>
                             <ext:MenuItem ID="wmMenuItem1" runat="server" Text="Top Ten Orders by Sales Amount" Icon="ApplicationDouble">
                                 <CustomConfig>
-                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount" Mode="Value" />
+                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount2" Mode="Value" />
                                 </CustomConfig>
                             </ext:MenuItem>
                             
@@ -20,7 +20,7 @@
                             <ext:MenuItem ID="wmMenuItem5" runat="server" Text="Order List" Icon="ApplicationForm" />
                         </Items>
                         <Listeners>
-                            <ItemClick Handler="Coolite.MVC.Northwind.addPageTab(#{tpMain}, menuItem.text, menuItem.url);" />
+                            <ItemClick Handler="Northwind.addTab({ title: menuItem.text, url: menuItem.url, icon: menuItem.iconCls });" />
                         </Listeners>
                     </Menu>                    
                 </ext:MenuPanel>

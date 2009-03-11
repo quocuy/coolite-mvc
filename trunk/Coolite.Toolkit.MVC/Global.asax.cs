@@ -12,6 +12,14 @@ namespace Coolite.Toolkit.MVC
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_AuthenticateRequest(object sender, System.EventArgs e)
+        {
+            if(HttpContext.Current.Request.RawUrl.ToLower().Contains("coolite.axd"))
+            {
+                HttpContext.Current.SkipAuthorization = true;
+            }
+        } 
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -23,7 +31,6 @@ namespace Coolite.Toolkit.MVC
                 "{controller}/{action}/{id}",                           // URL with parameters
                 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
             );
-
         }
 
         protected void Application_Start()
