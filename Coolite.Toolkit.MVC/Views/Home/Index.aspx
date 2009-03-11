@@ -7,5 +7,7 @@
 </asp:Content>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
-   Home Tab
+    <ext:FitLayout ID="fitHome" runat="server">
+        <ext:Panel ID="pnlHome" runat="server" Border="false" Html="Home Tab" />
+    </ext:FitLayout>
 </asp:Content>

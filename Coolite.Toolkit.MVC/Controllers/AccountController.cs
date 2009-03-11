@@ -1,36 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.UI;
-using Coolite.Utilities;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
-
     [HandleError]
     public class AccountController : Controller
     {
-
         // This constructor is used by the MVC framework to instantiate the controller using
         // the default forms authentication and membership providers.
-
-        public AccountController()
-            : this(null, null)
-        {
-        }
+        public AccountController() : this(null, null) { }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
         // of unit testing this type. See the comments at the end of this file for more
         // information.
         public AccountController(IFormsAuthentication formsAuth, IMembershipService service)
         {
-            FormsAuth = formsAuth ?? new FormsAuthenticationService();
-            MembershipService = service ?? new AccountMembershipService();
+            this.FormsAuth = formsAuth ?? new FormsAuthenticationService();
+            this.MembershipService = service ?? new AccountMembershipService();
         }
 
         public IFormsAuthentication FormsAuth
@@ -45,93 +34,85 @@ namespace Coolite.Toolkit.MVC.Controllers
             private set;
         }
 
-        public ActionResult LogOn()
+        public ActionResult Login()
         {
-            return View();
+            return this.View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn(string txtUsername, string txtPassword, string rememberMe, string returnUrl)
+        public ActionResult Login(string txtUsername, string txtPassword, string rememberMe, string returnUrl)
         {
             if (!ValidateLogOn(txtUsername, txtPassword))
             {
+                string msg = "Incorrect Username or Password";
                 //ViewData["rememberMe"] = rememberMe;
-                //return View();
-                //return new Coolite.Ext.Web.MVC.JsonResult { ErrorMessage = "Validation error: Incorrect user name or password!" };
-                return new Coolite.Ext.Web.MVC.JsonResult("Ext.Msg.alert('Validation error', 'Incorrect user name or password!');");
+                //return this.View();
+                return new Coolite.Ext.Web.MVC.JsonResult { ErrorMessage = msg };
+                //return new Coolite.Ext.Web.MVC.JsonResult("Ext.Msg.alert('Validation error', 'Incorrect user name or password!');");
             }
 
             //emulate net delay
             System.Threading.Thread.Sleep(1000);
 
-            FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
+            this.FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
 
             if (!String.IsNullOrEmpty(returnUrl))
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return this.RedirectToAction("Index", "Home");
             }
         }
 
-        public ActionResult GoToLogin()
+        public ActionResult Logout()
         {
-            return RedirectToAction("LogOn", "Account");
-        }
-
-        public ActionResult LogOff()
-        {
-
-            FormsAuth.SignOut();
-
+            this.FormsAuth.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Register()
         {
 
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            this.ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
 
-            return View();
+            return this.View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(string userName, string email, string password, string confirmPassword)
         {
 
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            this.ViewData["PasswordLength"] = this.MembershipService.MinPasswordLength;
 
-            if (ValidateRegistration(userName, email, password, confirmPassword))
+            if (this.ValidateRegistration(userName, email, password, confirmPassword))
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus = MembershipService.CreateUser(userName, password, email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuth.SignIn(userName, false /* createPersistentCookie */);
+                    this.FormsAuth.SignIn(userName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("_FORM", ErrorCodeToString(createStatus));
+                    this.ModelState.AddModelError("_FORM", ErrorCodeToString(createStatus));
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View();
+            return this.View();
         }
 
         [Authorize]
         public ActionResult ChangePassword()
         {
-
             this.ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
-            return View();
+            return this.View();
         }
 
         [Authorize]
@@ -145,7 +126,7 @@ namespace Coolite.Toolkit.MVC.Controllers
 
             if (!ValidateChangePassword(currentPassword, newPassword, confirmPassword))
             {
-                return View();
+                return this.View();
             }
 
             try
@@ -156,20 +137,20 @@ namespace Coolite.Toolkit.MVC.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");
-                    return View();
+                    this.ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");
+                    return this.View();
                 }
             }
             catch
             {
-                ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");
-                return View();
+                this.ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");
+                return this.View();
             }
         }
 
         public ActionResult ChangePasswordSuccess()
         {
-            return View();
+            return this.View();
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -186,11 +167,11 @@ namespace Coolite.Toolkit.MVC.Controllers
         {
             if (String.IsNullOrEmpty(currentPassword))
             {
-                ModelState.AddModelError("currentPassword", "You must specify a current password.");
+                this.ModelState.AddModelError("currentPassword", "You must specify a current password.");
             }
             if (newPassword == null || newPassword.Length < MembershipService.MinPasswordLength)
             {
-                ModelState.AddModelError("newPassword",
+                this.ModelState.AddModelError("newPassword",
                     String.Format(CultureInfo.CurrentCulture,
                          "You must specify a new password of {0} or more characters.",
                          MembershipService.MinPasswordLength));
@@ -198,52 +179,52 @@ namespace Coolite.Toolkit.MVC.Controllers
 
             if (!String.Equals(newPassword, confirmPassword, StringComparison.Ordinal))
             {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
+                this.ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
             }
 
-            return ModelState.IsValid;
+            return this.ModelState.IsValid;
         }
 
         private bool ValidateLogOn(string userName, string password)
         {
             if (String.IsNullOrEmpty(userName))
             {
-                ModelState.AddModelError("username", "You must specify a username.");
+                this.ModelState.AddModelError("username", "You must specify a username.");
             }
             if (String.IsNullOrEmpty(password))
             {
-                ModelState.AddModelError("password", "You must specify a password.");
+                this.ModelState.AddModelError("password", "You must specify a password.");
             }
             if (!MembershipService.ValidateUser(userName, password))
             {
-                ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
+                this.ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
             }
 
-            return ModelState.IsValid;
+            return this.ModelState.IsValid;
         }
 
         private bool ValidateRegistration(string userName, string email, string password, string confirmPassword)
         {
             if (String.IsNullOrEmpty(userName))
             {
-                ModelState.AddModelError("username", "You must specify a username.");
+                this.ModelState.AddModelError("username", "You must specify a username.");
             }
             if (String.IsNullOrEmpty(email))
             {
-                ModelState.AddModelError("email", "You must specify an email address.");
+                this.ModelState.AddModelError("email", "You must specify an email address.");
             }
             if (password == null || password.Length < MembershipService.MinPasswordLength)
             {
-                ModelState.AddModelError("password",
+                this.ModelState.AddModelError("password",
                     String.Format(CultureInfo.CurrentCulture,
                          "You must specify a password of {0} or more characters.",
                          MembershipService.MinPasswordLength));
             }
             if (!String.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
+                this.ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
             }
-            return ModelState.IsValid;
+            return this.ModelState.IsValid;
         }
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
@@ -274,7 +255,7 @@ namespace Coolite.Toolkit.MVC.Controllers
                     return "The user name provided is invalid. Please check the value and try again.";
 
                 case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+                    return "The authentication this.provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
 
                 case MembershipCreateStatus.UserRejected:
                     return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
@@ -320,38 +301,38 @@ namespace Coolite.Toolkit.MVC.Controllers
 
     public class AccountMembershipService : IMembershipService
     {
-        private MembershipProvider _provider;
+        private MembershipProvider provider;
 
         public AccountMembershipService() : this(null) { }
 
         public AccountMembershipService(MembershipProvider provider)
         {
-            _provider = provider ?? Membership.Provider;
+            this.provider = this.provider ?? Membership.Provider;
         }
 
         public int MinPasswordLength
         {
             get
             {
-                return _provider.MinRequiredPasswordLength;
+                return this.provider.MinRequiredPasswordLength;
             }
         }
 
         public bool ValidateUser(string userName, string password)
         {
-            return _provider.ValidateUser(userName, password);
+            return this.provider.ValidateUser(userName, password);
         }
 
         public MembershipCreateStatus CreateUser(string userName, string password, string email)
         {
             MembershipCreateStatus status;
-            _provider.CreateUser(userName, password, email, null, null, true, null, out status);
+            this.provider.CreateUser(userName, password, email, null, null, true, null, out status);
             return status;
         }
 
         public bool ChangePassword(string userName, string oldPassword, string newPassword)
         {
-            MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
+            MembershipUser currentUser = this.provider.GetUser(userName, true /* userIsOnline */);
             return currentUser.ChangePassword(oldPassword, newPassword);
         }
     }

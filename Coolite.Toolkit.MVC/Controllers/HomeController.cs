@@ -17,7 +17,8 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public ActionResult Index()
         {
-            this.ViewData["Message"] = "Welcome to ASP.NET MVC!";
+            this.ViewData["AppName"] = "<b>Northwind Traders</b>";
+            this.ViewData["Username"] = this.HttpContext.User.Identity.Name;
 
             NorthwindDataContext db = new NorthwindDataContext();
 

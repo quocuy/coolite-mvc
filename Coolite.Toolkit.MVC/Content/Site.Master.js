@@ -1,7 +1,7 @@
-﻿Ext.ns("Coolite.MVC");
+﻿Ext.ns("Northwind");
 
-Coolite.MVC.Northwind = {
-    hashCode: function(str) {
+Northwind = {
+    hashCode: function (str) {
         var hash = 1315423911;
 
         for (var i = 0; i < str.length; i++) {
@@ -11,30 +11,32 @@ Coolite.MVC.Northwind = {
         return (hash & 0x7FFFFFFF);
     },
 
-    addPageTab: function(tabpanel, title, url) {
-        if (Ext.isEmpty(url, false)) {
+    addTab: function (config) {
+        if (Ext.isEmpty(config.url, false)) {
             return;
         }
 
-        var id = this.hashCode(url);
-        var tab = tabpanel.getComponent(id);
+        var tp =  Ext.getCmp('tpMain');
+        var id =  this.hashCode(config.url);
+        var tab = tp.getComponent(id);
 
         if (!tab) {
-            tab = tabpanel.addTab({
-                id: id.toString(),
-                title: title,
-                closable: true,
+            tab = tp.addTab({
+                id:         id.toString(),
+                title:      config.title,
+                iconCls:    config.icon || 'icon-applicationdouble',
+                closable:   true,
                 autoLoad: {
-                    showMask: true,
-                    url: url,
-                    mode: "iframe",
-                    noCache:true,
-                    maskMsg: "Loading '" + title + "'..."
+                    showMask:   true,
+                    url:        config.url,
+                    mode:       'iframe',
+                    noCache:    true,
+                    maskMsg:    "Loading '" + config.title + "'...",
+                    scripts:    true
                 }
             });
-        }
-        else {
-            tabpanel.setActiveTab(tab);
+        } else {
+            tp.setActiveTab(tab);
         }
     }
 };

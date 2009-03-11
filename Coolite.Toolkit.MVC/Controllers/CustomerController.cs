@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using Coolite.Ext.Web;
 using Coolite.Ext.Web.MVC;
 
 namespace Coolite.Toolkit.MVC.Controllers
@@ -12,9 +7,9 @@ namespace Coolite.Toolkit.MVC.Controllers
     [Authorize]
     public class CustomerController : BaseDataController
     {
-        public ActionResult TopTenOrdersBySalesAmount()
+        public ActionResult TopTenOrdersBySalesAmount2()
         {
-            return View();
+            return this.View();
         }
 
         public StoreResult GetTopTenOrdersBySalesAmount()

@@ -4,8 +4,14 @@ namespace Coolite.Ext.Web.MVC
 {
     public class JsonResult : ActionResult
     {
+        public JsonResult() { }
+
+        public JsonResult(string script)
+        {
+            this.Script = script;
+        }
+
         private string script;
-        private string errorMessage;
 
         public string Script
         {
@@ -13,38 +19,32 @@ namespace Coolite.Ext.Web.MVC
             set { this.script = value; }
         }
 
+        private string errorMessage;
+
         public string ErrorMessage
         {
             get { return this.errorMessage; }
             set { this.errorMessage = value; }
         }
 
-        public JsonResult()
-        {
-        }
-
-        public JsonResult(string script)
-        {
-            this.script = script;
-        }
-
         public override void ExecuteResult(ControllerContext context)
         {
-            AjaxResponse responseObject = new AjaxResponse();
+            AjaxResponse response = new AjaxResponse();
+
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
-                responseObject.Success = false;
-                responseObject.ErrorMessage = this.ErrorMessage;
+                response.Success = false;
+                response.ErrorMessage = this.ErrorMessage;
             }
             else
             {
-                if (!string.IsNullOrEmpty(script))
+                if (!string.IsNullOrEmpty(this.Script))
                 {
-                    responseObject.Script = string.Concat("<string>", script);
+                    response.Script = string.Concat("<string>", this.Script);
                 }
             }
             
-            responseObject.Return();
+            response.Return();
         }
     }
 
