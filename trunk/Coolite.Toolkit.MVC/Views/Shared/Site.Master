@@ -85,7 +85,7 @@
                                 </Menu>
                             </ext:ToolbarButton>
                             <ext:ToolbarSeparator ID="ToolbarSeparator1" runat="server" />
-                            <ext:ToolbarButton ID="btnLogout" runat="server" Icon="Lock" Text="Logout">
+                            <ext:ToolbarButton ID="btnLogout" runat="server" Icon="LockGo" Text="Logout">
                                 <AjaxEvents>
                                     <Click Url="/Account/Logout/" />
                                 </AjaxEvents>

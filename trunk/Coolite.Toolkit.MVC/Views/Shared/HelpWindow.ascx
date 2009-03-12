@@ -37,6 +37,9 @@
                             Source code for the Coolite.Toolkit.MVC project is release by Coolite Inc, under an MIT open source license, see <a href="/License/License.txt" target="_blank">license</a>.
                             <br />
                             <br />
+                            Download project source code from GoogleCode, see <a href="http://coolite-mvc.googlecode.com/" target="_blank">http://coolite-mvc.googlecode.com/</a>
+                            <br />
+                            <br />
                             Licensing information and download of the Coolite Toolkit for ASP.NET is available at <a href="http://www.coolite.com/download/" target="_blank">http://www.coolite.com/download/</a>.
                         </Body>
                     </ext:Tab>
