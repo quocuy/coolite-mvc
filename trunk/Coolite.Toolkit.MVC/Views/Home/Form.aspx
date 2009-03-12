@@ -42,7 +42,7 @@
 
 </head>
 <body>
-    <ext:ScriptManager runat="server" RenderScripts="None" RenderStyles="None" />
+    <ext:ScriptManager runat="server" />
     
     <ext:FormPanel 
         ID="FormPanel1" 
@@ -98,21 +98,16 @@
                     <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'send'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
                 </Listeners>
             </ext:Button>
-            <ext:Button runat="server" Text="Send with failure 'Email' field">
+            <%--<ext:Button runat="server" Text="Send with failure 'Email' field">
                 <Listeners>
                     <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'error'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
                 </Listeners>
-            </ext:Button>
-            <ext:Button runat="server" Text="Send (emulate exception on server side)">
+            </ext:Button>--%>
+            <%--<ext:Button runat="server" Text="Send (emulate exception on server side)">
                 <Listeners>
                     <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'error1'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
                 </Listeners>
-            </ext:Button>
-            <ext:Button runat="server" Text="Cancel">
-                <Listeners>
-                    <Click Handler="#{FormPanel1}.form.reset();" />
-                </Listeners>
-            </ext:Button>
+            </ext:Button>--%>
         </Buttons>
     </ext:FormPanel>
 </body>

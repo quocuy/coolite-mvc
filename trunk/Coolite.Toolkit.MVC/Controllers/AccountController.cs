@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
+using Coolite.Ext.Web.MVC;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
@@ -42,27 +43,21 @@ namespace Coolite.Toolkit.MVC.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult Login(string txtUsername, string txtPassword, string rememberMe, string returnUrl)
+        public ActionResult Login(string txtUsername, string txtPassword, string returnUrl)
         {
             if (!ValidateLogOn(txtUsername, txtPassword))
             {
-                string msg = "Incorrect Username or Password";
-                //ViewData["rememberMe"] = rememberMe;
-                //return this.View();
-                return new Coolite.Ext.Web.MVC.JsonResult { ErrorMessage = msg };
-                //return new Coolite.Ext.Web.MVC.JsonResult("Ext.Msg.alert('Validation error', 'Incorrect user name or password!');");
+                return new AjaxResult { ErrorMessage = "Incorrect Username or Password" };
             }
 
-            this.FormsAuth.SignIn(txtUsername, string.IsNullOrEmpty(rememberMe));
+            this.FormsAuth.SignIn(txtUsername, true);
 
             if (!String.IsNullOrEmpty(returnUrl))
             {
-                return this.Redirect(returnUrl);
+                return this.Redirect(returnUrl.Replace("default.aspx", ""));
             }
-            else
-            {
-                return this.RedirectToAction("Index", "Home");
-            }
+            
+            return this.RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()

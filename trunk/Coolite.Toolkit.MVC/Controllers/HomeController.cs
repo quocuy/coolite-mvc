@@ -9,23 +9,16 @@ namespace Coolite.Toolkit.MVC.Controllers
     [HandleError]
     public class HomeController : Controller
     {
-        public void GetTimestamp()
-        {
-            string script = string.Concat("TextItem1.setText(", JSON.Serialize(DateTime.Now.ToString()), ")");
-            new AjaxResponse(script).Return();
-        }
-
         public ActionResult Index()
         {
             this.ViewData["AppName"] = "<b>Northwind Traders</b>";
             this.ViewData["Username"] = this.HttpContext.User.Identity.Name;
 
-            NorthwindDataContext db = new NorthwindDataContext();
+            return this.View();
+        }
 
-            var query = from p in db.Products 
-                        where p.Category.CategoryName == "Beverages"
-                        select p;
-
+        public ActionResult Dashboard()
+        {
             return this.View();
         }
 

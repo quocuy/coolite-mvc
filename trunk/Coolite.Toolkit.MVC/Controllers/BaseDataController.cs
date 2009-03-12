@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
+using Coolite.Toolkit.MVC.Models;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
     public abstract class BaseDataController : Controller
     {
+        public BaseDataController()
+        {
+            this.db = new NorthwindDataContext();
+        }
+
         NorthwindDataContext db;
 
         public NorthwindDataContext DBContext
         {
             get { return this.db; }
-        }
-
-        public BaseDataController()
-        {
-            this.db = new NorthwindDataContext();
         }
     }
 }

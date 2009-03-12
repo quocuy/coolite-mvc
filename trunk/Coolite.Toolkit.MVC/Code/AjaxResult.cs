@@ -2,11 +2,11 @@
 
 namespace Coolite.Ext.Web.MVC
 {
-    public class JsonResult : ActionResult
+    public class AjaxResult : ActionResult
     {
-        public JsonResult() { }
+        public AjaxResult() { }
 
-        public JsonResult(string script)
+        public AjaxResult(string script)
         {
             this.Script = script;
         }

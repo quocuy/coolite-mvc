@@ -10,18 +10,30 @@
                         <Items>
                             <ext:MenuItem ID="wmMenuItem1" runat="server" Text="Top Ten Orders by Sales Amount" Icon="ApplicationDouble">
                                 <CustomConfig>
-                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount" Mode="Value" />
+                                    <ext:ConfigItem Name="url" Value="/Customer/TopTenOrdersBySalesAmount/" Mode="Value" />
                                 </CustomConfig>
                             </ext:MenuItem>
                             
                             <ext:MenuItem ID="wmMenuItem2" runat="server" Text="Customer Details" Icon="ApplicationForm">
                                 <CustomConfig>
-                                    <ext:ConfigItem Name="url" Value="/Customer/CustomerDetails" Mode="Value" />
+                                    <ext:ConfigItem Name="url" Value="/Customer/CustomerDetails/" Mode="Value" />
                                 </CustomConfig>
                             </ext:MenuItem>
-                            <ext:MenuItem ID="wmMenuItem3" runat="server" Text="Customer List" Icon="ApplicationForm" />
-                            <ext:MenuItem ID="wmMenuItem4" runat="server" Text="Order Details" Icon="ApplicationForm" />
-                            <ext:MenuItem ID="wmMenuItem5" runat="server" Text="Order List" Icon="ApplicationForm" />
+                            <ext:MenuItem ID="wmMenuItem3" runat="server" Text="Customer List" Icon="ApplicationForm">
+                                <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Customer/CustomerList/" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>
+                            <ext:MenuItem ID="wmMenuItem4" runat="server" Text="Order Details" Icon="ApplicationForm">
+                                 <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Order/OrderDetails/" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>
+                            <ext:MenuItem ID="wmMenuItem5" runat="server" Text="Order List" Icon="ApplicationForm">
+                                 <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Order/OrderList/" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>
                         </Items>
                         <Listeners>
                             <ItemClick Handler="Northwind.addTab({ title: menuItem.text, url: menuItem.url, icon: menuItem.iconCls });" />
@@ -79,8 +91,8 @@
         </Body>
     </ext:Panel>
     
-    <ext:Panel ID="wmPanel5" runat="server" Border="false" Collapsed="true" Title="Reports" Cls="white-menu">
-    </ext:Panel>
+    <%--<ext:Pa nel ID="wmPanel5" runat="server" Border="false" Collapsed="true" Title="Reports" Cls="white-menu">
+    </ext:Panel>--%>
     
     <ext:Panel ID="wmPanel6" runat="server" Border="false" Collapsed="true" Title="Employees">
         <Body>
