@@ -42,8 +42,7 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetCustomers(int limit, int start, string dir, string sort)
         {
-            var query = from c in this.DBContext.Customers
-                        orderby sort ascending
+            var query = (from c in this.DBContext.Customers
                         select new
                         {
                             c.CustomerID,
@@ -53,12 +52,7 @@ namespace Coolite.Toolkit.MVC.Controllers
                             c.Phone,
                             c.Fax,
                             c.Region
-                        };
-
-            if (dir.Equals("DESC"))
-            {
-                query = query.OrderByDescending(c => c.CompanyName);
-            }
+                        }).OrderBy(string.Concat(sort, " ", dir));
 
             int total = query.ToList().Count;
 
@@ -91,18 +85,12 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetOrders(int limit, int start, string dir, string sort)
         {
-            var query = from o in this.DBContext.Orders
-                        orderby sort ascending
+            var query = (from o in this.DBContext.Orders
                         select new
                         {
                             o.OrderID,
                             o.OrderDate
-                        };
-
-            if (dir.Equals("DESC"))
-            {
-                query = query.OrderByDescending(o => o.OrderID);
-            }
+                        }).OrderBy(string.Concat(sort, " ", dir));
 
             int total = query.ToList().Count;
 
