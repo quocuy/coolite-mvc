@@ -14,9 +14,14 @@ namespace Coolite.Toolkit.MVC
     {
         protected void Application_AuthenticateRequest(object sender, System.EventArgs e)
         {
-            if(HttpContext.Current.Request.RawUrl.ToLower().Contains("coolite.axd"))
+            string url = HttpContext.Current.Request.RawUrl.ToLower();
+            if(url.Contains("coolite.axd"))
             {
                 HttpContext.Current.SkipAuthorization = true;
+            }
+            else if (url.Contains("returnurl=/default.aspx") || url.Contains("returnurl=%2fdefault.aspx"))
+            {
+                Response.Redirect(url.Replace("returnurl=/default.aspx", "r=/").Replace("returnurl=%2fdefault.aspx", "r=/"));
             }
         } 
 

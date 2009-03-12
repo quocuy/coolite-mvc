@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Coolite.Toolkit.MVC
+namespace Coolite.Toolkit.MVC.Models
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

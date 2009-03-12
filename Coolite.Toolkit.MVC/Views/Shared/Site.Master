@@ -2,17 +2,18 @@
 
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <%@ Register src="WestMenu.ascx" tagname="WestMenu" tagprefix="uc1" %>
+<%@ Register src="HelpWindow.ascx" tagname="HelpWindow" tagprefix="uc2" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <link href="/Content/ui.css" rel="stylesheet" type="text/css" />
     <ext:ScriptContainer runat="server" />
-    <script src="/Content/Site.Master.js" type="text/javascript"></script>   
+    <script src="/Content/Site.Master.js" type="text/javascript"></script>
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server"/>
@@ -68,7 +69,11 @@
                                 <Menu>
                                     <ext:Menu ID="menu2" runat="server">
                                         <Items>
-                                            <ext:MenuItem ID="menuReport" Text="Report a Bug" Icon="Bug" />
+                                            <ext:MenuItem ID="menuReport" Text="Report a Defect" Icon="Bug">
+                                                <Listeners>
+                                                    <Click Handler="Northwind.addTab({ title: el.text, url: '/Home/Form/', icon: el.iconCls });" />
+                                                </Listeners>
+                                            </ext:MenuItem>
                                             <ext:MenuItem ID="menuAbout" Text="About" Icon="Information">
                                                 <Listeners>
                                                     <Click Handler="#{winAbout}.show();" />
@@ -87,7 +92,7 @@
                         </Items>
                     </ext:Toolbar>                    
                 </North>
-                <West Collapsible="true" Split="true" MarginsSummary="0 0 4 4">
+                <West Split="true" CollapseMode="Mini" MarginsSummary="0 0 4 4">
                     <ext:Panel ID="Panel1" runat="server" Title="Explorer" Width="225">
                         <Body>
                             <uc1:WestMenu ID="WestMenu1" runat="server" />
@@ -97,10 +102,13 @@
                 <Center MarginsSummary="0 0 4 0">
                     <ext:TabPanel ID="tpMain" runat="server" EnableTabScroll="true">
                         <Tabs>
-                            <ext:Tab ID="Tab1" runat="server" Title="Home" Icon="ApplicationForm" Border="false" BodyStyle="padding:5px;">
-                                <Body>
-                                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-                                </Body>
+                            <ext:Tab 
+                                ID="Tab1" 
+                                runat="server" 
+                                Title="Home" 
+                                Icon="ApplicationForm" 
+                                Border="false">
+                                <AutoLoad Url="/Home/Dashboard" />
                             </ext:Tab>                        
                         </Tabs>
                         <Plugins>
@@ -108,7 +116,7 @@
                         </Plugins>
                     </ext:TabPanel>
                 </Center>
-                <East Collapsible="true" Split="true" MarginsSummary="0 4 4 0">
+                <East Collapsible="true" Split="true" CollapseMode="Mini" MarginsSummary="0 4 4 0">
                     <ext:Panel ID="Panel2" runat="server" Width="225" Border="false">
                         <Body>
                             <ext:BorderLayout ID="layoutWest" runat="server">
@@ -143,19 +151,6 @@
         </Body>
     </ext:ViewPort>
     
-    <ext:Window 
-        ID="winAbout" 
-        runat="server" 
-        Title="About" 
-        Icon="Information" 
-        Modal="true"
-        Height="185" 
-        Width="300"
-        ShowOnLoad="false"
-        BodyStyle="padding:5px;background-color:#fff;">
-        <Body>
-            Copyright 2006-2009 <a href="http://www.coolite.com/">Coolite</a>, Inc<br />
-        </Body>
-    </ext:Window>
+    <uc2:HelpWindow ID="HelpWindow1" runat="server" />
 </body>
 </html>

@@ -8,19 +8,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>    
+    <style type="text/css">
+        h1  {
+            font: normal 60px tahoma, arial, verdana;
+            color: #E1E1E1;
+        }
+    </style>
+    <script type="text/javascript">
+        if (window.top.frames.length !=0 ) {
+            window.top.location = self.document.location;
+        }
+    </script>
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server" />
+    
+    <h1>Northwind Traders</h1>
+    
     <ext:Window 
         ID="Window1" 
         runat="server" 
         Closable="false"
         Resizable="false"
-        Height="150" 
+        Height="130" 
         Icon="Lock" 
         Title="Login"
         Draggable="true"
-        Width="350"
+        Width="300"
         Modal="true"
         BodyBorder="false"
         BodyStyle="padding:5px;">
@@ -38,7 +52,7 @@
                         <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).ReturnUrl || '/'" Mode="Raw" />
                     </BaseParams>--%>
                     <Anchors>
-                        <ext:Anchor>
+                        <ext:Anchor Horizontal="100%">
                             <ext:TextField 
                                 ID="txtUsername" 
                                 runat="server" 
@@ -48,7 +62,7 @@
                                 Text="demo"
                                 />
                         </ext:Anchor>
-                        <ext:Anchor>
+                        <ext:Anchor Horizontal="100%">
                             <ext:TextField 
                                 ID="txtPassword" 
                                 runat="server" 
@@ -59,9 +73,9 @@
                                 Text="demo"
                                 />
                         </ext:Anchor>
-                        <ext:Anchor>
+                        <%--<ext:Anchor>
                             <ext:Checkbox ID="rememberMe" runat="server" FieldLabel="Remember me"></ext:Checkbox>
-                        </ext:Anchor>
+                        </ext:Anchor>--%>
                     </Anchors>
                 </ext:FormPanel>
             </ext:FitLayout>
@@ -72,6 +86,7 @@
                     <Click Handler="#{FormPanel1}.form.submit({waitMsg:'Checking...'});" />
                 </Listeners>                           
             </ext:Button>--%>
+            <%--<ext:LinkButton ID="btnForgot" runat="server" Text="Forgot Password" />--%>
             <ext:Button ID="Button2" runat="server" Text="Login" Icon="Accept">
                 <AjaxEvents>
                     <Click 
@@ -88,7 +103,7 @@
                         });">
                         <EventMask MinDelay="1000" />
                         <ExtraParams>
-                            <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).ReturnUrl || '/'" Mode="Raw" />
+                            <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).r || '/'" Mode="Raw" />
                         </ExtraParams>
                     </Click>
                 </AjaxEvents>
