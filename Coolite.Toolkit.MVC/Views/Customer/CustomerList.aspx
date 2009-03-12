@@ -19,8 +19,8 @@
         <Reader>
             <ext:JsonReader Root="data" TotalProperty="totalCount">
                 <Fields>
-                    <ext:RecordField Name="CustomerID" />
-                    <ext:RecordField Name="CompanyName" SortDir="ASC" />
+                    <ext:RecordField Name="CustomerID" SortDir="ASC" />
+                    <ext:RecordField Name="CompanyName" />
                     <ext:RecordField Name="Email" />
                     <ext:RecordField Name="Phone" />
                     <ext:RecordField Name="Fax" />
@@ -32,9 +32,9 @@
             <ext:Parameter Name="limit" Value="15" Mode="Raw" />
             <ext:Parameter Name="start" Value="0" Mode="Raw" />
             <ext:Parameter Name="dir" Value="ASC" />
-            <ext:Parameter Name="sort" Value="CustomerName" />
+            <ext:Parameter Name="sort" Value="CustomerID" />
         </BaseParams>
-        <SortInfo Field="CompanyName" Direction="ASC" />
+        <SortInfo Field="CustomerID" Direction="ASC" />
     </ext:Store>
     
     <ext:ViewPort runat="server">

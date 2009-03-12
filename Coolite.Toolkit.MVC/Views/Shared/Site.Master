@@ -1,6 +1,7 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+
 <%@ Register src="WestMenu.ascx" tagname="WestMenu" tagprefix="uc1" %>
 <%@ Register src="HelpWindow.ascx" tagname="HelpWindow" tagprefix="uc2" %>
 
