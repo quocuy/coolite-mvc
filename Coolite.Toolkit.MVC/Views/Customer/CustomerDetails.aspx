@@ -10,6 +10,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title></title>
+    
+    <script type="text/javascript">
+        var failureHandler = function(form, action) {
+
+            var msg = '';
+
+            if (action.failureType == "client" || (action.result && action.result.errors && action.result.errors.length > 0)) {
+                msg = "Please check fields.";
+            } else if (action.result && action.result.extraParams.msg) {
+                msg = action.result.extraParams.msg;
+            } else if (action.response) {
+                msg = action.response.responseText;
+            }
+
+            Ext.MessageBox.show({
+                title: 'Failure',
+                msg: msg,
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.MessageBox.ERROR
+            });
+        }
+
+        var successHandler = function(form, action) {
+            Ext.MessageBox.alert('Success', 'Customer has been saved!');
+            if (action.result && action.result.extraParams && action.result.extraParams.newID) {
+                dsCustomer.getAt(0).id = action.result.extraParams.newID;
+                if (dsCustomer.getAt(0).newRecord) {
+                    delete dsCustomer.getAt(0).newRecord;
+                }
+            }
+
+            if (action.options.params.setNew) {
+                debugger;
+                DetailsForm.form.reset();
+                dsCustomer.removeAll();
+                var rec = new dsCustomer.recordType();
+                rec.newRecord = true;
+                rec.commit();
+                dsCustomer.add(rec);
+            }
+        }
+    </script>
+
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server" />
@@ -71,8 +114,34 @@
                      <TopBar>
                         <ext:Toolbar ID="TopBar" runat="server">
                             <Items>
-                                <ext:ToolbarButton runat="server" Text="Save" Icon="Disk" />
-                                <ext:ToolbarButton runat="server" Text="Save and New" Icon="Add" /> 
+                                <ext:ToolbarButton runat="server" Text="Save" Icon="Disk">
+                                    <Listeners>
+                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{id: (#{dsCustomer}.getCount()>0 && !#{dsCustomer}.getAt(0).newRecord) ? #{dsCustomer}.getAt(0).id : ''}, success: successHandler, failure: failureHandler});" />
+                                    </Listeners>
+                                </ext:ToolbarButton>
+                                
+                                <ext:ToolbarButton runat="server" Text="Save and New" Icon="Add">
+                                     <Listeners>
+                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{setNew: true, id: (#{dsCustomer}.getCount()>0 && !#{dsCustomer}.getAt(0).newRecord) ? #{dsCustomer}.getAt(0).id : ''}, success: successHandler, failure: failureHandler});" />
+                                    </Listeners>
+                                </ext:ToolbarButton>
+                                
+                                <ext:ToolbarButton ID="ToolbarButton1" runat="server" Text="Delete" Icon="Cross">
+                                     <AjaxEvents>
+                                        <Click 
+                                            Url="/Data/DeleteCustomer" 
+                                            CleanRequest="true"
+                                            Method="POST"
+                                            Failure="Ext.Msg.show({title:'Delete Error',msg: result.errorMessage,buttons: Ext.Msg.OK,icon: Ext.MessageBox.ERROR});" 
+                                            Success="#{CustomerPager}.doLoad(Math.max(0, #{CustomerPager}.cursor-1));">
+                                            <Confirmation ConfirmRequest="true" Title="Confirm" Message="Are you sure?" />
+                                            <ExtraParams>
+                                                <ext:Parameter Name="id" Value="#{dsCustomer}.getAt(0).id" Mode="Raw" />
+                                            </ExtraParams>
+                                        </Click>
+                                     </AjaxEvents>
+                                </ext:ToolbarButton>
+                                
                                 <ext:ToolbarFill runat="server" />
                                 <ext:Hidden ID="txtFilter" runat="server">
                                     <Listeners>
@@ -121,7 +190,7 @@
                                         <ext:Tab ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;">
                                             <Body>
                                                 <ext:FitLayout ID="gdFitLayout1" runat="server">
-                                                    <ext:FormPanel ID="DetailsForm" runat="server" Border="false">
+                                                    <ext:FormPanel ID="DetailsForm" runat="server" Border="false" Url="/Data/SaveCustomer">
                                                         <Anchors>
                                                             <ext:Anchor>
                                                                 <ext:Panel ID="gdPanel1" runat="server" Border="false">
@@ -130,7 +199,7 @@
                                                                             <ext:LayoutColumn ColumnWidth="0.5">
                                                                                 <ext:Panel ID="gdPanel2" runat="server" Border="false">
                                                                                     <Body>
-                                                                                        <ext:FormLayout ID="gdFormLayout1" runat="server" LabelSeparator="" LabelWidth="130">
+                                                                                        <ext:FormLayout ID="gdFormLayout1" runat="server" LabelSeparator="" LabelWidth="130" MsgTarget="Side" AllowBlank="false">
                                                                                             <ext:Anchor Horizontal="95%">
                                                                                                 <ext:TextField ID="CompanyName" runat="server" FieldLabel="Company" />
                                                                                             </ext:Anchor>
@@ -140,7 +209,7 @@
                                                                                             </ext:Anchor>
                                                                                             
                                                                                             <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="ContactName" runat="server" FieldLabel="Contact Name" />
+                                                                                                <ext:TextField ID="ContactName" runat="server" FieldLabel="Contact Name"  MsgTarget="Side" AllowBlank="false"/>
                                                                                             </ext:Anchor>
                                                                                             
                                                                                             <ext:Anchor Horizontal="95%">
@@ -195,7 +264,7 @@
                                                                                     <Body>
                                                                                         <ext:FormLayout ID="gdFormLayout2" runat="server" LabelSeparator="" LabelWidth="130">
                                                                                             <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Email" runat="server" FieldLabel="E-mail" />
+                                                                                                <ext:TextField ID="Email" runat="server" FieldLabel="E-mail"/>
                                                                                             </ext:Anchor>
                                                                                             
                                                                                             <ext:Anchor Horizontal="95%">

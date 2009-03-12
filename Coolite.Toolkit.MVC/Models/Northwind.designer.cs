@@ -763,7 +763,7 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CustomerID", DbType="NVarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CustomerID
 		{
 			get
@@ -2122,7 +2122,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		[Column(Storage="_CustomerID", DbType="NVarChar(30) ")]
 		public string CustomerID
 		{
 			get
@@ -4698,7 +4698,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		[Column(Storage="_CustomerID", DbType="NVarChar(30) ")]
 		public string CustomerID
 		{
 			get
@@ -5226,7 +5226,7 @@ namespace Coolite.Toolkit.MVC.Models
 		{
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5)")]
+		[Column(Storage="_CustomerID", DbType="NVarChar(30) ", IsDbGenerated=true, IsVersion=true)]
 		public string CustomerID
 		{
 			get
@@ -5698,7 +5698,7 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CustomerID", DbType="NVarChar(30) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string CustomerID
 		{
 			get

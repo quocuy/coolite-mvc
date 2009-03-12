@@ -79,6 +79,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\AjaxFormResult.cs" />
     <Compile Include="Code\DynamicLibrary.cs" />
     <Compile Include="Code\AjaxStoreResult.cs" />
     <Compile Include="Code\AjaxResult.cs" />
