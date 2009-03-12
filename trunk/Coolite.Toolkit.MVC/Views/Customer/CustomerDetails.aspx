@@ -76,7 +76,7 @@
                                 <ext:ToolbarFill runat="server" />
                                 <ext:Hidden ID="txtFilter" runat="server">
                                     <Listeners>
-                                        <Change Handler="#{dsCustomer}.reload();#{CustomerPager}.changePage(1)" />
+                                        <Change Handler="#{CustomerPager}.changePage(1)" />
                                     </Listeners>
                                 </ext:Hidden>
                                 <ext:ComboBox 
