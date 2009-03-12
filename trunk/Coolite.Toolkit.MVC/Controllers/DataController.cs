@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Coolite.Ext.Web.MVC;
 using System.Linq.Dynamic;
+using Coolite.Toolkit.MVC.Models;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
@@ -63,6 +65,85 @@ namespace Coolite.Toolkit.MVC.Controllers
         public AjaxStoreResult GetTopTenOrdersBySalesAmount()
         {
             return new AjaxStoreResult(this.DBContext.Top_Ten_Orders_By_Sales_Amounts);
+        }
+
+        public AjaxResult DeleteCustomer(string id)
+        {
+            AjaxResult response = new AjaxResult();
+            try
+            {
+                
+                var customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
+                this.DBContext.Customers.DeleteOnSubmit(customer);
+                this.DBContext.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                response.ErrorMessage = e.ToString();
+            }
+            return response;
+        }
+
+        public AjaxFormResult SaveCustomer(string id, FormCollection values)
+        {
+            AjaxFormResult response = new AjaxFormResult();
+
+            try
+            {
+                //for example
+                if(string.IsNullOrEmpty(values["Notes"]))
+                {
+                    response.Success = false;
+                    response.Errors.Add(new FieldError("Notes", "The Notes field is required"));
+                    return response;
+                }
+
+                bool isNew = false;
+
+                Customer customer;
+                if(string.IsNullOrEmpty(id))
+                {
+                    customer = new Customer();
+                    customer.CustomerID = Guid.NewGuid().ToString().GetHashCode().ToString();
+                    isNew = true;
+                }
+                else
+                {
+                    customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
+                }
+                
+                
+                customer.CompanyName = values["CompanyName"];
+                customer.Address = values["Address"];
+                customer.City = values["City"];
+                customer.ContactName = values["ContactName"];
+                customer.ContactTitle = values["ContactTitle"];
+                customer.Country = values["Country"];
+                customer.Email = values["Email"];
+                customer.Fax = values["Fax"];
+                customer.Mobile = values["Mobile"];
+                customer.Notes = values["Notes"];
+                customer.Phone = values["Phone"];
+                customer.PostalCode = values["PostalCode"];
+                customer.Region = values["Region"];
+                customer.WebPage = values["WebPage"];
+
+                if(isNew)
+                {
+                    this.DBContext.Customers.InsertOnSubmit(customer);
+                }
+
+                this.DBContext.SubmitChanges();
+
+                response.ExtraParams["newID"] = customer.CustomerID;
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.ExtraParams["msg"] = e.ToString();
+            }
+
+            return response;
         }
 
 

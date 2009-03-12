@@ -21,7 +21,7 @@
   </Table>
   <Table Name="dbo.CustomerCustomerDemo" Member="CustomerCustomerDemos">
     <Type Name="CustomerCustomerDemo">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CustomerTypeID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="CustomerDemographic_CustomerCustomerDemo" Member="CustomerDemographic" ThisKey="CustomerTypeID" OtherKey="CustomerTypeID" Type="CustomerDemographic" IsForeignKey="true" />
       <Association Name="Customer_CustomerCustomerDemo" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
@@ -82,7 +82,7 @@
   <Table Name="dbo.Orders" Member="Orders">
     <Type Name="Order">
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(30) " CanBeNull="true" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RequiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -242,7 +242,7 @@
   <Table Name="dbo.[Orders Qry]" Member="Orders_Qries">
     <Type Name="Orders_Qry">
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(30) " CanBeNull="true" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RequiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -287,10 +287,10 @@
   </Table>
   <Table Name="dbo.[Quarterly Orders]" Member="Quarterly_Orders">
     <Type Name="Quarterly_Order">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
-      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="CustomerID" AutoSync="Never" Type="System.String" DbType="NVarChar(30) " CanBeNull="true" UpdateCheck="Always" IsVersion="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" UpdateCheck="Always" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Always" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Always" />
     </Type>
   </Table>
   <Table Name="dbo.[Sales by Category]" Member="Sales_by_Categories">
@@ -327,7 +327,7 @@
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
     <Type Name="Customer">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.String" DbType="NVarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
       <Column Name="ContactName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
