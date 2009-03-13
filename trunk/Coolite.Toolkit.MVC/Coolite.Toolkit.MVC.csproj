@@ -97,6 +97,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Northwind.cs">
+      <DependentUpon>Northwind.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Northwind.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

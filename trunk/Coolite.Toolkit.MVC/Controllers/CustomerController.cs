@@ -14,6 +14,7 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public ActionResult CustomerDetails()
         {
+            ViewData["id"] = HttpContext.Request["id"]??"";
             return this.View();
         }
 
