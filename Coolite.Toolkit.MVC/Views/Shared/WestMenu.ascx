@@ -2,7 +2,7 @@
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
 <ext:Accordion ID="wmAccordion1" runat="server" Animate="true">
-    <ext:Panel ID="wmPanel1" runat="server" Border="false" Collapsed="true" Title="Customers & Orders">
+    <ext:Panel ID="wmPanel1" runat="server" Border="false" Collapsed="false" Title="Customers & Orders">
         <Body>
             <ext:FitLayout ID="wmFitLayout1" runat="server">
                 <ext:MenuPanel ID="wmMenuPanel1" runat="server" Border="false" SaveSelection="false" Cls="white-menu">

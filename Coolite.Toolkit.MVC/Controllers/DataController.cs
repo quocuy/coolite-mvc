@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Data.Linq;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using Coolite.Ext.Web;
 using Coolite.Ext.Web.MVC;
 using System.Linq.Dynamic;
 using Coolite.Toolkit.MVC.Models;
@@ -37,9 +40,25 @@ namespace Coolite.Toolkit.MVC.Controllers
                         {
                             c.CustomerID,
                             c.CompanyName,
+                            c.ContactName
                         };
 
             return new AjaxStoreResult(query);
+        }
+
+        public AjaxStoreResult GetCustomersPaging(string filter, int start, int limit)
+        {
+            var query = from c in this.DBContext.Customers
+                        where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
+                               c.CustomerID.ToLower().StartsWith(filter.ToLower()))
+                        select new
+                        {
+                            c.CustomerID,
+                            c.CompanyName,
+                            c.ContactName
+                        };
+
+            return new AjaxStoreResult(query.Skip(start).Take(limit), query.Count());
         }
 
         public AjaxStoreResult GetCustomers(int limit, int start, string dir, string sort)
@@ -146,6 +165,108 @@ namespace Coolite.Toolkit.MVC.Controllers
             return response;
         }
 
+        public AjaxStoreResult SaveCustomersWithoutConfirmation()
+        {
+            AjaxStoreResult ajaxStoreResult = new AjaxStoreResult(StoreResponseFormat.Save);
+
+            try
+            {
+                NorthwindDataContext db = this.DBContext;
+                StoreDataHandler dataHandler = new StoreDataHandler(HttpContext.Request["data"]);
+                ChangeRecords<Customer> data = dataHandler.ObjectData<Customer>();
+
+                foreach (Customer customer in data.Deleted)
+                {
+                    db.Customers.Attach(customer);
+                    db.Customers.DeleteOnSubmit(customer);
+                }
+
+                foreach (Customer customer in data.Updated)
+                {
+                    db.Customers.Attach(customer);
+                    db.Refresh(RefreshMode.KeepCurrentValues, customer);
+                }
+
+                foreach (Customer customer in data.Created)
+                {
+                    customer.TemporaryID = customer.CustomerID;
+                    db.Customers.InsertOnSubmit(customer);
+                }
+
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                ajaxStoreResult.SaveResponse.Success = false;
+                ajaxStoreResult.SaveResponse.ErrorMessage = e.Message;
+            }
+
+            return ajaxStoreResult;
+        }
+
+        public AjaxStoreResult SaveCustomersWithConfirmation()
+        {
+            AjaxStoreResult ajaxStoreResult = new AjaxStoreResult(StoreResponseFormat.Save);
+
+            try
+            {
+                NorthwindDataContext db = this.DBContext;
+                StoreDataHandler dataHandler = new StoreDataHandler(HttpContext.Request["data"]);
+                ChangeRecords<Customer> data = dataHandler.ObjectData<Customer>();
+                ConfirmationList confirmationList = dataHandler.BuildConfirmationList("CustomerID");
+
+                foreach (Customer customer in data.Deleted)
+                {
+                    db.Customers.Attach(customer);
+                    db.Customers.DeleteOnSubmit(customer);
+                    confirmationList[customer.CustomerID].ConfirmRecord();
+                }
+
+                foreach (Customer customer in data.Updated)
+                {
+                    db.Customers.Attach(customer);
+                    db.Refresh(RefreshMode.KeepCurrentValues, customer);
+                    confirmationList[customer.CustomerID].ConfirmRecord();
+                }
+
+                foreach (Customer customer in data.Created)
+                {
+                    customer.TemporaryID = customer.CustomerID;
+                    db.Customers.InsertOnSubmit(customer);
+                }
+
+                db.SubmitChanges();
+
+                //ideally we should confirm after each operation
+                //but LINQ make batch submit of changes
+
+                foreach (Customer customer in data.Deleted)
+                {
+                    confirmationList[customer.CustomerID].ConfirmRecord();
+                }
+
+                foreach (Customer customer in data.Updated)
+                {
+                    confirmationList[customer.CustomerID].ConfirmRecord();
+                }
+
+                foreach (Customer customer in data.Created)
+                {
+                    confirmationList[customer.TemporaryID.ToString()].ConfirmRecord(customer.CustomerID);
+                }
+
+
+                ajaxStoreResult.SaveResponse.ConfirmationList = confirmationList;
+            }
+            catch (Exception e)
+            {
+                ajaxStoreResult.SaveResponse.Success = false;
+                ajaxStoreResult.SaveResponse.ErrorMessage = e.Message;
+            }
+
+            return ajaxStoreResult;
+        }
+
 
         //********************//
         //       Order        //
@@ -178,6 +299,24 @@ namespace Coolite.Toolkit.MVC.Controllers
             query = query.Skip(start).Take(limit);
 
             return new AjaxStoreResult(query, total);
+        }
+
+        public AjaxStoreResult GetCustomerOrders(string customerID)
+        {
+            var query = from o in this.DBContext.Orders
+                        where o.CustomerID == customerID
+                        from subtotal in this.DBContext.Order_Subtotals 
+                        where subtotal.OrderID == o.OrderID
+                         select new
+                         {
+                             o.OrderID,
+                             subtotal.Subtotal,
+                             o.OrderDate,
+                             o.RequiredDate,
+                             o.ShippedDate
+                         };
+
+            return new AjaxStoreResult(query);
         }
     }
 }

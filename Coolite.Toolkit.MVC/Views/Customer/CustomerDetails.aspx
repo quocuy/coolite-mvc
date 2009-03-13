@@ -33,23 +33,30 @@
         }
 
         var successHandler = function(form, action) {
-            Ext.MessageBox.alert('Success', 'Customer has been saved!');
+
             if (action.result && action.result.extraParams && action.result.extraParams.newID) {
                 dsCustomer.getAt(0).id = action.result.extraParams.newID;
                 if (dsCustomer.getAt(0).newRecord) {
                     delete dsCustomer.getAt(0).newRecord;
                 }
             }
+            else {
+                Ext.MessageBox.alert('Success', 'Customer has been saved!');
+            }
+
+            customerChanged = true;
 
             if (action.options.params.setNew) {
-                debugger;
                 DetailsForm.form.reset();
                 dsCustomer.removeAll();
                 var rec = new dsCustomer.recordType();
                 rec.newRecord = true;
-                rec.commit();
                 dsCustomer.add(rec);
             }
+        }
+
+        var getCustomerID = function() {
+            return (dsCustomer.getCount()>0 && !dsCustomer.getAt(0).newRecord) ? dsCustomer.getAt(0).id : ''
         }
     </script>
 
@@ -59,7 +66,7 @@
     
     <ext:Store ID="dsCustomer" runat="server" ShowWarningOnFailure="true">
         <Proxy>
-            <ext:HttpWriteProxy Url="/Data/GetCustomer/" SaveUrl="/Data/SaveCustomer/"/>
+            <ext:HttpProxy Url="/Data/GetCustomer/"/>
         </Proxy>
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
@@ -86,25 +93,50 @@
             <ext:Parameter Name="filter" Value="#{txtFilter}.getValue()" Mode="Raw" />
         </BaseParams>
         <Listeners>
-            <Load Handler="records.length > 0 ? #{DetailsForm}.form.loadRecord(records[0]) : #{DetailsForm}.form.reset();" />
+            <Load Handler="if(records.length > 0){#{DetailsForm}.form.loadRecord(records[0]); #{CustomerPanel}.setActiveTab(0);#{dsOrders}.loaded = false;}else{#{DetailsForm}.form.reset();#{dsOrders}.removeAll();}" />
         </Listeners>
     </ext:Store>
     
     <ext:Store ID="dsCustomers" runat="server" ShowWarningOnFailure="true" AutoLoad="false">
         <Proxy>
-            <ext:HttpProxy Url="/Data/GetCustomersSimple/" />
+            <ext:HttpProxy Url="/Data/GetCustomersPaging/" />
         </Proxy>
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
                 <Fields>
                     <ext:RecordField Name="CustomerID" />
                     <ext:RecordField Name="CompanyName" />
+                    <ext:RecordField Name="ContactName" />
                 </Fields>
             </ext:JsonReader>
         </Reader>
         <BaseParams>
             <ext:Parameter Name="filter" Value="#{txtCustomers}.getText()" Mode="Raw" />
         </BaseParams>
+    </ext:Store>
+    
+    <ext:Store ID="dsOrders" runat="server" ShowWarningOnFailure="true" AutoLoad="false">
+        <Proxy>
+            <ext:HttpProxy Url="/Data/GetCustomerOrders/" />
+        </Proxy>
+        <Reader>
+            <ext:JsonReader ReaderID="OrderID" Root="data" TotalProperty="totalCount">
+                <Fields>
+                    <ext:RecordField Name="OrderID" />
+                    <ext:RecordField Name="Subtotal" Type="Float"/>
+                    <ext:RecordField Name="OrderDate" Type="Date" />
+                    <ext:RecordField Name="RequiredDate" Type="Date" />
+                    <ext:RecordField Name="ShippedDate" Type="Date" />
+                </Fields>
+            </ext:JsonReader>
+        </Reader>
+        <BaseParams>
+            <ext:Parameter Name="customerID" Value="getCustomerID()" Mode="Raw" />
+        </BaseParams>
+        <Listeners>
+            <BeforeLoad Handler="return !this.loaded;" />
+            <Load Handler="this.loaded = true;" />
+        </Listeners>
     </ext:Store>
     
     <ext:ViewPort ID="ViewPort1" runat="server">
@@ -116,13 +148,13 @@
                             <Items>
                                 <ext:ToolbarButton runat="server" Text="Save" Icon="Disk">
                                     <Listeners>
-                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{id: (#{dsCustomer}.getCount()>0 && !#{dsCustomer}.getAt(0).newRecord) ? #{dsCustomer}.getAt(0).id : ''}, success: successHandler, failure: failureHandler});" />
+                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{id: getCustomerID()}, success: successHandler, failure: failureHandler});" />
                                     </Listeners>
                                 </ext:ToolbarButton>
                                 
                                 <ext:ToolbarButton runat="server" Text="Save and New" Icon="Add">
                                      <Listeners>
-                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{setNew: true, id: (#{dsCustomer}.getCount()>0 && !#{dsCustomer}.getAt(0).newRecord) ? #{dsCustomer}.getAt(0).id : ''}, success: successHandler, failure: failureHandler});" />
+                                        <Click Handler="#{DetailsForm}.form.submit({waitMsg:'Saving...', params:{setNew: true, id: getCustomerID()}, success: successHandler, failure: failureHandler});" />
                                     </Listeners>
                                 </ext:ToolbarButton>
                                 
@@ -143,25 +175,48 @@
                                 </ext:ToolbarButton>
                                 
                                 <ext:ToolbarFill runat="server" />
-                                <ext:Hidden ID="txtFilter" runat="server">
+                                <ext:Hidden ID="txtFilter" runat="server" Text='<%# ViewData["id"] %>'>
                                     <Listeners>
                                         <Change Handler="#{CustomerPager}.changePage(1)" />
                                     </Listeners>
                                 </ext:Hidden>
+                                
                                 <ext:ComboBox 
                                     ID="txtCustomers" 
-                                    runat="server" 
+                                    runat="server"
                                     EmptyText="Select Customer"
                                     TypeAhead="true" 
                                     StoreID="dsCustomers"
                                     DisplayField="CompanyName" 
                                     ValueField="CustomerID"
-                                    MinChars="1">
+                                    MinChars="1"                                    
+                                    ListWidth="400"  
+                                    PageSize="10"                                  
+                                    ItemSelector="tr.list-item">
+                                    <Template ID="Template1" runat="server">
+                                        <tpl for=".">
+                                            <tpl if="[xindex] == 1">
+                                                <table>
+                                                    <tr>
+                                                        <td><b>Company</b></td>
+                                                        <td><b>Contact Name</b></td>
+                                                    </tr>
+                                            </tpl>
+                                            <tr class="list-item">
+                                                <td style="font-size:85%;padding:3px 0px;">{CompanyName}</td>
+                                                <td style="font-size:85%;">{ContactName}</td>
+                                            </tr>
+                                            <tpl if="[xcount-xindex]==0">
+                                                </table>
+                                            </tpl>
+                                        </tpl>
+                                    </Template>    
                                     <Listeners>
                                         <Select Handler="#{txtSearch}.setValue('');#{txtFilter}.setValue(el.getValue());" />
                                         <Blur Handler="if(Ext.isEmpty(el.getText())) { el.setValue(''); #{txtFilter}.setValue(''); };" />
                                     </Listeners>
-                                </ext:ComboBox>
+                                </ext:ComboBox>                                   
+                                
                                 <ext:ToolbarSpacer ID="ToolbarSpacer2" runat="server" />
                                 <ext:ToolbarSeparator ID="ToolbarSeparator1" runat="server" />
                                 <ext:ToolbarSpacer ID="ToolbarSpacer1" runat="server" />
@@ -185,7 +240,7 @@
                      </TopBar>
                      <Body>
                          <ext:FitLayout ID="FitLayout2" runat="server">
-                                <ext:TabPanel ID="TabPanel1" runat="server" Border="false">
+                                <ext:TabPanel ID="CustomerPanel" runat="server" Border="false" Plain="true">
                                     <Tabs>
                                         <ext:Tab ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;">
                                             <Body>
@@ -301,8 +356,38 @@
                                         </ext:Tab>
                                         <ext:Tab ID="tabOrders" runat="server" Title="Orders">
                                             <Body>
-                                                Not Implemented
+                                                <ext:FitLayout runat="server">
+                                                    <ext:GridPanel ID="grdOrders" runat="server" StoreID="dsOrders" Border="false">
+                                                        <ColumnModel>
+                                                            <Columns>
+                                                                <ext:Column Header="Order ID" DataIndex="OrderID" Sortable="true"/>
+                                                                <ext:Column Header="Sub Total" DataIndex="Subtotal" Sortable="true">
+                                                                    <Renderer Format="UsMoney" />
+                                                                </ext:Column>
+                                                                <ext:Column Header="Order Date" DataIndex="OrderDate" Sortable="true">
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                </ext:Column>
+                                                                 <ext:Column Header="Required Date" DataIndex="RequiredDate" Sortable="true">
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                </ext:Column>
+                                                                <ext:Column Header="Shipped Date" DataIndex="ShippedDate" Sortable="true">
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                </ext:Column>
+                                                            </Columns>
+                                                        </ColumnModel>
+                                                        <View>
+                                                            <ext:GridView ID="GridView1" runat="server" AutoFill="true" />
+                                                        </View>
+                                                        <SelectionModel>
+                                                            <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" />
+                                                        </SelectionModel>
+                                                        <LoadMask ShowMask="true" />
+                                                    </ext:GridPanel>
+                                                </ext:FitLayout>
                                             </Body>
+                                            <Listeners>
+                                                <Activate Handler="#{dsOrders}.reload();" />
+                                            </Listeners>
                                         </ext:Tab>
                                     </Tabs>
                                      <BottomBar>
