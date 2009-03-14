@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Web.Mvc;
 using Coolite.Utilities;
-using Newtonsoft.Json;
 
 namespace Coolite.Ext.Web.MVC
 {
@@ -74,38 +72,30 @@ namespace Coolite.Ext.Web.MVC
 
     public class FieldError
     {
-        public FieldError(string fieldId, string errorMessage)
+        public FieldError(string fieldID, string errorMessage)
         {
-            if(string.IsNullOrEmpty(fieldId))
+            if(string.IsNullOrEmpty(fieldID))
             {
-                throw new ArgumentNullException("fieldId", "Field Id can't be empty");
+                throw new ArgumentNullException("fieldID", "Field ID can not be empty");
             }
 
             if (string.IsNullOrEmpty(errorMessage))
             {
-                throw new ArgumentNullException("errorMessage", "Error message can't be empty");
+                throw new ArgumentNullException("errorMessage", "Error message can not be empty");
             }
 
-            this.FieldId = fieldId;
+            this.FieldID = fieldID;
             this.ErrorMessage = errorMessage;
         }
 
         [ClientConfig("id")]
         [DefaultValue("")]
-        public string FieldId
-        {
-            get; set;
-        }
+        public string FieldID { get; set; }
 
         [ClientConfig("msg")]
         [DefaultValue("")]
-        public string ErrorMessage
-        {
-            get; set;
-        }
+        public string ErrorMessage { get; set; }
     }
 
-    public class FieldErrors : Collection<FieldError>
-    {
-    }
+    public class FieldErrors : Collection<FieldError> { }
 }

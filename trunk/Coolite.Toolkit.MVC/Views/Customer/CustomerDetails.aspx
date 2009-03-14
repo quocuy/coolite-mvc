@@ -12,23 +12,23 @@
     <title></title>
     
     <script type="text/javascript">
-        var failureHandler = function(form, action) {
+        var failureHandler = function (form, action) {
 
             var msg = '';
 
             if (action.failureType == "client" || (action.result && action.result.errors && action.result.errors.length > 0)) {
-                msg = "Please check fields.";
+                msg = "Please check fields";
             } else if (action.result && action.result.extraParams.msg) {
                 msg = action.result.extraParams.msg;
             } else if (action.response) {
                 msg = action.response.responseText;
             }
 
-            Ext.MessageBox.show({
-                title: 'Failure',
+            Ext.Msg.show({
+                title: 'Save Error',
                 msg: msg,
-                buttons: Ext.MessageBox.OK,
-                icon: Ext.MessageBox.ERROR
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.ERROR
             });
         }
 
@@ -164,9 +164,9 @@
                                             Url="/Data/DeleteCustomer" 
                                             CleanRequest="true"
                                             Method="POST"
-                                            Failure="Ext.Msg.show({title:'Delete Error',msg: result.errorMessage,buttons: Ext.Msg.OK,icon: Ext.MessageBox.ERROR});" 
+                                            Failure="Ext.Msg.show({title:'Delete Error',msg: result.errorMessage,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});" 
                                             Success="#{CustomerPager}.doLoad(Math.max(0, #{CustomerPager}.cursor-1));">
-                                            <Confirmation ConfirmRequest="true" Title="Confirm" Message="Are you sure?" />
+                                            <Confirmation ConfirmRequest="true" Title="Alert" Message="Please Confirm Deletion" />
                                             <ExtraParams>
                                                 <ext:Parameter Name="id" Value="#{dsCustomer}.getAt(0).id" Mode="Raw" />
                                             </ExtraParams>
@@ -245,111 +245,113 @@
                                         <ext:Tab ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;">
                                             <Body>
                                                 <ext:FitLayout ID="gdFitLayout1" runat="server">
-                                                    <ext:FormPanel ID="DetailsForm" runat="server" Border="false" Url="/Data/SaveCustomer">
-                                                        <Anchors>
-                                                            <ext:Anchor>
-                                                                <ext:Panel ID="gdPanel1" runat="server" Border="false">
-                                                                    <Body>
-                                                                        <ext:ColumnLayout ID="gdColumnLayout1" runat="server">
-                                                                            <ext:LayoutColumn ColumnWidth="0.5">
-                                                                                <ext:Panel ID="gdPanel2" runat="server" Border="false">
-                                                                                    <Body>
-                                                                                        <ext:FormLayout ID="gdFormLayout1" runat="server" LabelSeparator="" LabelWidth="130" MsgTarget="Side" AllowBlank="false">
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="CompanyName" runat="server" FieldLabel="Company" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor>
-                                                                                                <ext:Label ID="gdLabel1" runat="server" FieldLabel="<br/><b>Primary Contact</b>" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="ContactName" runat="server" FieldLabel="Contact Name"  MsgTarget="Side" AllowBlank="false"/>
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="ContactTitle" runat="server" FieldLabel="Job Title" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor>
-                                                                                                <ext:Label ID="gdLabel2" runat="server" FieldLabel="<br/><b>Phone Numbers</b>" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Phone" runat="server" FieldLabel="Business Phone" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Mobile" runat="server" FieldLabel="Mobile Phone" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Fax" runat="server" FieldLabel="Fax Number" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor>
-                                                                                                <ext:Label ID="Label3" runat="server" FieldLabel="<br/><b>Address</b>" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Address" runat="server" FieldLabel="Street" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="City" runat="server" FieldLabel="City" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Region" runat="server" FieldLabel="State/Province" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="PostalCode" runat="server" FieldLabel="Zip/Postal Code" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Country" runat="server" FieldLabel="Country/Region" />
-                                                                                            </ext:Anchor>
-                                                                                        </ext:FormLayout>
-                                                                                    </Body>
-                                                                                </ext:Panel>   
-                                                                            </ext:LayoutColumn>
-                                                                            <ext:LayoutColumn ColumnWidth="0.5">
-                                                                                 <ext:Panel ID="gdPanel3" runat="server" Border="false">
-                                                                                    <Body>
-                                                                                        <ext:FormLayout ID="gdFormLayout2" runat="server" LabelSeparator="" LabelWidth="130">
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="Email" runat="server" FieldLabel="E-mail"/>
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                                <ext:TextField ID="WebPage" runat="server" FieldLabel="Web Page" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor>
-                                                                                                <ext:Label ID="gdLabel4" runat="server" FieldLabel="<br/>" />
-                                                                                            </ext:Anchor>
-                                                                                            
-                                                                                            <ext:Anchor Horizontal="95%">
-                                                                                               <ext:Panel ID="gdPanel4" runat="server" Border="false">
-                                                                                                    <Body>
-                                                                                                        <ext:FormLayout ID="gdFormLayout3" runat="server" LabelAlign="Top">
-                                                                                                            <ext:Anchor Horizontal="100%">
-                                                                                                                 <ext:TextArea ID="Notes" runat="server" FieldLabel="Notes" Height="302" />
-                                                                                                            </ext:Anchor>
-                                                                                                        </ext:FormLayout>
-                                                                                                    </Body>
-                                                                                               </ext:Panel>
-                                                                                            </ext:Anchor>
-                                                                                        </ext:FormLayout>
-                                                                                    </Body>
-                                                                                </ext:Panel>
-                                                                             </ext:LayoutColumn>
-                                                                        </ext:ColumnLayout>
-                                                                    </Body>
-                                                                </ext:Panel>
-                                                            </ext:Anchor>
-                                                        </Anchors>
+                                                    <ext:FormPanel ID="DetailsForm" runat="server" Border="false" Url="/Data/SaveCustomer/">
+                                                        <Body>
+                                                            <ext:FormLayout ID="layDetails" runat="server">
+                                                                <ext:Anchor>
+                                                                    <ext:Panel ID="gdPanel1" runat="server" Border="false">
+                                                                        <Body>
+                                                                            <ext:ColumnLayout ID="gdColumnLayout1" runat="server">
+                                                                                <ext:LayoutColumn ColumnWidth="0.5">
+                                                                                    <ext:Panel ID="gdPanel2" runat="server" Border="false">
+                                                                                        <Body>
+                                                                                            <ext:FormLayout ID="gdFormLayout1" runat="server" LabelSeparator="" LabelWidth="130" MsgTarget="Side" AllowBlank="false">
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="CompanyName" runat="server" FieldLabel="Company" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor>
+                                                                                                    <ext:Label ID="gdLabel1" runat="server" FieldLabel="<br/><b>Primary Contact</b>" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="ContactName" runat="server" FieldLabel="Contact Name"  MsgTarget="Side" AllowBlank="false"/>
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="ContactTitle" runat="server" FieldLabel="Job Title" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor>
+                                                                                                    <ext:Label ID="gdLabel2" runat="server" FieldLabel="<br/><b>Phone Numbers</b>" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Phone" runat="server" FieldLabel="Business Phone" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Mobile" runat="server" FieldLabel="Mobile Phone" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Fax" runat="server" FieldLabel="Fax Number" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor>
+                                                                                                    <ext:Label ID="Label3" runat="server" FieldLabel="<br/><b>Address</b>" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Address" runat="server" FieldLabel="Street" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="City" runat="server" FieldLabel="City" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Region" runat="server" FieldLabel="State/Province" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="PostalCode" runat="server" FieldLabel="Zip/Postal Code" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Country" runat="server" FieldLabel="Country/Region" />
+                                                                                                </ext:Anchor>
+                                                                                            </ext:FormLayout>
+                                                                                        </Body>
+                                                                                    </ext:Panel>   
+                                                                                </ext:LayoutColumn>
+                                                                                <ext:LayoutColumn ColumnWidth="0.5">
+                                                                                     <ext:Panel ID="gdPanel3" runat="server" Border="false">
+                                                                                        <Body>
+                                                                                            <ext:FormLayout ID="gdFormLayout2" runat="server" LabelSeparator="" LabelWidth="130">
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="Email" runat="server" FieldLabel="E-mail"/>
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                    <ext:TextField ID="WebPage" runat="server" FieldLabel="Web Page" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor>
+                                                                                                    <ext:Label ID="gdLabel4" runat="server" FieldLabel="<br/>" />
+                                                                                                </ext:Anchor>
+                                                                                                
+                                                                                                <ext:Anchor Horizontal="95%">
+                                                                                                   <ext:Panel ID="gdPanel4" runat="server" Border="false">
+                                                                                                        <Body>
+                                                                                                            <ext:FormLayout ID="gdFormLayout3" runat="server" LabelAlign="Top">
+                                                                                                                <ext:Anchor Horizontal="100%">
+                                                                                                                     <ext:TextArea ID="Notes" runat="server" FieldLabel="Notes" Height="302" />
+                                                                                                                </ext:Anchor>
+                                                                                                            </ext:FormLayout>
+                                                                                                        </Body>
+                                                                                                   </ext:Panel>
+                                                                                                </ext:Anchor>
+                                                                                            </ext:FormLayout>
+                                                                                        </Body>
+                                                                                    </ext:Panel>
+                                                                                 </ext:LayoutColumn>
+                                                                            </ext:ColumnLayout>
+                                                                        </Body>
+                                                                    </ext:Panel>
+                                                                </ext:Anchor>
+                                                            </ext:FormLayout>
+                                                        </Body>
                                                     </ext:FormPanel>
                                                 </ext:FitLayout>
                                             </Body>
