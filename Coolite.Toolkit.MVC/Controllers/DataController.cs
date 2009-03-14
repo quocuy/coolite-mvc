@@ -21,9 +21,12 @@ namespace Coolite.Toolkit.MVC.Controllers
         {
             if (!string.IsNullOrEmpty(filter))
             {
-                var query = from c in this.DBContext.Customers 
+                var query = from c in this.DBContext.Customers
+
+                            /// HACK: Simple search needs to be replaced with 'real' search
                             where (c.CompanyName.ToLower().Contains(filter.ToLower()) || 
                                    c.CustomerID.ToLower().Contains(filter.ToLower())) 
+
                             select c;
 
                 return new AjaxStoreResult(query.Skip(start).Take(1), query.Count());
@@ -34,8 +37,11 @@ namespace Coolite.Toolkit.MVC.Controllers
         public AjaxStoreResult GetCustomersSimple(string filter)
         {
             var query = from c in this.DBContext.Customers
+
+                        /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) || 
                                c.CustomerID.ToLower().StartsWith(filter.ToLower()))
+
                         select new
                         {
                             c.CustomerID,
@@ -110,16 +116,17 @@ namespace Coolite.Toolkit.MVC.Controllers
             try
             {
                 //for example
-                if(string.IsNullOrEmpty(values["Notes"]))
+                if (string.IsNullOrEmpty(values["CompanyName"]))
                 {
                     response.Success = false;
-                    response.Errors.Add(new FieldError("Notes", "The Notes field is required"));
+                    response.Errors.Add(new FieldError("CompanyName", "The CompanyName field is required"));
                     return response;
                 }
 
                 bool isNew = false;
 
                 Customer customer;
+
                 if(string.IsNullOrEmpty(id))
                 {
                     customer = new Customer();
@@ -130,7 +137,6 @@ namespace Coolite.Toolkit.MVC.Controllers
                 {
                     customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
                 }
-                
                 
                 customer.CompanyName = values["CompanyName"];
                 customer.Address = values["Address"];

@@ -48,35 +48,31 @@
                     BodyBorder="false" 
                     BodyStyle="background:transparent;" 
                     Url='<%# Html.AttributeEncode(Url.Action("Login")) %>'>
-                    <%--<BaseParams>
-                        <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).ReturnUrl || '/'" Mode="Raw" />
-                    </BaseParams>--%>
-                    <Anchors>
-                        <ext:Anchor Horizontal="100%">
-                            <ext:TextField 
-                                ID="txtUsername" 
-                                runat="server" 
-                                FieldLabel="Username" 
-                                AllowBlank="false"
-                                BlankText="Username is required."
-                                Text="demo"
-                                />
-                        </ext:Anchor>
-                        <ext:Anchor Horizontal="100%">
-                            <ext:TextField 
-                                ID="txtPassword" 
-                                runat="server" 
-                                InputType="Password" 
-                                FieldLabel="Password" 
-                                AllowBlank="false" 
-                                BlankText="Password is required."
-                                Text="demo"
-                                />
-                        </ext:Anchor>
-                        <%--<ext:Anchor>
-                            <ext:Checkbox ID="rememberMe" runat="server" FieldLabel="Remember me"></ext:Checkbox>
-                        </ext:Anchor>--%>
-                    </Anchors>
+                    <Body>
+                        <ext:FormLayout ID="layLogin" runat="server">
+                            <ext:Anchor Horizontal="100%">
+                                <ext:TextField 
+                                    ID="txtUsername" 
+                                    runat="server" 
+                                    FieldLabel="Username" 
+                                    AllowBlank="false"
+                                    BlankText="Username is required."
+                                    Text="demo"
+                                    />
+                            </ext:Anchor>
+                            <ext:Anchor Horizontal="100%">
+                                <ext:TextField 
+                                    ID="txtPassword" 
+                                    runat="server" 
+                                    InputType="Password" 
+                                    FieldLabel="Password" 
+                                    AllowBlank="false" 
+                                    BlankText="Password is required."
+                                    Text="demo"
+                                    />
+                            </ext:Anchor>    
+                        </ext:FormLayout>
+                    </Body>
                 </ext:FormPanel>
             </ext:FitLayout>
         </Body>
