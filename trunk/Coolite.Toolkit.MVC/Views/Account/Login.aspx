@@ -9,8 +9,17 @@
 <head runat="server">
     <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>    
     <style type="text/css">
-        h1  {
+        h1, h2  {
             font: normal 60px tahoma, arial, verdana;
+            color: #E1E1E1;
+        }
+        
+        h2 {
+            font-size: 20px;
+        }
+        
+        h2 a {
+            text-decoration: none;
             color: #E1E1E1;
         }
     </style>
@@ -24,7 +33,7 @@
     <ext:ScriptManager ID="ScriptManager1" runat="server" />
     
     <h1>Northwind Traders</h1>
-    
+    <h2>Powered by the <a href="http://www.coolite.com/">Coolite Toolkit</a>, <a href="http://www.extjs.com/">ExtJS</a> and <a href="http://www.asp.net/mvc/">ASP.NET MVC</a></h2>
     <ext:Window 
         ID="Window1" 
         runat="server" 

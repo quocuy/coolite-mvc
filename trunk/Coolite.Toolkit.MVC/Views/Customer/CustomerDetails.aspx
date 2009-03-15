@@ -60,6 +60,21 @@
         }
     </script>
 
+    <style type="text/css">
+        .txtCustomers-list 
+        {
+            width: 298px;
+            font: 11px tahoma,arial,helvetica,sans-serif;
+        }
+        
+        .txtCustomers-list th {
+            font-weight: bold;
+        }
+        
+        .txtCustomers-list td, .txtCustomers-list th {
+            padding: 3px;
+        }
+    </style>
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server" />
@@ -190,21 +205,21 @@
                                     DisplayField="CompanyName" 
                                     ValueField="CustomerID"
                                     MinChars="1"                                    
-                                    ListWidth="400"  
-                                    PageSize="10"                                  
+                                    ListWidth="300"  
+                                    PageSize="15"                                  
                                     ItemSelector="tr.list-item">
                                     <Template ID="Template1" runat="server">
                                         <tpl for=".">
                                             <tpl if="[xindex] == 1">
-                                                <table>
+                                                <table class="txtCustomers-list">
                                                     <tr>
-                                                        <td><b>Company</b></td>
-                                                        <td><b>Contact Name</b></td>
+                                                        <th>Company</th>
+                                                        <th>Contact Name</th>
                                                     </tr>
                                             </tpl>
                                             <tr class="list-item">
-                                                <td style="font-size:85%;padding:3px 0px;">{CompanyName}</td>
-                                                <td style="font-size:85%;">{ContactName}</td>
+                                                <td style="padding:3px 0px;">{CompanyName}</td>
+                                                <td>{ContactName}</td>
                                             </tr>
                                             <tpl if="[xcount-xindex]==0">
                                                 </table>

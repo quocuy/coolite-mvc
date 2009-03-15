@@ -36,6 +36,20 @@ namespace Coolite.Toolkit.MVC
                 "{controller}/{action}/{id}",                           // URL with parameters
                 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
             );
+
+            /**/
+
+            routes.MapRoute(
+              "Default2",
+              "{controller}.mvc/{action}/{id}",
+              new { action = "Index", id = "" }
+            );
+
+            routes.MapRoute(
+              "Root",
+              "",
+              new { controller = "Home", action = "Index", id = "" }
+            );
         }
 
         protected void Application_Start()
