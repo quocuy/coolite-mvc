@@ -72,7 +72,7 @@ namespace Coolite.Toolkit.MVC.Models
     #endregion
 		
 		public NorthwindDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NORTHWNDConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NORTHWNDConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

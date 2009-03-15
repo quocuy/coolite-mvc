@@ -15,5 +15,14 @@ namespace Coolite.Toolkit.MVC.Controllers
             string script = string.Concat("TextItem1.setText(", JSON.Serialize(DateTime.Now.ToString()), ")");
             return new AjaxResult(script);
         }
+
+        //public AjaxResult GetThemeUrl(string theme)
+        //{
+        //    Theme temp = (Theme)Enum.Parse(typeof(Theme), theme);
+
+        //    this.Session["Coolite.Theme"] = temp;
+
+        //    return (temp == Theme.Default) ? "Default" : this.ScriptManager1.GetThemeUrl(temp);
+        //}
     }
 }

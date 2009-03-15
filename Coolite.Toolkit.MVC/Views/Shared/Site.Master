@@ -30,7 +30,7 @@
                                 <Menu>
                                     <ext:Menu ID="menu1" runat="server">
                                         <Items>
-                                            <ext:MenuItem ID="menuProfile" Text="Profile" Icon="Magnifier" />
+                                            <ext:MenuItem ID="menuProfile" Text="Profile" Icon="Magnifier" Enabled="false" />
                                             <ext:MenuItem ID="menuOptions" Text="Options" Icon="Wrench">
                                                 <Menu>
                                                     <ext:Menu ID="menu3" runat="server">
