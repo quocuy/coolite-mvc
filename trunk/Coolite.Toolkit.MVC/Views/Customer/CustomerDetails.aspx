@@ -13,9 +13,7 @@
     
     <script type="text/javascript">
         var failureHandler = function (form, action) {
-
             var msg = '';
-
             if (action.failureType == "client" || (action.result && action.result.errors && action.result.errors.length > 0)) {
                 msg = "Please check fields";
             } else if (action.result && action.result.extraParams.msg) {
@@ -108,7 +106,7 @@
             <ext:Parameter Name="filter" Value="#{txtFilter}.getValue()" Mode="Raw" />
         </BaseParams>
         <Listeners>
-            <Load Handler="if(records.length > 0){#{DetailsForm}.form.loadRecord(records[0]); #{CustomerPanel}.setActiveTab(0);#{dsOrders}.loaded = false;}else{#{DetailsForm}.form.reset();#{dsOrders}.removeAll();}" />
+            <Load Handler="if(records.length > 0) { #{DetailsForm}.form.loadRecord(records[0]); #{CustomerPanel}.setActiveTab(0); #{dsOrders}.loaded = false; } else { #{DetailsForm}.form.reset(); #{dsOrders}.removeAll(); }" />
         </Listeners>
     </ext:Store>
     
@@ -181,7 +179,7 @@
                                             Method="POST"
                                             Failure="Ext.Msg.show({title:'Delete Error',msg: result.errorMessage,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});" 
                                             Success="#{CustomerPager}.doLoad(Math.max(0, #{CustomerPager}.cursor-1));">
-                                            <Confirmation ConfirmRequest="true" Title="Alert" Message="Please Confirm Deletion" />
+                                            <Confirmation ConfirmRequest="true" Title="Alert" Message="Delete Record?" />
                                             <ExtraParams>
                                                 <ext:Parameter Name="id" Value="#{dsCustomer}.getAt(0).id" Mode="Raw" />
                                             </ExtraParams>
@@ -200,13 +198,14 @@
                                     ID="txtCustomers" 
                                     runat="server"
                                     EmptyText="Select Customer"
-                                    TypeAhead="true" 
+                                    TypeAhead="true"
+                                    ForceSelection="true"
                                     StoreID="dsCustomers"
                                     DisplayField="CompanyName" 
                                     ValueField="CustomerID"
-                                    MinChars="1"                                    
-                                    ListWidth="300"  
-                                    PageSize="15"                                  
+                                    MinChars="1"
+                                    ListWidth="300"
+                                    PageSize="10"
                                     ItemSelector="tr.list-item">
                                     <Template ID="Template1" runat="server">
                                         <tpl for=".">
@@ -374,7 +373,12 @@
                                         <ext:Tab ID="tabOrders" runat="server" Title="Orders">
                                             <Body>
                                                 <ext:FitLayout runat="server">
-                                                    <ext:GridPanel ID="grdOrders" runat="server" StoreID="dsOrders" Border="false">
+                                                    <ext:GridPanel 
+                                                        ID="grdOrders" 
+                                                        runat="server" 
+                                                        StoreID="dsOrders" 
+                                                        Border="false"
+                                                        TrackMouseOver="true">
                                                         <ColumnModel>
                                                             <Columns>
                                                                 <ext:Column Header="Order ID" DataIndex="OrderID" Sortable="true"/>
@@ -382,13 +386,13 @@
                                                                     <Renderer Format="UsMoney" />
                                                                 </ext:Column>
                                                                 <ext:Column Header="Order Date" DataIndex="OrderDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
                                                                 </ext:Column>
                                                                  <ext:Column Header="Required Date" DataIndex="RequiredDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
                                                                 </ext:Column>
                                                                 <ext:Column Header="Shipped Date" DataIndex="ShippedDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
                                                                 </ext:Column>
                                                             </Columns>
                                                         </ColumnModel>

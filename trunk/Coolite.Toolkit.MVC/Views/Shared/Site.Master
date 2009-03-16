@@ -17,7 +17,7 @@
     <script src="/Content/Site.Master.js" type="text/javascript"></script>
 </head>
 <body>
-    <ext:ScriptManager ID="ScriptManager1" runat="server"/>
+    <ext:ScriptManager ID="ScriptManager1" runat="server" />
     <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
             <ext:BorderLayout ID="BorderLayout1" runat="server">
@@ -109,7 +109,7 @@
                                 Title="Home" 
                                 Icon="ApplicationForm" 
                                 Border="false">
-                                <AutoLoad Url="/Home/Dashboard" />
+                                <AutoLoad Url="/Home/Dashboard/" Mode="IFrame" ShowMask="true" MaskMsg="Loading 'Daskboard'..." />
                             </ext:Tab>                        
                         </Tabs>
                         <Plugins>

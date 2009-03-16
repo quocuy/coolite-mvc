@@ -32,7 +32,11 @@
     <ext:ViewPort runat="server">
         <Body>
             <ext:FitLayout runat="server">
-                <ext:GridPanel runat="server" StoreID="Store1" Border="false">
+                <ext:GridPanel 
+                    runat="server" 
+                    StoreID="Store1" 
+                    Border="false"
+                    TrackMouseOver="true">
                     <ColumnModel>
                         <Columns>
                             <ext:Column Header="Order ID" DataIndex="OrderID" Sortable="true"/>
