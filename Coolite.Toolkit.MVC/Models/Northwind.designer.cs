@@ -1929,7 +1929,7 @@ namespace Coolite.Toolkit.MVC.Models
 		}
 		
 		[Association(Name="Order_Order_Detail", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
-		public Order Order
+		internal Order Order
 		{
 			get
 			{
@@ -2395,7 +2395,7 @@ namespace Coolite.Toolkit.MVC.Models
 		}
 		
 		[Association(Name="Order_Order_Detail", Storage="_Order_Details", ThisKey="OrderID", OtherKey="OrderID")]
-		internal EntitySet<Order_Detail> Order_Details
+		public EntitySet<Order_Detail> Order_Details
 		{
 			get
 			{
@@ -2476,7 +2476,7 @@ namespace Coolite.Toolkit.MVC.Models
 		}
 		
 		[Association(Name="Customer_Order", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public Customer Customer
+		internal Customer Customer
 		{
 			get
 			{

@@ -127,7 +127,7 @@
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
     <Content Include="Views\Home\Dashboard.aspx" />
     <Content Include="Views\Order\OrderDetails.aspx" />
-    <Content Include="Views\Order\OrderDetailsGeneral.ascx" />
+    <Content Include="Views\Order\OrderDetails.ascx" />
     <Content Include="Views\Order\OrderList.aspx" />
     <Content Include="Views\Customer\CustomerList.aspx" />
     <Content Include="Views\Customer\CustomerDetails.aspx" />

@@ -3,9 +3,10 @@
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <%@ Register src="CustomerDetailsGeneral.ascx" tagname="CustomerDetailsGeneral" tagprefix="uc1" %>
 <%@ Register src="CustomerDetailsOrders.ascx" tagname="CustomerDetailsOrders" tagprefix="uc1" %>
-
+<%@ Register src="~/Views/Order/OrderDetails.ascx" tagname="OrderDetails" tagprefix="uc1" %>
+<%--
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">--%>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
@@ -254,7 +255,7 @@
                      </TopBar>
                      <Body>
                          <ext:FitLayout ID="FitLayout2" runat="server">
-                                <ext:TabPanel ID="CustomerPanel" runat="server" Border="false">
+                                <ext:TabPanel ID="CustomerPanel" runat="server" Border="false" LayoutOnTabChange="true">
                                     <Tabs>
                                         <ext:Tab ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;">
                                             <Body>
@@ -370,41 +371,54 @@
                                                 </ext:FitLayout>
                                             </Body>
                                         </ext:Tab>
-                                        <ext:Tab ID="tabOrders" runat="server" Title="Orders">
+                                        <ext:Tab ID="tabOrders" runat="server" Title="Orders" BodyStyle="background-color:#F0F0F0;">
                                             <Body>
-                                                <ext:FitLayout runat="server">
-                                                    <ext:GridPanel 
-                                                        ID="grdOrders" 
-                                                        runat="server" 
-                                                        StoreID="dsOrders" 
-                                                        Border="false"
-                                                        TrackMouseOver="true">
-                                                        <ColumnModel>
-                                                            <Columns>
-                                                                <ext:Column Header="Order ID" DataIndex="OrderID" Sortable="true"/>
-                                                                <ext:Column Header="Sub Total" DataIndex="Subtotal" Sortable="true">
-                                                                    <Renderer Format="UsMoney" />
-                                                                </ext:Column>
-                                                                <ext:Column Header="Order Date" DataIndex="OrderDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
-                                                                </ext:Column>
-                                                                 <ext:Column Header="Required Date" DataIndex="RequiredDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
-                                                                </ext:Column>
-                                                                <ext:Column Header="Shipped Date" DataIndex="ShippedDate" Sortable="true">
-                                                                    <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
-                                                                </ext:Column>
-                                                            </Columns>
-                                                        </ColumnModel>
-                                                        <View>
-                                                            <ext:GridView ID="GridView1" runat="server" AutoFill="true" />
-                                                        </View>
-                                                        <SelectionModel>
-                                                            <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" />
-                                                        </SelectionModel>
-                                                        <LoadMask ShowMask="true" />
-                                                    </ext:GridPanel>
-                                                </ext:FitLayout>
+                                                <ext:RowLayout runat="server" Split="true">
+                                                    <ext:LayoutRow RowHeight="0.5">
+                                                        <ext:GridPanel 
+                                                            ID="grdOrders" 
+                                                            runat="server" 
+                                                            StoreID="dsOrders" 
+                                                            TrackMouseOver="true">
+                                                            <ColumnModel>
+                                                                <Columns>
+                                                                    <ext:Column Header="Order ID" DataIndex="OrderID" Sortable="true"/>
+                                                                    <ext:Column Header="Sub Total" DataIndex="Subtotal" Sortable="true">
+                                                                        <Renderer Format="UsMoney" />
+                                                                    </ext:Column>
+                                                                    <ext:Column Header="Order Date" DataIndex="OrderDate" Sortable="true">
+                                                                        <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
+                                                                    </ext:Column>
+                                                                     <ext:Column Header="Required Date" DataIndex="RequiredDate" Sortable="true">
+                                                                        <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
+                                                                    </ext:Column>
+                                                                    <ext:Column Header="Shipped Date" DataIndex="ShippedDate" Sortable="true">
+                                                                        <Renderer Fn="Ext.util.Format.dateRenderer('Y-m-d')" />
+                                                                    </ext:Column>
+                                                                </Columns>
+                                                            </ColumnModel>
+                                                            <View>
+                                                                <ext:GridView ID="GridView1" runat="server" AutoFill="true" />
+                                                            </View>
+                                                            <SelectionModel>
+                                                                <ext:RowSelectionModel ID="RowSelectionModel1" runat="server">
+                                                                    <Listeners>
+                                                                        <RowSelect Handler="OrderDetails.body.mask('Loading order ' + record.id + '...', 'x-mask-loading'); dsOrder.load({params:{orderID: record.id}});" Buffer="250" />
+                                                                    </Listeners>
+                                                                </ext:RowSelectionModel>
+                                                            </SelectionModel>
+                                                            <LoadMask ShowMask="true" />
+                                                        </ext:GridPanel>
+                                                    </ext:LayoutRow>
+                                                    
+                                                    <ext:LayoutRow RowHeight="0.5">
+                                                        <ext:Panel runat="server" Border="false">
+                                                            <Body>
+                                                                <uc1:OrderDetails runat="server" />
+                                                            </Body>
+                                                        </ext:Panel>
+                                                    </ext:LayoutRow>
+                                                </ext:RowLayout>
                                             </Body>
                                             <Listeners>
                                                 <Activate Handler="#{dsOrders}.reload();" />
