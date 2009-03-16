@@ -39,8 +39,9 @@ namespace Coolite.Toolkit.MVC.Controllers
             var query = from c in this.DBContext.Customers
 
                         /// HACK: Simple search hack needs to be replaced with 'real' search
-                        where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) || 
-                               c.CustomerID.ToLower().StartsWith(filter.ToLower()))
+                        where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
+                               c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
+                               c.ContactName.ToLower().StartsWith(filter.ToLower()))
 
                         select new
                         {
@@ -55,8 +56,11 @@ namespace Coolite.Toolkit.MVC.Controllers
         public AjaxStoreResult GetCustomersPaging(string filter, int start, int limit)
         {
             var query = from c in this.DBContext.Customers
+                        
+                        /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
-                               c.CustomerID.ToLower().StartsWith(filter.ToLower()))
+                               c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
+                               c.ContactName.ToLower().StartsWith(filter.ToLower()))
                         select new
                         {
                             c.CustomerID,

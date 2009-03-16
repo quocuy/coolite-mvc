@@ -254,7 +254,7 @@
                      </TopBar>
                      <Body>
                          <ext:FitLayout ID="FitLayout2" runat="server">
-                                <ext:TabPanel ID="CustomerPanel" runat="server" Border="false" Plain="true">
+                                <ext:TabPanel ID="CustomerPanel" runat="server" Border="false">
                                     <Tabs>
                                         <ext:Tab ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;">
                                             <Body>
