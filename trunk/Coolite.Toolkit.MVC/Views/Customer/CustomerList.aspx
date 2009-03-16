@@ -83,7 +83,11 @@
                     AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns>
-                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID" />
+                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID">
+                                <Editor>
+                                    <ext:TextField ID="TextField1" runat="server" AllowBlank="false" />
+                                </Editor>                                
+                            </ext:Column>
                             <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company Name">
                                 <Editor>
                                     <ext:TextField runat="server" AllowBlank="false" />
@@ -116,17 +120,17 @@
                                     <ext:TextField runat="server" />
                                 </Editor>
                             </ext:Column>
-                            <ext:CommandColumn Width="30" Hideable="false">
+                            <ext:CommandColumn Width="50" Hideable="false">
                                 <Commands>
-                                    <ext:GridCommand Icon="ApplicationFormEdit" CommandName="edit" QTipText="Edit" />
+                                    <ext:GridCommand CommandName="edit" Icon="ApplicationFormEdit">
+                                        <ToolTip Text="Edit"></ToolTip>
+                                    </ext:GridCommand>
+                                    <ext:GridCommand CommandName="delete" Icon="Cross">
+                                        <ToolTip Text="Delete" />
+                                    </ext:GridCommand>
                                 </Commands>
+                                <PrepareToolbar Handler="toolbar.setVisible(!record.newRecord);" />
                             </ext:CommandColumn>
-                            <ext:ImageCommandColumn Width="30" Hideable="false">
-                                <Commands>
-                                    <ext:ImageCommand CommandName="delete" Icon="Cross" Tooltip="Delete" />
-                                </Commands>
-                                <PrepareCommand Handler="command.hidden = record.newRecord;" />
-                            </ext:ImageCommandColumn>
                         </Columns>
                     </ColumnModel>
                     <SelectionModel>
@@ -158,6 +162,7 @@
                     </BottomBar>
                     <Listeners>
                         <Command Fn="commandHandler" />
+                        <BeforeEdit Handler="e.cancel = e.field == 'CustomerID' && !e.record.newRecord;" />
                     </Listeners>
                 </ext:GridPanel>
             </ext:FitLayout>

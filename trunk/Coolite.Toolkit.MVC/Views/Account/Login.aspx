@@ -30,12 +30,11 @@
     </script>
 </head>
 <body>
-    <ext:ScriptManager ID="ScriptManager1" runat="server" />
+    <ext:ScriptManager runat="server" />
     
     <h1>Northwind Traders</h1>
     <h2>Powered by the <a href="http://www.coolite.com/">Coolite Toolkit</a>, <a href="http://www.extjs.com/">ExtJS</a> and <a href="http://www.asp.net/mvc/">ASP.NET MVC</a></h2>
     <ext:Window 
-        ID="Window1" 
         runat="server" 
         Closable="false"
         Resizable="false"
@@ -50,7 +49,6 @@
         <Body>
             <ext:FitLayout runat="server">
                 <ext:FormPanel 
-                    ID="FormPanel1" 
                     runat="server" 
                     FormID="form1"
                     Border="false"
@@ -92,7 +90,7 @@
                 </Listeners>                           
             </ext:Button>--%>
             <%--<ext:LinkButton ID="btnForgot" runat="server" Text="Forgot Password" />--%>
-            <ext:Button ID="Button2" runat="server" Text="Login" Icon="Accept">
+            <ext:Button runat="server" Text="Login" Icon="Accept">
                 <AjaxEvents>
                     <Click 
                         Url="/Account/Login/" 

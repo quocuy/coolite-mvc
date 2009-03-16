@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Web;
@@ -284,15 +285,34 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetOrder(int orderID)
         {
-            if (orderID != -1)
-            {
-                var query = from o in this.DBContext.Orders
+             var query = from o in this.DBContext.Orders
                             where o.OrderID.Equals(orderID)
-                            select o;
-
-                return new AjaxStoreResult(query.Take(1), query.Count());
-            }
-            return new AjaxStoreResult(this.DBContext.Orders.Take(1), this.DBContext.Orders.Count());
+                            select new
+                                       {
+                                           o.OrderID,
+                                           Salesperson = o.Employee.LastName + " " + o.Employee.FirstName,
+                                           CustomerName = o.Customer.CompanyName,
+                                           CustomerEmail = o.Customer.Email,
+                                           o.OrderDate,
+                                           Order_Details = from od in o.Order_Details select new 
+                                                            {
+                                                                od.OrderID,
+                                                                Product = od.Product.ProductName,
+                                                                od.Quantity,
+                                                                od.UnitPrice,
+                                                                od.Discount
+                                                            },
+                                           ShippingCompany = o.Shipper.CompanyName,
+                                           o.ShippedDate,
+                                           o.Freight,
+                                           o.ShipName,
+                                           o.ShipAddress,
+                                           o.ShipCity,
+                                           o.ShipRegion,
+                                           o.ShipPostalCode,
+                                           o.ShipCountry
+                                       };
+                return new AjaxStoreResult(query.Take(1));
         }
 
         public AjaxStoreResult GetOrders(int limit, int start, string dir, string sort)
