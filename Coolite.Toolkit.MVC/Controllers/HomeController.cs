@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Coolite.Ext.Web;
 using Coolite.Utilities;
 
 namespace Coolite.Toolkit.MVC.Controllers
@@ -19,6 +17,12 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public ActionResult Dashboard()
         {
+            List<string> items = new List<string>();
+            
+            items.Add("test");
+
+            this.ViewData["Data"] = items;
+
             return this.View();
         }
 

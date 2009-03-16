@@ -2,13 +2,6 @@
 
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
-<script runat="server">
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        //this.Button1.Text = "My Test";
-    }
-</script>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -19,13 +12,19 @@
     <script type="text/javascript">
         var commandHandler = function (cmd, record) {
             switch (cmd) {
-                case "customer-details":
-                    CustomerDetailsWindow.autoLoad.params.id = record.id;
-                    CustomerDetailsWindow.setTitle(record.data.CompanyName);
-                    CustomerDetailsWindow.show();
+                case "edit":
+                    var win = CustomerDetailsWindow;
+                    win.autoLoad.params.id = record.id;
+                    win.setTitle(record.data.CompanyName);
+                    win.show();
                     break;
                 case "delete":
-                    dsCustomers.remove(record);
+                    Ext.Msg.confirm('Alert','Delete Record?', function (btn) {
+                        if(btn == "yes") {
+                            dsCustomers.remove(record);
+                            dsCustomers.save();
+                        }
+                    });
                     break;
             }
         }
@@ -63,13 +62,12 @@
             <ext:Parameter Name="sort" Value="CustomerID" />
         </BaseParams>
         <SortInfo Field="CustomerID" Direction="ASC" />
-        
-        <Listeners>
+        <%--<Listeners>
             <LoadException Handler="Ext.Msg.alert('Customers - Load failed', e.message || e )" />
             <CommitFailed Handler="Ext.Msg.alert('Customers - Commit failed', 'Reason: ' + msg)" />
             <SaveException Handler="Ext.Msg.alert('Customers - Save failed', e.message || e)" />
             <CommitDone Handler="Ext.Msg.alert('Customers - Commit', 'The data successfully saved');" />
-        </Listeners>   
+        </Listeners>--%>   
     </ext:Store>
     
     <ext:ViewPort runat="server">
@@ -85,16 +83,7 @@
                     AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns>
-                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID">
-                                <%--<Commands>
-                                    <ext:ImageCommand CommandName="customer-details" Icon="ApplicationFormEdit" Tooltip="Show customer details" />
-                                </Commands>--%>
-                                <%--<PrepareCommand Handler="command.hidden = record.newRecord;" />--%>
-                                <Editor>
-                                    <ext:TextField runat="server" AllowBlank="false" />
-                                </Editor>
-                            </ext:Column>
-                            
+                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID" />
                             <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company Name">
                                 <Editor>
                                     <ext:TextField runat="server" AllowBlank="false" />
@@ -127,17 +116,17 @@
                                     <ext:TextField runat="server" />
                                 </Editor>
                             </ext:Column>
+                            <ext:CommandColumn Width="30" Hideable="false">
+                                <Commands>
+                                    <ext:GridCommand Icon="ApplicationFormEdit" CommandName="edit" QTipText="Edit" />
+                                </Commands>
+                            </ext:CommandColumn>
                             <ext:ImageCommandColumn Width="30" Hideable="false">
                                 <Commands>
                                     <ext:ImageCommand CommandName="delete" Icon="Cross" Tooltip="Delete" />
                                 </Commands>
                                 <PrepareCommand Handler="command.hidden = record.newRecord;" />
                             </ext:ImageCommandColumn>
-                            <ext:CommandColumn Width="30" Hideable="false">
-                                <Commands>
-                                    <ext:GridCommand Icon="ApplicationFormEdit" CommandName="customer-details" QTipText="Edit" />
-                                </Commands>
-                            </ext:CommandColumn>
                         </Columns>
                     </ColumnModel>
                     <SelectionModel>
@@ -161,8 +150,6 @@
                                         <Click Handler="#{dsCustomers}.rejectChanges();" />
                                     </Listeners>
                                 </ext:Button>
-                                <%--<ext:ToolbarSeparator />
-                                <ext:ToolbarFill ID="indexFiller1" runat="server" />--%>
                             </Items>
                         </ext:Toolbar>
                     </TopBar>
@@ -198,7 +185,7 @@
             </Params>
         </AutoLoad>
         <Buttons>
-            <ext:Button runat="server" ID="btnDetailsCancel" Text="Cancel" Icon="Decline">
+            <ext:Button runat="server" ID="btnDetailsCancel" Text="Close">
                 <Listeners>
                     <Click Handler="#{CustomerDetailsWindow}.hide();" />
                 </Listeners>
