@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
-<ext:Accordion ID="wmAccordion1" runat="server" Animate="true">
+<ext:Accordion ID="wmAccordion1" runat="server" Animate="true" >
     <ext:Panel ID="wmPanel1" runat="server" Border="false" Title="Customers & Orders">
         <Body>
             <ext:FitLayout runat="server">

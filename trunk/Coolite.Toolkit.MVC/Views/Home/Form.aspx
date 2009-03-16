@@ -51,47 +51,49 @@
         Border="false" 
         BodyStyle="padding:5px 5px 0px;" 
         LabelAlign="Top">
-        <Anchors>
-            <ext:Anchor>
-                <ext:Panel runat="server" Border="false">
-                    <Body>
-                        <ext:ColumnLayout ID="ColumnLayout1" runat="server">
-                            <ext:LayoutColumn ColumnWidth="0.5">
-                                <ext:Panel ID="Panel1" runat="server" Border="false">
-                                    <Body>
-                                        <ext:FormLayout ID="FormLayout1" runat="server">
-                                            <ext:Anchor Horizontal="95%">
-                                                <ext:TextField ID="TextField1" runat="server" FieldLabel="First Name" AllowBlank="false" />
-                                            </ext:Anchor>
-                                            <ext:Anchor Horizontal="95%">
-                                                <ext:TextField ID="TextField2" runat="server" FieldLabel="Company" AllowBlank="false" />
-                                            </ext:Anchor>
-                                        </ext:FormLayout>
-                                    </Body>
-                                </ext:Panel>
-                            </ext:LayoutColumn>
-                            <ext:LayoutColumn ColumnWidth="0.5">
-                                <ext:Panel ID="Panel2" runat="server" Border="false">
-                                    <Body>
-                                        <ext:FormLayout ID="FormLayout2" runat="server">
-                                            <ext:Anchor Horizontal="95%">
-                                                <ext:TextField ID="TextField3" runat="server" FieldLabel="Last Name" AllowBlank="false" />
-                                            </ext:Anchor>
-                                            <ext:Anchor Horizontal="95%">
-                                                <ext:TextField ID="TextField4" runat="server" FieldLabel="Email" Vtype="email" AllowBlank="false" />
-                                            </ext:Anchor>
-                                        </ext:FormLayout>
-                                    </Body>
-                                </ext:Panel>
-                            </ext:LayoutColumn>
-                        </ext:ColumnLayout>
-                    </Body>
-                </ext:Panel>
-            </ext:Anchor>
-            <ext:Anchor Horizontal="98%">
-                <ext:HtmlEditor ID="HtmlEditor1" runat="server" FieldLabel="Biography" Height="200" AllowBlank="false" />
-            </ext:Anchor>
-        </Anchors>
+        <Body>
+            <ext:FormLayout ID="FormLayout1" runat="server">
+                <ext:Anchor>
+                    <ext:Panel ID="Panel1" runat="server" Border="false">
+                        <Body>
+                            <ext:ColumnLayout ID="ColumnLayout1" runat="server">
+                                <ext:LayoutColumn ColumnWidth="0.5">
+                                    <ext:Panel ID="Panel2" runat="server" Border="false">
+                                        <Body>
+                                            <ext:FormLayout ID="FormLayout2" runat="server">
+                                                <ext:Anchor Horizontal="95%">
+                                                    <ext:TextField ID="TextField1" runat="server" FieldLabel="First Name" AllowBlank="false" />
+                                                </ext:Anchor>
+                                                <ext:Anchor Horizontal="95%">
+                                                    <ext:TextField ID="TextField2" runat="server" FieldLabel="Company" AllowBlank="false" />
+                                                </ext:Anchor>
+                                            </ext:FormLayout>
+                                        </Body>
+                                    </ext:Panel>
+                                </ext:LayoutColumn>
+                                <ext:LayoutColumn ColumnWidth="0.5">
+                                    <ext:Panel ID="Panel3" runat="server" Border="false">
+                                        <Body>
+                                            <ext:FormLayout ID="FormLayout3" runat="server">
+                                                <ext:Anchor Horizontal="95%">
+                                                    <ext:TextField ID="TextField3" runat="server" FieldLabel="Last Name" AllowBlank="false" />
+                                                </ext:Anchor>
+                                                <ext:Anchor Horizontal="95%">
+                                                    <ext:TextField ID="TextField4" runat="server" FieldLabel="Email" Vtype="email" AllowBlank="false" />
+                                                </ext:Anchor>
+                                            </ext:FormLayout>
+                                        </Body>
+                                    </ext:Panel>
+                                </ext:LayoutColumn>
+                            </ext:ColumnLayout>
+                        </Body>
+                    </ext:Panel>
+                </ext:Anchor>
+                <ext:Anchor Horizontal="98%">
+                    <ext:HtmlEditor ID="HtmlEditor1" runat="server" FieldLabel="Biography" Height="200" AllowBlank="false" />
+                </ext:Anchor>
+            </ext:FormLayout>
+        </Body>
         <Buttons>
             <ext:Button runat="server" Text="Send">
                 <Listeners>
