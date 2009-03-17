@@ -57,6 +57,21 @@
         var getCustomerID = function() {
             return (dsCustomer.getCount()>0 && !dsCustomer.getAt(0).newRecord) ? dsCustomer.getAt(0).id : ''
         }
+
+        var customerLoaded = function(store, records) {
+            if (records.length > 0) {
+                DetailsForm.form.loadRecord(records[0]);
+                dsOrders.loaded = false;                
+
+                if (CustomerPanel.getActiveTab().id == tabOrders.id) {
+                    dsOrders.reload();
+                }
+            }
+            else {
+                DetailsForm.form.reset();
+                dsOrders.removeAll();
+            }
+        }
     </script>
 
     <style type="text/css">
@@ -107,7 +122,7 @@
             <ext:Parameter Name="filter" Value="#{txtFilter}.getValue()" Mode="Raw" />
         </BaseParams>
         <Listeners>
-            <Load Handler="if(records.length > 0) { #{DetailsForm}.form.loadRecord(records[0]); #{dsOrders}.loaded = false; } else { #{DetailsForm}.form.reset(); #{dsOrders}.removeAll(); }" />
+            <Load Fn="customerLoaded" />
         </Listeners>
     </ext:Store>
     
@@ -148,7 +163,7 @@
             <ext:Parameter Name="customerID" Value="getCustomerID()" Mode="Raw" />
         </BaseParams>
         <Listeners>
-            <BeforeLoad Handler="return !this.loaded;" />
+            <BeforeLoad Handler="OrderCommonInformation.form.reset();dsOrderDetails.removeAll();ShippingInformationForm.form.reset();SouthPanel.collapse(true);return !this.loaded;" />
             <Load Handler="this.loaded = true;" />
         </Listeners>
     </ext:Store>
