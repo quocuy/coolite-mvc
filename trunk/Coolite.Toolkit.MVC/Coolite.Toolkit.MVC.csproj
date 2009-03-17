@@ -90,6 +90,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -118,6 +119,7 @@
     <Content Include="App_Data\NORTHWND_log.ldf">
       <DependentUpon>NORTHWND.MDF</DependentUpon>
     </Content>
+    <Content Include="Content\group-expand-sprite.gif" />
     <Content Include="Content\ui.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -135,6 +137,7 @@
     <Content Include="Views\Customer\CustomerDetailsOrders.ascx" />
     <Content Include="Views\Customer\TopTenOrdersBySalesAmount.aspx" />
     <Content Include="Views\Home\Form.aspx" />
+    <Content Include="Views\Report\CustomerAddressBook.aspx" />
     <Content Include="Views\Shared\HelpWindow.ascx" />
     <Content Include="Views\Shared\WestMenu.ascx" />
     <Content Include="Content\Site.Master.js" />

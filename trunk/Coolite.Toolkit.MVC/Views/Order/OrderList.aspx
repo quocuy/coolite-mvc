@@ -8,19 +8,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title></title>
+    
+        
+    <script type="text/javascript">
+        var commandHandler = function (cmd, record) {
+            switch (cmd) {
+                case "view":
+                    var win = OrderDetailsWindow;
+                    win.autoLoad.params.orderID = record.id;
+                    win.setTitle('Order #' + record.id);
+                    win.show();
+                    break;
+            }
+        }
+    </script>
 </head>
 <body>
     <ext:ScriptManager runat="server" />
     
-    <ext:Store ID="Store1" runat="server" RemoteSort="true">
+    <ext:Store ID="dsOrders" runat="server" RemoteSort="true">
         <Proxy>
             <ext:HttpProxy Url="/Data/GetOrders/" />
         </Proxy>
         <Reader>
-            <ext:JsonReader Root="data" TotalProperty="totalCount">
+            <ext:JsonReader ReaderID="OrderID" Root="data" TotalProperty="totalCount">
                 <Fields>
                     <ext:RecordField Name="OrderID" />
                     <ext:RecordField Name="OrderDate" Type="Date" />
+                    <ext:RecordField Name="Salesperson" />
+                    <ext:RecordField Name="CompanyName" />
+                    <ext:RecordField Name="ShippedDate" Type="Date"/>
+                    <ext:RecordField Name="Freight" Type="Float" />
+                    <ext:RecordField Name="Total" Type="Float" />
                 </Fields>
             </ext:JsonReader>
         </Reader>
@@ -41,23 +60,76 @@
                     runat="server" 
                     Header="false"
                     Border="false"
-                    StoreID="Store1" 
-                    AutoExpandColumn="OrderID">
+                    StoreID="dsOrders" 
+                    AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns> 
+                            <ext:CommandColumn Width="30">
+                                <Commands>
+                                    <ext:GridCommand CommandName="view" Icon="ApplicationFormEdit">
+                                        <ToolTip Text="Show order details" />
+                                    </ext:GridCommand>
+                                </Commands>
+                            </ext:CommandColumn>
                             <ext:Column ColumnID="OrderID" DataIndex="OrderID" Header="ID" />
-                            <ext:Column ColumnID="OrderDate" DataIndex="OrderDate" Header="Order Date" />
+                            <ext:Column ColumnID="OrderDate" DataIndex="OrderDate" Header="Order Date">
+                                 <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                            </ext:Column>
+                            <ext:Column ColumnID="Salesperson" DataIndex="Salesperson" Header="Salesperson" />
+                            <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company" />
+                            <ext:Column ColumnID="ShippedDate" DataIndex="ShippedDate" Header="Ship Date">
+                                 <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                            </ext:Column>
+                            <ext:Column ColumnID="Freight" DataIndex="Freight" Header="Shipping">
+                                <Renderer Format="UsMoney" />
+                            </ext:Column>
+                            <ext:Column ColumnID="Total" DataIndex="Total" Header="Total">
+                                <Renderer Format="UsMoney" />
+                            </ext:Column>
                         </Columns>
                     </ColumnModel>
                     <SelectionModel>
                         <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" SingleSelect="true" />
                     </SelectionModel>
                     <BottomBar>
-                        <ext:PagingToolbar ID="PagingToolbar1" runat="server" StoreID="Store1" PageSize="15" />
+                        <ext:PagingToolbar ID="PagingToolbar1" runat="server" StoreID="dsOrders" PageSize="15" />
                     </BottomBar>
+                    <LoadMask ShowMask="true" />
+                    <Listeners>
+                        <Command Fn="commandHandler" />
+                    </Listeners>
                 </ext:GridPanel>
             </ext:FitLayout>
         </Body>
     </ext:ViewPort>
+    
+    <ext:Window 
+        ID="OrderDetailsWindow" 
+        runat="server" 
+        Icon="ApplicationFormEdit" 
+        Width="800" 
+        Height="600" 
+        ShowOnLoad="false" 
+        Modal="true"
+        Constrain="true">
+        <AutoLoad 
+            Url="/Order/OrderDetails/" 
+            Mode="IFrame" 
+            TriggerEvent="show" 
+            ReloadOnEvent="true" 
+            ShowMask="true" 
+            MaskMsg="Loading order...">
+            <Params>
+                <ext:Parameter Name="orderID" Value="" Mode="Value" />
+            </Params>
+        </AutoLoad>
+        <Buttons>
+            <ext:Button runat="server" ID="btnDetailsCancel" Text="Close">
+                <Listeners>
+                    <Click Handler="#{OrderDetailsWindow}.hide();" />
+                </Listeners>
+            </ext:Button>
+        </Buttons>
+    </ext:Window>
 </body>
 </html>

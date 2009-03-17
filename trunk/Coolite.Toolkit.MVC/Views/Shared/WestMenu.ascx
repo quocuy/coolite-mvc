@@ -112,4 +112,25 @@
             </ext:FitLayout>
         </Body>
     </ext:Panel>
+    
+     <ext:Panel ID="wmPanel7" runat="server" Border="false" Title="Reports">
+        <Body>
+            <ext:FitLayout runat="server">
+                <ext:MenuPanel runat="server" Border="false" SaveSelection="false" Cls="white-menu">
+                    <Menu>
+                        <Items>
+                            <ext:MenuItem runat="server" Text="Customer Address Book" Icon="Report">
+                                <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Report/CustomerAddressBook/" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>                           
+                        </Items>
+                        <Listeners>
+                            <ItemClick Handler="Northwind.addTab({ title: menuItem.text, url: menuItem.url, icon: menuItem.iconCls });" />
+                        </Listeners>
+                    </Menu>                    
+                </ext:MenuPanel>
+            </ext:FitLayout>
+        </Body>
+    </ext:Panel>
 </ext:Accordion>

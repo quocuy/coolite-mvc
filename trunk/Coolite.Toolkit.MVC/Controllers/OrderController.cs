@@ -9,6 +9,7 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         public ActionResult OrderDetails()
         {
+            ViewData["orderID"] = HttpContext.Request["orderID"] ?? "";
             return this.View();
         }
 

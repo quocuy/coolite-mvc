@@ -321,7 +321,12 @@ namespace Coolite.Toolkit.MVC.Controllers
                         select new
                         {
                             o.OrderID,
-                            o.OrderDate
+                            o.OrderDate,
+                            Salesperson = o.Employee.LastName+" "+o.Employee.FirstName,
+                            o.Customer.CompanyName,
+                            o.ShippedDate,
+                            o.Freight,
+                            Total = (from od in o.Order_Details select od.UnitPrice*od.Quantity*(decimal) (1-od.Discount)).Sum() + o.Freight
                         }).OrderBy(string.Concat(sort, " ", dir));
 
             int total = query.ToList().Count;
@@ -348,5 +353,35 @@ namespace Coolite.Toolkit.MVC.Controllers
 
             return new AjaxStoreResult(query);
         }
+
+        //********************//
+        //       Reports      //
+        //********************//
+
+        public AjaxStoreResult CustomerAddressBookReport()
+        {
+            var query = (from c in this.DBContext.Customers
+                         group c by c.ContactName[0] into custs
+                         select new
+                                    {
+                                        Letter = custs.Key,
+                                        Customers = (from cust in custs
+                                                     select new
+                                                                {
+                                                                    cust.CustomerID,
+                                                                    cust.CompanyName,
+                                                                    Email = cust.Email??"",
+                                                                    ContactName = cust.ContactName??"",
+                                                                    Address = cust.Address??"",
+                                                                    City = cust.City??"",
+                                                                    Region = cust.Region??"",
+                                                                    PostalCode = cust.PostalCode??"",
+                                                                    Country = cust.Country??""
+                                                                })
+                                    });
+
+            return new AjaxStoreResult(query);
+        }
+
     }
 }
