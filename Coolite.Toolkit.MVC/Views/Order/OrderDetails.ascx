@@ -3,13 +3,26 @@
 
 <script type="text/javascript">
     function loadOrder(orderID) {
-        dsOrderDetails.load({ params: {orderID: orderID} });
+        if (Ext.isEmpty(orderID, false)) {
+            return;
+        }
+        dsOrder.load({ params: { orderID: orderID} });
     }
 
     function fillOrder(record) {
         OrderCommonInformation.form.loadRecord(record);
         ShippingInformationForm.form.loadRecord(record);
         dsOrderDetails.loadData(record.data.Order_Details);
+    }  
+</script>
+
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if(ViewData["orderID"] != null)
+        {
+            ProxyManager.ScriptManager.RegisterOnReadyScript(string.Format("loadOrder({0});", ViewData["orderID"]));
+        }
     }
 </script>
 
@@ -53,6 +66,8 @@
             padding:4px 16px;
         }        
 </style>
+
+<ext:ScriptManagerProxy ID="ProxyManager" runat="server"/>
 
 <ext:Store ID="dsOrder" runat="server" AutoLoad="false">
     <Proxy>
@@ -213,7 +228,7 @@
                                                                     <ext:LayoutColumn ColumnWidth="0.33">
                                                                         <ext:Panel runat="server" Border="false">
                                                                             <Body>
-                                                                                <ext:FormLayout runat="server" LabelWidth="150">
+                                                                                <ext:FormLayout runat="server" LabelWidth="110">
                                                                                     <ext:Anchor Horizontal="95%">
                                                                                         <ext:TextField ID="ShippingCompany" runat="server" ReadOnly="true" FieldLabel="Shipping Company"/>
                                                                                     </ext:Anchor>
@@ -225,7 +240,7 @@
                                                                     <ext:LayoutColumn ColumnWidth="0.33">
                                                                          <ext:Panel runat="server" Border="false">
                                                                             <Body>
-                                                                                <ext:FormLayout runat="server" LabelWidth="150">
+                                                                                <ext:FormLayout runat="server" LabelWidth="110">
                                                                                     <ext:Anchor Horizontal="95%">
                                                                                         <ext:DateField ID="ShippedDate" runat="server" ReadOnly="true" FieldLabel="Ship Date" HideTrigger="true"/>
                                                                                     </ext:Anchor>
@@ -237,7 +252,7 @@
                                                                     <ext:LayoutColumn ColumnWidth="0.33">
                                                                          <ext:Panel runat="server" Border="false">
                                                                             <Body>
-                                                                                <ext:FormLayout runat="server" LabelWidth="150">
+                                                                                <ext:FormLayout runat="server" LabelWidth="110">
                                                                                     <ext:Anchor Horizontal="95%">
                                                                                         <ext:NumberField ID="Freight" runat="server" DecimalPrecision="2" ReadOnly="true" FieldLabel="Shipping Fee"/>
                                                                                     </ext:Anchor>
