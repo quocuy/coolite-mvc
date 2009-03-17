@@ -75,11 +75,12 @@
         }
 
         var nodeClick = function (view, index, node, e) {            
+            var nd = Ext.fly(node).first('td');
             DataViewContextMenu.node = {
-                id: Ext.fly(node).getAttributeNS("", "custID"),
-                name: Ext.fly(node).getAttributeNS("", "custName"),
-                contact: Ext.fly(node).first('td').dom.innerHTML,
-                email: Ext.fly(node).getAttributeNS("", "email")
+                id: nd.getAttributeNS("", "custID"),
+                name: nd.getAttributeNS("", "custName"),
+                contact: nd.dom.innerHTML,
+                email: nd.getAttributeNS("", "email")
             };
             DataViewContextMenu.showAt(e.getXY());
         }
