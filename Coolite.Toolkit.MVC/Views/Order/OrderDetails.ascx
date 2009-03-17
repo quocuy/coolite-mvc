@@ -118,7 +118,7 @@
 </ext:Store>
 
 <ext:FitLayout ID="odFitLayout1" runat="server">
-    <ext:Panel ID="OrderDetails" runat="server" Title="Order">
+    <ext:Panel ID="OrderDetails" runat="server" Border="false">
         <Body>
             <ext:RowLayout ID="odRowLayout1" runat="server">
                 <ext:LayoutRow>
