@@ -107,7 +107,7 @@
             <ext:Parameter Name="filter" Value="#{txtFilter}.getValue()" Mode="Raw" />
         </BaseParams>
         <Listeners>
-            <Load Handler="if(records.length > 0) { #{DetailsForm}.form.loadRecord(records[0]); #{CustomerPanel}.setActiveTab(0); #{dsOrders}.loaded = false; } else { #{DetailsForm}.form.reset(); #{dsOrders}.removeAll(); }" />
+            <Load Handler="if(records.length > 0) { #{DetailsForm}.form.loadRecord(records[0]); #{dsOrders}.loaded = false; } else { #{DetailsForm}.form.reset(); #{dsOrders}.removeAll(); }" />
         </Listeners>
     </ext:Store>
     
@@ -373,8 +373,8 @@
                                         </ext:Tab>
                                         <ext:Tab ID="tabOrders" runat="server" Title="Orders" BodyStyle="background-color:#F0F0F0;">
                                             <Body>
-                                                <ext:RowLayout runat="server" Split="true">
-                                                    <ext:LayoutRow RowHeight="0.5">
+                                                <ext:BorderLayout runat="server">
+                                                    <Center>
                                                         <ext:GridPanel 
                                                             ID="grdOrders" 
                                                             runat="server" 
@@ -403,22 +403,22 @@
                                                             <SelectionModel>
                                                                 <ext:RowSelectionModel ID="RowSelectionModel1" runat="server">
                                                                     <Listeners>
-                                                                        <RowSelect Handler="OrderDetails.body.mask('Loading order ' + record.id + '...', 'x-mask-loading'); dsOrder.load({params:{orderID: record.id}});" Buffer="250" />
+                                                                        <RowSelect Handler="SouthPanel.expand(true);SouthPanel.doLayout();OrderDetails.body.mask('Loading order ' + record.id + '...', 'x-mask-loading'); dsOrder.load({params:{orderID: record.id}});" Buffer="250" />
                                                                     </Listeners>
                                                                 </ext:RowSelectionModel>
                                                             </SelectionModel>
                                                             <LoadMask ShowMask="true" />
                                                         </ext:GridPanel>
-                                                    </ext:LayoutRow>
+                                                    </Center>
                                                     
-                                                    <ext:LayoutRow RowHeight="0.5">
-                                                        <ext:Panel runat="server" Border="false">
+                                                    <South Split="true">
+                                                        <ext:Panel ID="SouthPanel" runat="server" Collapsible="true" Title="Order" Collapsed="true" Height="360">
                                                             <Body>
                                                                 <uc1:OrderDetails runat="server" />
                                                             </Body>
                                                         </ext:Panel>
-                                                    </ext:LayoutRow>
-                                                </ext:RowLayout>
+                                                    </South>
+                                                </ext:BorderLayout>
                                             </Body>
                                             <Listeners>
                                                 <Activate Handler="#{dsOrders}.reload();" />
