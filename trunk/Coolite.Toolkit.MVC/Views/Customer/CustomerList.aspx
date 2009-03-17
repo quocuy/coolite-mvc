@@ -80,6 +80,7 @@
                     Border="false"
                     StoreID="dsCustomers"
                     TrackMouseOver="true"
+                    ClicksToEdit="1"
                     AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns>
@@ -133,9 +134,9 @@
                             </ext:CommandColumn>
                         </Columns>
                     </ColumnModel>
-                    <SelectionModel>
+                    <%--<SelectionModel>
                         <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" SingleSelect="true" />
-                    </SelectionModel>
+                    </SelectionModel>--%>
                     <TopBar>
                         <ext:Toolbar ID="Toolbar1" runat="server">
                             <Items>
