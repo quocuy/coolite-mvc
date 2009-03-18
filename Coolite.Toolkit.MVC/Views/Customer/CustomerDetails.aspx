@@ -84,6 +84,7 @@
         var initUI = function(isNew) {
             btnDelete.setDisabled(isNew);
             tabOrders.setDisabled(isNew);
+            CustomerID.setDisabled(!isNew);
         }
     </script>
 
@@ -113,6 +114,7 @@
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
                 <Fields>
+                    <ext:RecordField Name="CustomerID" />
                     <ext:RecordField Name="CompanyName" />
                     <ext:RecordField Name="ContactName" />
                     <ext:RecordField Name="ContactTitle" />
@@ -148,7 +150,7 @@
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
                 <Fields>
-                    <ext:RecordField Name="CustomerID" Type="Int" />
+                    <ext:RecordField Name="CustomerID"/>
                     <ext:RecordField Name="CompanyName" />
                     <ext:RecordField Name="ContactName" />
                 </Fields>
@@ -292,7 +294,10 @@
                                                 <ext:FitLayout ID="gdFitLayout1" runat="server">
                                                     <ext:FormPanel ID="DetailsForm" runat="server" Border="false" Url="/Data/SaveCustomer/">
                                                         <Body>
-                                                            <ext:FormLayout ID="layDetails" runat="server">
+                                                            <ext:FormLayout ID="layDetails" runat="server" LabelWidth="130">
+                                                                <ext:Anchor>
+                                                                    <ext:TextField ID="CustomerID" runat="server" FieldLabel="Customer ID" MaxLength="5" AllowBlank="false"></ext:TextField>
+                                                                </ext:Anchor>
                                                                 <ext:Anchor>
                                                                     <ext:Panel ID="gdPanel1" runat="server" Border="false">
                                                                         <Body>

@@ -738,7 +738,7 @@ namespace Coolite.Toolkit.MVC.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CustomerID;
+		private string _CustomerID;
 		
 		private string _CustomerTypeID;
 		
@@ -750,7 +750,7 @@ namespace Coolite.Toolkit.MVC.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanging(string value);
     partial void OnCustomerIDChanged();
     partial void OnCustomerTypeIDChanging(string value);
     partial void OnCustomerTypeIDChanged();
@@ -763,8 +763,8 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CustomerID
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerID
 		{
 			get
 			{
@@ -872,7 +872,7 @@ namespace Coolite.Toolkit.MVC.Models
 					}
 					else
 					{
-						this._CustomerID = default(int);
+						this._CustomerID = default(string);
 					}
 					this.SendPropertyChanged("Customer");
 				}
@@ -2025,7 +2025,7 @@ namespace Coolite.Toolkit.MVC.Models
 		
 		private int _OrderID;
 		
-		private int _CustomerID;
+		private string _CustomerID;
 		
 		private System.Nullable<int> _EmployeeID;
 		
@@ -2065,7 +2065,7 @@ namespace Coolite.Toolkit.MVC.Models
     partial void OnCreated();
     partial void OnOrderIDChanging(int value);
     partial void OnOrderIDChanged();
-    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanging(string value);
     partial void OnCustomerIDChanged();
     partial void OnEmployeeIDChanging(System.Nullable<int> value);
     partial void OnEmployeeIDChanged();
@@ -2122,8 +2122,8 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false)]
+		public string CustomerID
 		{
 			get
 			{
@@ -2502,7 +2502,7 @@ namespace Coolite.Toolkit.MVC.Models
 					}
 					else
 					{
-						this._CustomerID = default(int);
+						this._CustomerID = default(string);
 					}
 					this.SendPropertyChanged("Customer");
 				}
@@ -5621,7 +5621,7 @@ namespace Coolite.Toolkit.MVC.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CustomerID;
+		private string _CustomerID;
 		
 		private string _CompanyName;
 		
@@ -5659,7 +5659,7 @@ namespace Coolite.Toolkit.MVC.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanging(string value);
     partial void OnCustomerIDChanged();
     partial void OnCompanyNameChanging(string value);
     partial void OnCompanyNameChanged();
@@ -5698,8 +5698,8 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CustomerID
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CustomerID
 		{
 			get
 			{

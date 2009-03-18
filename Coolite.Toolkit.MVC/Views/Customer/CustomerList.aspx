@@ -43,7 +43,7 @@
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
                 <Fields>
-                    <ext:RecordField Name="CustomerID" Type="Int" SortDir="ASC"/>
+                    <ext:RecordField Name="CustomerID" SortDir="ASC"/>
                     <ext:RecordField Name="CompanyName" />
                     <ext:RecordField Name="ContactName" />
                     <ext:RecordField Name="Email" />
@@ -82,7 +82,11 @@
                     AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns>
-                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID"/>                               
+                            <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID">
+                                <Editor>
+                                    <ext:TextField runat="server" MaxLength="5" AllowBlank="false"></ext:TextField>
+                                </Editor>
+                            </ext:Column>                               
                             <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company Name">
                                 <Editor>
                                     <ext:TextField runat="server" AllowBlank="false" />
@@ -141,7 +145,7 @@
                                 </ext:Button>
                                 <ext:Button ID="Button3" runat="server" Text="Add" Icon="Add">
                                     <Listeners>
-                                        <Click Handler="#{GridPanel1}.insertRecord(0, {});#{GridPanel1}.getView().focusRow(0);#{GridPanel1}.startEditing(0, 1);" />
+                                        <Click Handler="#{GridPanel1}.insertRecord(0, {});#{GridPanel1}.getView().focusRow(0);#{GridPanel1}.startEditing(0, 0);" />
                                     </Listeners>
                                 </ext:Button>
                                 <ext:Button ID="Button2" runat="server" Text="Reject Changes" Icon="ArrowUndo">
@@ -157,6 +161,7 @@
                     </BottomBar>
                     <Listeners>
                         <Command Fn="commandHandler" />
+                        <BeforeEdit Handler="return !(e.field=='CustomerID' && !e.record.newRecord);" />
                     </Listeners>
                     <LoadMask ShowMask="true" />
                     <SaveMask ShowMask="true" />
