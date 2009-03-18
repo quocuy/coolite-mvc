@@ -266,7 +266,7 @@
         <classShapeMoniker Id="9b04d83e-b07d-48a4-b88f-3994008d1cf9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 3.15625); (4.41666666666667 : 3.15625 : JumpStart); (4.58333333333333 : 3.15625 : JumpEnd); (6.5 : 3.15625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 3.15625); (6.5 : 3.15625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/NorthwindDataContext/Customer/Customer_Order" />
       <nodes>
         <classShapeMoniker Id="825634cf-f78c-4f2a-9d3e-68d66d08a9a2" />

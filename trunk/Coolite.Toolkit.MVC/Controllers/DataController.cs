@@ -22,16 +22,11 @@ namespace Coolite.Toolkit.MVC.Controllers
         {
             if (!string.IsNullOrEmpty(filter))
             {
-                int id;
-                if (!int.TryParse(filter, out id))
-                {
-                    id = -1;
-                }
                 var query = from c in this.DBContext.Customers
 
                             /// HACK: Simple search needs to be replaced with 'real' search
                             where (c.CompanyName.ToLower().Contains(filter.ToLower()) ||
-                                   c.CustomerID == id
+                                   c.CustomerID.ToLower().StartsWith(filter.ToLower())
                                   ) 
 
                             select c;
@@ -43,17 +38,11 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetCustomersSimple(string filter)
         {
-            int id;
-            if (!int.TryParse(filter, out id))
-            {
-                id = -1;
-            }
-
             var query = from c in this.DBContext.Customers
 
                         /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
-                               c.CustomerID == id ||
+                               c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
                                c.ContactName.ToLower().StartsWith(filter.ToLower()))
 
                         select new
@@ -68,17 +57,11 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetCustomersPaging(string filter, int start, int limit)
         {
-            int id;
-            if (!int.TryParse(filter, out id))
-            {
-                id = -1;
-            }
-
             var query = from c in this.DBContext.Customers
                         
                         /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
-                               c.CustomerID == id ||
+                                c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
                                c.ContactName.ToLower().StartsWith(filter.ToLower()))
                         select new
                         {
@@ -115,12 +98,11 @@ namespace Coolite.Toolkit.MVC.Controllers
             return new AjaxStoreResult(this.DBContext.Top_Ten_Orders_By_Sales_Amounts);
         }
 
-        public AjaxResult DeleteCustomer(int id)
+        public AjaxResult DeleteCustomer(string id)
         {
             AjaxResult response = new AjaxResult();
             try
             {
-                
                 var customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
                 this.DBContext.Customers.DeleteOnSubmit(customer);
                 this.DBContext.SubmitChanges();
@@ -152,13 +134,20 @@ namespace Coolite.Toolkit.MVC.Controllers
 
                 if(string.IsNullOrEmpty(id))
                 {
+                    if (string.IsNullOrEmpty(values["CustomerID"]))
+                    {
+                        response.Success = false;
+                        response.Errors.Add(new FieldError("CustomerID", "The CustomerID field is required"));
+                        return response;
+                    }
+                    
                     customer = new Customer();
+                    customer.CustomerID = values["CustomerID"];
                     isNew = true;
                 }
                 else
                 {
-                    int intId = int.Parse(id);
-                    customer = (from c in this.DBContext.Customers where c.CustomerID == intId select c).First();
+                    customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
                 }
                 
                 customer.CompanyName = values["CompanyName"];
@@ -218,7 +207,6 @@ namespace Coolite.Toolkit.MVC.Controllers
 
                 foreach (Customer customer in data.Created)
                 {
-                    customer.TemporaryID = customer.CustomerID;
                     db.Customers.InsertOnSubmit(customer);
                 }
 
@@ -248,19 +236,17 @@ namespace Coolite.Toolkit.MVC.Controllers
                 {
                     db.Customers.Attach(customer);
                     db.Customers.DeleteOnSubmit(customer);
-                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Updated)
                 {
                     db.Customers.Attach(customer);
                     db.Refresh(RefreshMode.KeepCurrentValues, customer);
-                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Created)
                 {
-                    customer.TemporaryID = customer.CustomerID;
+                    //customer.TemporaryID = customer.CustomerID;
                     db.Customers.InsertOnSubmit(customer);
                 }
 
@@ -271,17 +257,17 @@ namespace Coolite.Toolkit.MVC.Controllers
 
                 foreach (Customer customer in data.Deleted)
                 {
-                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
+                    confirmationList[customer.CustomerID].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Updated)
                 {
-                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
+                    confirmationList[customer.CustomerID].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Created)
                 {
-                    confirmationList[customer.TemporaryID.ToString()].ConfirmRecord(customer.CustomerID.ToString());
+                    confirmationList[customer.CustomerID].ConfirmRecord();
                 }
 
 
@@ -354,7 +340,7 @@ namespace Coolite.Toolkit.MVC.Controllers
             return new AjaxStoreResult(query, total);
         }
 
-        public AjaxStoreResult GetCustomerOrders(int customerID)
+        public AjaxStoreResult GetCustomerOrders(string customerID)
         {
             var query = from o in this.DBContext.Orders
                         where o.CustomerID == customerID
