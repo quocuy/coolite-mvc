@@ -48,9 +48,15 @@
             if (action.options.params.setNew) {
                 DetailsForm.form.reset();
                 dsCustomer.removeAll();
+                dsOrders.removeAll();
+                
                 var rec = new dsCustomer.recordType();
                 rec.newRecord = true;
                 dsCustomer.add(rec);
+                initUI(true);
+            }
+            else {
+                initUI(false);
             }
         }
 
@@ -71,6 +77,13 @@
                 DetailsForm.form.reset();
                 dsOrders.removeAll();
             }
+            initUI(false);
+            CustomerPanel.el.unmask();
+        }
+
+        var initUI = function(isNew) {
+            btnDelete.setDisabled(isNew);
+            tabOrders.setDisabled(isNew);
         }
     </script>
 
@@ -122,6 +135,8 @@
             <ext:Parameter Name="filter" Value="#{txtFilter}.getValue()" Mode="Raw" />
         </BaseParams>
         <Listeners>
+            <BeforeLoad Handler="#{CustomerPanel}.el.mask('Loading customer...', 'x-mask-loading');" />
+            <LoadException Handler="#{CustomerPanel}.el.unmask();" />
             <Load Fn="customerLoaded" />
         </Listeners>
     </ext:Store>
@@ -133,7 +148,7 @@
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
                 <Fields>
-                    <ext:RecordField Name="CustomerID" />
+                    <ext:RecordField Name="CustomerID" Type="Int" />
                     <ext:RecordField Name="CompanyName" />
                     <ext:RecordField Name="ContactName" />
                 </Fields>
@@ -187,14 +202,14 @@
                                     </Listeners>
                                 </ext:ToolbarButton>
                                 
-                                <ext:ToolbarButton ID="ToolbarButton1" runat="server" Text="Delete" Icon="Cross">
+                                <ext:ToolbarButton ID="btnDelete" runat="server" Text="Delete" Icon="Cross">
                                      <AjaxEvents>
                                         <Click 
                                             Url="/Data/DeleteCustomer" 
                                             CleanRequest="true"
                                             Method="POST"
                                             Failure="Ext.Msg.show({title:'Delete Error',msg: result.errorMessage,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});" 
-                                            Success="#{CustomerPager}.doLoad(Math.max(0, #{CustomerPager}.cursor-1));">
+                                            Success="customerChanged = true;#{CustomerPager}.doLoad(Math.max(0, #{CustomerPager}.cursor-1));">
                                             <Confirmation ConfirmRequest="true" Title="Alert" Message="Delete Record?" />
                                             <ExtraParams>
                                                 <ext:Parameter Name="id" Value="#{dsCustomer}.getAt(0).id" Mode="Raw" />

@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-    <ext:ScriptManager ID="ScriptManager1" runat="server" />
+    <ext:ScriptManager ID="ScriptManager1" runat="server"/>
     
     <ext:Panel ID="Panel1" runat="server" Border="false" AutoHeight="true" BodyStyle="padding:5px;" Html="Dashboard Here... need stuff here" />
     
