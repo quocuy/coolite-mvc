@@ -393,7 +393,8 @@
                                                         <ext:GridPanel 
                                                             ID="grdOrders" 
                                                             runat="server" 
-                                                            StoreID="dsOrders" 
+                                                            StoreID="dsOrders"
+                                                            Border="false"
                                                             TrackMouseOver="true">
                                                             <ColumnModel>
                                                                 <Columns>
@@ -427,7 +428,7 @@
                                                     </Center>
                                                     
                                                     <South Split="true">
-                                                        <ext:Panel ID="SouthPanel" runat="server" Collapsible="true" Title="Order" Collapsed="true" Height="360">
+                                                        <ext:Panel ID="SouthPanel" runat="server" Border="true" Collapsible="true" Title="Order" Collapsed="true" Height="350">
                                                             <Body>
                                                                 <uc1:OrderDetails runat="server" />
                                                             </Body>

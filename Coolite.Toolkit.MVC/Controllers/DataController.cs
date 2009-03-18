@@ -360,28 +360,27 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult CustomerAddressBookReport()
         {
-            var query = (from c in this.DBContext.Customers
-                         group c by c.ContactName[0] into custs
-                         select new
-                                    {
-                                        Letter = custs.Key,
-                                        Customers = (from cust in custs
-                                                     select new
-                                                                {
-                                                                    cust.CustomerID,
-                                                                    cust.CompanyName,
-                                                                    Email = cust.Email??"",
-                                                                    ContactName = cust.ContactName??"",
-                                                                    Address = cust.Address??"",
-                                                                    City = cust.City??"",
-                                                                    Region = cust.Region??"",
-                                                                    PostalCode = cust.PostalCode??"",
-                                                                    Country = cust.Country??""
-                                                                })
-                                    });
+            var query = from c in this.DBContext.Customers
+                        group c by c.ContactName[0] into custs
+                        select new
+                        {
+                            Letter = custs.Key,
+                            Customers = from cust in custs
+                                        select new
+                                        {
+                                            cust.CustomerID,
+                                            cust.CompanyName,
+                                            Email = cust.Email ?? "",
+                                            ContactName = cust.ContactName ?? "",
+                                            Address = cust.Address ?? "",
+                                            City = cust.City ?? "",
+                                            Region = cust.Region ?? "",
+                                            PostalCode = cust.PostalCode ?? "",
+                                            Country = cust.Country ?? ""
+                                        }
+                        };
 
             return new AjaxStoreResult(query);
         }
-
     }
 }

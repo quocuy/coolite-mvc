@@ -11,21 +11,9 @@ namespace Coolite.Ext.Web.MVC
             this.Script = script;
         }
 
-        private string script;
-
-        public string Script
-        {
-            get { return this.script; }
-            set { this.script = value; }
-        }
-
-        private string errorMessage;
-
-        public string ErrorMessage
-        {
-            get { return this.errorMessage; }
-            set { this.errorMessage = value; }
-        }
+        public string Script { get; set; }
+        public string Result { get; set; }
+        public string ErrorMessage { get; set; }
 
         private ParameterCollection extraParamsResponse;
         public ParameterCollection ExtraParamsResponse
@@ -44,6 +32,8 @@ namespace Coolite.Ext.Web.MVC
         public override void ExecuteResult(ControllerContext context)
         {
             AjaxResponse response = new AjaxResponse();
+
+            response.Result = this.Result;
 
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {

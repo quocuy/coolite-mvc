@@ -24,7 +24,7 @@
             }
 
             return msg;
-        }
+        };
 
         var failureHandler = function (form, action) {
             Ext.MessageBox.show({
@@ -33,11 +33,11 @@
                 buttons: Ext.MessageBox.OK,
                 icon: Ext.MessageBox.ERROR
             });
-        }
-
-        var successHandler = function (form, action) {
-            Ext.MessageBox.alert('Success', getMsg(action));
-        }
+        };
+        
+        var success = function (result) {
+            eval(result.script);  
+        };
     </script>
 
 </head>
@@ -62,10 +62,7 @@
                                         <Body>
                                             <ext:FormLayout ID="FormLayout2" runat="server">
                                                 <ext:Anchor Horizontal="95%">
-                                                    <ext:TextField ID="TextField1" runat="server" FieldLabel="First Name" AllowBlank="false" />
-                                                </ext:Anchor>
-                                                <ext:Anchor Horizontal="95%">
-                                                    <ext:TextField ID="TextField2" runat="server" FieldLabel="Company" AllowBlank="false" />
+                                                    <ext:TextField ID="txtName" runat="server" FieldLabel="Name" AllowBlank="false" />
                                                 </ext:Anchor>
                                             </ext:FormLayout>
                                         </Body>
@@ -76,10 +73,7 @@
                                         <Body>
                                             <ext:FormLayout ID="FormLayout3" runat="server">
                                                 <ext:Anchor Horizontal="95%">
-                                                    <ext:TextField ID="TextField3" runat="server" FieldLabel="Last Name" AllowBlank="false" />
-                                                </ext:Anchor>
-                                                <ext:Anchor Horizontal="95%">
-                                                    <ext:TextField ID="TextField4" runat="server" FieldLabel="Email" Vtype="email" AllowBlank="false" />
+                                                    <ext:TextField ID="txtEmail" runat="server" FieldLabel="Email" AllowBlank="false" />
                                                 </ext:Anchor>
                                             </ext:FormLayout>
                                         </Body>
@@ -90,26 +84,16 @@
                     </ext:Panel>
                 </ext:Anchor>
                 <ext:Anchor Horizontal="98%">
-                    <ext:HtmlEditor ID="HtmlEditor1" runat="server" FieldLabel="Biography" Height="200" AllowBlank="false" />
+                    <ext:HtmlEditor ID="txtComments" runat="server" FieldLabel="Comments" Height="200" AllowBlank="false" />
                 </ext:Anchor>
             </ext:FormLayout>
         </Body>
         <Buttons>
             <ext:Button runat="server" Text="Send">
                 <Listeners>
-                    <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'send'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
+                    <Click Handler="#{FormPanel1}.form.submit({ waitMsg:'Sending...', success: success });" />
                 </Listeners>
             </ext:Button>
-            <%--<ext:Button runat="server" Text="Send with failure 'Email' field">
-                <Listeners>
-                    <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'error'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
-                </Listeners>
-            </ext:Button>--%>
-            <%--<ext:Button runat="server" Text="Send (emulate exception on server side)">
-                <Listeners>
-                    <Click Handler="#{FormPanel1}.form.submit({ params:{action: 'error1'},waitMsg:'Sending...', failure: failureHandler, success: successHandler});" />
-                </Listeners>
-            </ext:Button>--%>
         </Buttons>
     </ext:FormPanel>
 </body>
