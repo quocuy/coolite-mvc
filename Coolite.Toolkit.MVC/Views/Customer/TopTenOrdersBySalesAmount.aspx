@@ -58,6 +58,7 @@
                     <SelectionModel>
                         <ext:RowSelectionModel runat="server" />
                     </SelectionModel>
+                    <LoadMask ShowMask="true" />
                 </ext:GridPanel>
             </ext:FitLayout>
         </Body>

@@ -32,7 +32,8 @@ Northwind = {
                     mode: 'iframe',
                     noCache: true,
                     maskMsg: "Loading '" + config.title + "'...",
-                    scripts: true
+                    scripts: true,
+                    passParentSize: config.passParentSize
                 }
             });
         } else {

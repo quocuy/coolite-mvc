@@ -22,11 +22,17 @@ namespace Coolite.Toolkit.MVC.Controllers
         {
             if (!string.IsNullOrEmpty(filter))
             {
+                int id;
+                if (!int.TryParse(filter, out id))
+                {
+                    id = -1;
+                }
                 var query = from c in this.DBContext.Customers
 
                             /// HACK: Simple search needs to be replaced with 'real' search
-                            where (c.CompanyName.ToLower().Contains(filter.ToLower()) || 
-                                   c.CustomerID.ToLower().Contains(filter.ToLower())) 
+                            where (c.CompanyName.ToLower().Contains(filter.ToLower()) ||
+                                   c.CustomerID == id
+                                  ) 
 
                             select c;
 
@@ -37,11 +43,17 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetCustomersSimple(string filter)
         {
+            int id;
+            if (!int.TryParse(filter, out id))
+            {
+                id = -1;
+            }
+
             var query = from c in this.DBContext.Customers
 
                         /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
-                               c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
+                               c.CustomerID == id ||
                                c.ContactName.ToLower().StartsWith(filter.ToLower()))
 
                         select new
@@ -56,11 +68,17 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxStoreResult GetCustomersPaging(string filter, int start, int limit)
         {
+            int id;
+            if (!int.TryParse(filter, out id))
+            {
+                id = -1;
+            }
+
             var query = from c in this.DBContext.Customers
                         
                         /// HACK: Simple search hack needs to be replaced with 'real' search
                         where (c.CompanyName.ToLower().StartsWith(filter.ToLower()) ||
-                               c.CustomerID.ToLower().StartsWith(filter.ToLower()) ||
+                               c.CustomerID == id ||
                                c.ContactName.ToLower().StartsWith(filter.ToLower()))
                         select new
                         {
@@ -97,7 +115,7 @@ namespace Coolite.Toolkit.MVC.Controllers
             return new AjaxStoreResult(this.DBContext.Top_Ten_Orders_By_Sales_Amounts);
         }
 
-        public AjaxResult DeleteCustomer(string id)
+        public AjaxResult DeleteCustomer(int id)
         {
             AjaxResult response = new AjaxResult();
             try
@@ -135,12 +153,12 @@ namespace Coolite.Toolkit.MVC.Controllers
                 if(string.IsNullOrEmpty(id))
                 {
                     customer = new Customer();
-                    customer.CustomerID = Guid.NewGuid().ToString().GetHashCode().ToString();
                     isNew = true;
                 }
                 else
                 {
-                    customer = (from c in this.DBContext.Customers where c.CustomerID == id select c).First();
+                    int intId = int.Parse(id);
+                    customer = (from c in this.DBContext.Customers where c.CustomerID == intId select c).First();
                 }
                 
                 customer.CompanyName = values["CompanyName"];
@@ -165,7 +183,7 @@ namespace Coolite.Toolkit.MVC.Controllers
 
                 this.DBContext.SubmitChanges();
 
-                response.ExtraParams["newID"] = customer.CustomerID;
+                response.ExtraParams["newID"] = customer.CustomerID.ToString();
             }
             catch (Exception e)
             {
@@ -230,14 +248,14 @@ namespace Coolite.Toolkit.MVC.Controllers
                 {
                     db.Customers.Attach(customer);
                     db.Customers.DeleteOnSubmit(customer);
-                    confirmationList[customer.CustomerID].ConfirmRecord();
+                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Updated)
                 {
                     db.Customers.Attach(customer);
                     db.Refresh(RefreshMode.KeepCurrentValues, customer);
-                    confirmationList[customer.CustomerID].ConfirmRecord();
+                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Created)
@@ -253,17 +271,17 @@ namespace Coolite.Toolkit.MVC.Controllers
 
                 foreach (Customer customer in data.Deleted)
                 {
-                    confirmationList[customer.CustomerID].ConfirmRecord();
+                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Updated)
                 {
-                    confirmationList[customer.CustomerID].ConfirmRecord();
+                    confirmationList[customer.CustomerID.ToString()].ConfirmRecord();
                 }
 
                 foreach (Customer customer in data.Created)
                 {
-                    confirmationList[customer.TemporaryID.ToString()].ConfirmRecord(customer.CustomerID);
+                    confirmationList[customer.TemporaryID.ToString()].ConfirmRecord(customer.CustomerID.ToString());
                 }
 
 
@@ -336,7 +354,7 @@ namespace Coolite.Toolkit.MVC.Controllers
             return new AjaxStoreResult(query, total);
         }
 
-        public AjaxStoreResult GetCustomerOrders(string customerID)
+        public AjaxStoreResult GetCustomerOrders(int customerID)
         {
             var query = from o in this.DBContext.Orders
                         where o.CustomerID == customerID
@@ -350,6 +368,17 @@ namespace Coolite.Toolkit.MVC.Controllers
                              o.RequiredDate,
                              o.ShippedDate
                          };
+
+            return new AjaxStoreResult(query);
+        }
+
+        public AjaxStoreResult GetOrdersYears()
+        {
+            var query = (from o in this.DBContext.Orders
+                        select new
+                                   {
+                                       o.OrderDate.Value.Year
+                                   }).Distinct().OrderBy("Year");
 
             return new AjaxStoreResult(query);
         }

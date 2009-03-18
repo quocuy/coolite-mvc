@@ -12,10 +12,23 @@
                                 <CustomConfig>
                                     <ext:ConfigItem Name="url" Value="/Report/CustomerAddressBook/" Mode="Value" />
                                 </CustomConfig>
-                            </ext:MenuItem>                           
+                            </ext:MenuItem>                
+                            
+                            <ext:MenuItem runat="server" Text="Total Sales By Employee" Icon="ChartBar">
+                                <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Chart/TotalByEmployee/" Mode="Value" />
+                                    <ext:ConfigItem Name="passParentSize" Value="true" Mode="Raw" />
+                                </CustomConfig>
+                            </ext:MenuItem>            
+                            
+                            <ext:MenuItem runat="server" Text="Product Sales By Category" Icon="ChartBar">
+                                <CustomConfig>
+                                    <ext:ConfigItem Name="url" Value="/Chart/ProductSalesByCategory/" Mode="Value" />
+                                </CustomConfig>
+                            </ext:MenuItem>         
                         </Items>
                         <Listeners>
-                            <ItemClick Handler="Northwind.addTab({ title: menuItem.text, url: menuItem.url, icon: menuItem.iconCls });" />
+                            <ItemClick Handler="Northwind.addTab({ title: menuItem.text, url: menuItem.url, icon: menuItem.iconCls, passParentSize: menuItem.passParentSize});" />
                         </Listeners>
                     </Menu>                    
                 </ext:MenuPanel>

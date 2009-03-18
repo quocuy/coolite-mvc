@@ -85,6 +85,7 @@
     <Compile Include="Code\AjaxResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseDataController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\HelpersController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -127,6 +128,9 @@
     <Content Include="Resources\ReferenceAssemblies\Coolite.Ext.Web.dll" />
     <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="Views\Chart\GetProductsSalesByCategoryImage.aspx" />
+    <Content Include="Views\Chart\ProductSalesByCategory.aspx" />
+    <Content Include="Views\Chart\TotalByEmployee.aspx" />
     <Content Include="Views\Home\Dashboard.aspx" />
     <Content Include="Views\Order\OrderDetails.aspx" />
     <Content Include="Views\Order\OrderDetails.ascx" />
@@ -187,7 +191,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55527</DevelopmentServerPort>
+          <DevelopmentServerPort>50393</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

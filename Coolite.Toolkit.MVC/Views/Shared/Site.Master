@@ -109,7 +109,7 @@
                                 Title="Home" 
                                 Icon="ApplicationForm" 
                                 Border="false">
-                                <AutoLoad Url="/Home/Dashboard/" Mode="IFrame" ShowMask="true" MaskMsg="Loading 'Daskboard'..." />
+                                <AutoLoad Url="/Home/Dashboard/" Mode="IFrame" ShowMask="true" MaskMsg="Loading 'Dashboard'..." />
                             </ext:Tab>                        
                         </Tabs>
                         <Plugins>
@@ -133,7 +133,8 @@
                                                     Border="false"
                                                     Height="225">
                                                     <Tabs>
-                                                        <ext:Tab ID="Tab2" runat="server" Title="Item 1" />
+                                                        <ext:Tab ID="Tab2" runat="server" Title="Item 1">
+                                                        </ext:Tab>
                                                         <ext:Tab ID="Tab3" runat="server" Title="Item 2" />
                                                     </Tabs>
                                                 </ext:TabPanel>
