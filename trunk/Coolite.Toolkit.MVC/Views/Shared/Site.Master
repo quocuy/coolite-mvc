@@ -122,7 +122,7 @@
                         <Body>
                             <ext:BorderLayout ID="layoutWest" runat="server">
                                 <North>
-                                    <ext:Panel ID="Panel3" runat="server" Title="Properties" AutoHeight="true">
+                                    <ext:Panel ID="Panel3" runat="server" Title="Chart Here" AutoHeight="true">
                                         <Body>
                                             <ext:FitLayout ID="fitWest" runat="server">
                                                 <ext:TabPanel 

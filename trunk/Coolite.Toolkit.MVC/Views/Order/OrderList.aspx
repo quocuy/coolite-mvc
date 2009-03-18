@@ -8,8 +8,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title></title>
-    
-        
     <script type="text/javascript">
         var commandHandler = function (cmd, record) {
             switch (cmd) {
@@ -61,24 +59,19 @@
                     Header="false"
                     Border="false"
                     StoreID="dsOrders" 
+                    ClicksToEdit="1"
+                    TrackMouseOver="true"
                     AutoExpandColumn="CompanyName">
                     <ColumnModel ID="ColumnModel1" runat="server">
                         <Columns> 
-                            <ext:CommandColumn Width="30">
-                                <Commands>
-                                    <ext:GridCommand CommandName="view" Icon="ApplicationFormEdit">
-                                        <ToolTip Text="Show order details" />
-                                    </ext:GridCommand>
-                                </Commands>
-                            </ext:CommandColumn>
                             <ext:Column ColumnID="OrderID" DataIndex="OrderID" Header="ID" />
-                            <ext:Column ColumnID="OrderDate" DataIndex="OrderDate" Header="Order Date">
-                                 <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
-                            </ext:Column>
-                            <ext:Column ColumnID="Salesperson" DataIndex="Salesperson" Header="Salesperson" />
                             <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company" />
+                            <ext:Column ColumnID="Salesperson" DataIndex="Salesperson" Header="Salesperson" />
+                            <ext:Column ColumnID="OrderDate" DataIndex="OrderDate" Header="Order Date">
+                                 <Renderer Fn="Ext.util.Format.dateRenderer('Y-M-d')" />
+                            </ext:Column>
                             <ext:Column ColumnID="ShippedDate" DataIndex="ShippedDate" Header="Ship Date">
-                                 <Renderer Fn="Ext.util.Format.dateRenderer('d M Y')" />
+                                 <Renderer Fn="Ext.util.Format.dateRenderer('Y-M-d')" />
                             </ext:Column>
                             <ext:Column ColumnID="Freight" DataIndex="Freight" Header="Shipping">
                                 <Renderer Format="UsMoney" />
@@ -86,11 +79,18 @@
                             <ext:Column ColumnID="Total" DataIndex="Total" Header="Total">
                                 <Renderer Format="UsMoney" />
                             </ext:Column>
+                            <ext:CommandColumn Width="30">
+                                <Commands>
+                                    <ext:GridCommand CommandName="view" Icon="ApplicationFormEdit">
+                                        <ToolTip Text="Show order details" />
+                                    </ext:GridCommand>
+                                </Commands>
+                            </ext:CommandColumn>
                         </Columns>
                     </ColumnModel>
-                    <SelectionModel>
+                    <%--<SelectionModel>
                         <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" SingleSelect="true" />
-                    </SelectionModel>
+                    </SelectionModel>--%>
                     <BottomBar>
                         <ext:PagingToolbar ID="PagingToolbar1" runat="server" StoreID="dsOrders" PageSize="15" />
                     </BottomBar>

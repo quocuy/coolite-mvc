@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Coolite.Utilities;
+using Coolite.Ext.Web.MVC;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
@@ -36,20 +37,15 @@ namespace Coolite.Toolkit.MVC.Controllers
             return this.View();
         }
 
-        public void SaveForm(string action, string TextField1, string TextField2, string TextField3, string TextField4, string HtmlEditor1)
+        public AjaxResult SaveForm(string txtName, string txtEmail, string txtComments)
         {
-            switch(action)
-            {
-                case "send":
-                    CompressionUtils.GZipResponse("{success: true,errors:[{id:'0',msg:'Send is complete!!!'}]}");
-                    break;
-                case "error":
-                    CompressionUtils.GZipResponse("{success: false,errors:[{id:'TextField4',msg:'Oops... Email incorrect!'}]}");
-                    break;
-                case "error1":
-                    CompressionUtils.GZipResponse("{success: false,errors:[{id:'-',msg:'Oops... Internal server error!'}]}");
-                    break;
-            }
+            AjaxResult result = new AjaxResult();
+
+            result.Script = "Ext.Msg.alert('Success', 'Bug report sent');";
+
+            return result;
+
+            //CompressionUtils.GZipResponse("{success: true, errors:[{id:'0',msg:'Send is complete!!!'}]}");
         }
     }
 }

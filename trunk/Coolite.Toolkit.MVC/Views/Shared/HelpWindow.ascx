@@ -17,7 +17,7 @@
                 <Tabs>
                     <ext:Tab ID="tabInfo" runat="server" Title="Info" BodyStyle="padding:5px;background-color:#fff;">
                         <Body>
-                            Northind Traders web application using 
+                            Northind Traders Web Administration v1.0 using 
                             <a href="http://www.coolite.com/" target="_blank">Coolite Toolkit</a>, 
                             <a href="http://www.extjs.com/" target="_blank">ExtJS</a> and 
                             <a href="http://www.asp.net/mvc/" target="_blank">ASP.NET MVC</a>
