@@ -12,8 +12,27 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         public AjaxResult GetTimestamp()
         {
-            string script = string.Concat("TextItem1.setText(", JSON.Serialize(DateTime.Now.ToString()), ")");
-            return new AjaxResult(script);
+            JsonObject company = new JsonObject();
+
+            company.Add("name", "Coolite");
+            company.Add("country", "Canada");
+
+            JsonObject customer = new JsonObject();
+
+            customer.Add("name", "Geoff");
+            customer.Add("email", "geoff@coolite.com");
+            customer.Add("company", company);
+
+            JsonObject obj = new JsonObject();
+
+            obj.Add("date", DateTime.Now);
+            obj.Add("day", DateTime.Now.ToString("dddd"));
+            obj.Add("month", DateTime.Now.ToString("MMMM"));
+            obj.Add("year", DateTime.Now.Year);
+            obj.Add("leapyear", DateTime.IsLeapYear(DateTime.Now.Year));
+            obj.Add("customer", customer);
+
+            return new AjaxResult(obj);
         }
 
         //public AjaxResult GetThemeUrl(string theme)
