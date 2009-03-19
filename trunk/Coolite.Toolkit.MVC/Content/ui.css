@@ -1,3 +1,7 @@
-﻿.white-menu .x-menu {
+﻿body {
+    font: normal 12px tahoma, arial, verdana;
+}
+
+.white-menu .x-menu {
     background:white !important;
 }

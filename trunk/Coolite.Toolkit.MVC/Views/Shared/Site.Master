@@ -118,32 +118,22 @@
                     </ext:TabPanel>
                 </Center>
                 <East Collapsible="true" Split="true" CollapseMode="Mini" MarginsSummary="0 4 4 0">
-                    <ext:Panel ID="Panel2" runat="server" Width="225" Border="false">
+                    <ext:Panel runat="server" Width="225" Border="false">
                         <Body>
-                            <ext:BorderLayout ID="layoutWest" runat="server">
+                            <ext:BorderLayout runat="server">
                                 <North>
-                                    <ext:Panel ID="Panel3" runat="server" Title="Chart Here" AutoHeight="true">
-                                        <Body>
-                                            <ext:FitLayout ID="fitWest" runat="server">
-                                                <ext:TabPanel 
-                                                    ID="TabPanel1" 
-                                                    runat="server" 
-                                                    ActiveTabIndex="0" 
-                                                    TabPosition="Bottom"
-                                                    Border="false"
-                                                    Height="225">
-                                                    <Tabs>
-                                                        <ext:Tab ID="Tab2" runat="server" Title="Item 1">
-                                                        </ext:Tab>
-                                                        <ext:Tab ID="Tab3" runat="server" Title="Item 2" />
-                                                    </Tabs>
-                                                </ext:TabPanel>
-                                            </ext:FitLayout>
-                                        </Body>
+                                    <ext:Panel runat="server" Title="Sales Summary" Height="225">
+                                        <AutoLoad Url="/Chart/TotalByEmployee/" PassParentSize="true" />
                                     </ext:Panel>
                                 </North>
                                 <Center MarginsSummary="4 0 0 0">
-                                    <ext:Panel ID="pnlSomething" runat="server" Title="Something Here" />
+                                    <ext:Panel 
+                                        runat="server" 
+                                        Title="Company Chat" 
+                                        Icon="Comments" 
+                                        BodyStyle="padding:5px;" 
+                                        Html="<span style='color:#999'>admin:</span> chat is coming...">
+                                    </ext:Panel>
                                 </Center>
                             </ext:BorderLayout>
                         </Body>
