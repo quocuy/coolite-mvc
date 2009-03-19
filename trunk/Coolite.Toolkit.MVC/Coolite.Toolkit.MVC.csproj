@@ -117,6 +117,8 @@
       <DependentUpon>NORTHWND.MDF</DependentUpon>
     </Content>
     <Content Include="Content\group-expand-sprite.gif" />
+    <Content Include="Content\HomeSchema.xml" />
+    <Content Include="Content\icon.png" />
     <Content Include="Content\ui.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -124,6 +126,7 @@
     <Content Include="Resources\ReferenceAssemblies\Coolite.Ext.Web.dll" />
     <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
     <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="Views\Chart\SalesByYear.aspx" />
     <Content Include="Views\Chart\GetProductsSalesByCategoryImage.aspx" />
     <Content Include="Views\Chart\ProductSalesByCategory.aspx" />
     <Content Include="Views\Chart\TotalByEmployee.aspx" />

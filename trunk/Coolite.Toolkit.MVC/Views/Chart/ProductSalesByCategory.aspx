@@ -43,6 +43,7 @@
                     <TopBar>
                         <ext:Toolbar runat="server">
                             <Items>
+                                <ext:ToolbarTextItem runat="server" Text="Year: "></ext:ToolbarTextItem>
                                 <ext:ComboBox 
                                     ID="cbxYear" 
                                     runat="server" 

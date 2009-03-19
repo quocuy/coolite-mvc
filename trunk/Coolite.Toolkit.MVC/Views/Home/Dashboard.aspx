@@ -9,70 +9,133 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
     <title></title>
+    
+    <style type="text/css">
+        div.item-wrap {
+	        float: left;
+	        border : 1px solid transparent;
+	        margin: 5px 25px 5px 25px;
+	        width: 100px;
+	        cursor: pointer;
+	        height: 120px;
+	        text-align:center;
+        }
+
+        div.item-wrap img {
+	        margin: 5px 0px 0px 5px;
+	        width: 61px;
+	        height: 77px;
+        }
+
+        div.item-wrap h6 {
+	        font-size: 14px;
+	        color: #3A4B5B;
+	        font-family: tahoma,arial,san-serif;
+        }
+        
+        .items-view .x-view-over { border: solid 1px silver; }
+
+        #items-ct { padding: 20px 30px 24px 30px; }
+
+        #items-ct h2 {
+            border-bottom: 2px solid #3A4B5B;           
+            cursor:pointer;      
+        }
+
+        #items-ct h2 div {
+            background:transparent url(/Content/group-expand-sprite.gif) no-repeat 3px -47px;
+            padding:4px 4px 4px 17px;
+            font-family: tahoma,arial,san-serif;
+            font-size: 12px;
+            color: #3A4B5B;
+        }
+
+        #items-ct .collapsed h2 div { background-position: 3px 3px; }
+        #items-ct dl { margin-left: 2px; }
+        #items-ct .collapsed dl { display:none; }
+
+    </style>
+    
+    <script type="text/javascript">
+
+        var selectionChanged = function(dv, nodes) {
+            if (nodes.length > 0) {
+                var panel = nodes[0].getAttribute('ext:panel');
+                var menu = nodes[0].getAttribute('ext:menu');
+
+                if (!Ext.isEmpty(panel, false)) {
+                    parent.window[panel].expand();
+                }
+
+                if (!Ext.isEmpty(menu, false)) {
+                    parent.window[menu].parentMenu.fireEvent("itemclick", parent.window[menu]);
+                }
+            }
+        }
+        
+        var viewClick = function(dv, e) {
+            var group = e.getTarget('h2', 3, true);
+            if (group) {
+                group.up('div').toggleClass('collapsed');
+            }
+        }
+    </script>
 </head>
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server"/>
     
-    <ext:Panel ID="Panel1" runat="server" Border="false" AutoHeight="true" BodyStyle="padding:5px;" Html="Dashboard Here... need stuff" />
-    
-    <%--<ext:Store runat="server" ID="Store1" AutoLoad="true" DataSource='<%# ViewData["Data"] as List<string> %>'>
+    <ext:Store runat="server" ID="Store1" AutoLoad="true">
+        <Proxy>
+            <ext:HttpProxy Url="/Data/GetHomeSchema/"></ext:HttpProxy>
+        </Proxy>
         <Reader>
-            <ext:JsonReader>
+            <ext:JsonReader Root="data">
                 <Fields>
-                    <ext:RecordField Name="title" />
+                    <ext:RecordField Name="Title" />
+                    <ext:RecordField Name="Items" />
                 </Fields>
             </ext:JsonReader>
         </Reader>
-    </ext:Store>--%>
-
-    <%--<ext:ViewPort ID="ViewPort1" runat="server">
+    </ext:Store>
+    
+    <ext:Panel ID="DashBoardPanel" runat="server" Cls="items-view" AutoHeight="true" Border="false">
         <Body>
-            <ext:FitLayout ID="FitLayout2" runat="server">    
-                <ext:Panel ID="ImagePanel" runat="server" Cls="images-view" AutoHeight="true" Border="false">
-                    <Body>
-                        <ext:FitLayout ID="FitLayout1" runat="server">
-                            <ext:DataView 
-                                ID="DataView1" 
-                                runat="server" 
-                                StoreID="Store1"
-                                SingleSelect="true"
-                                OverClass="x-view-over" 
-                                ItemSelector="div.thumb-wrap" 
-                                AutoHeight="true" 
-                                EmptyText="No examples to display">
-                                <Template ID="Template1" runat="server">
-                                    <div id="sample-ct">
-                                        <tpl for=".">
-                                            <div>
-                                                <a name="{id}"></a>
-                                                <h2><div>{title}</div></h2>
-                                                <dl>
-                                                    <tpl for="samples">
-                                                        <div class="thumb-wrap" ext:url="{url}" ext:id="{id}">
-                                                            <img src="{imgUrl}" title="{title}"/>
-                                                            <div>
-                                                                <H6>{sub}</H6>
-                                                                <H4>{title}</H4>
-                                                                <P>{desc}</P>
-                                                            </div>
-                                                        </div>
-                                                    </tpl>
-                                                    <div style="clear:left"></div>
-                                                 </dl>
+            <ext:FitLayout runat="server">
+                <ext:DataView 
+                    runat="server" 
+                    StoreID="Store1" 
+                    SingleSelect="true"
+                    OverClass="x-view-over" 
+                    ItemSelector="div.item-wrap" 
+                    AutoHeight="true" 
+                    EmptyText="No items to display">
+                    <Template runat="server">
+                        <div id="items-ct">
+                            <tpl for=".">
+                                <div>
+                                    <h2><div>{Title}</div></h2>
+                                    <dl>
+                                        <tpl for="Items">
+                                            <div class="item-wrap" ext:panel="{Accordion}" ext:menu="{MenuItem}">
+                                                <img src="{Icon}"/>
+                                                <div>
+                                                    <H6>{Title}</H6>                                                    
+                                                </div>
                                             </div>
                                         </tpl>
-                                    </div>
-                                </Template>
-                                <Listeners>
-                                    <SelectionChange Fn="selectionChaged" />
-                                    <ContainerClick Fn="viewClick" />
-                                </Listeners>
-                            </ext:DataView>
-                        </ext:FitLayout>
-                    </Body>
-                </ext:Panel>
+                                        <div style="clear:left"></div>
+                                     </dl>
+                                </div>
+                            </tpl>
+                        </div>
+                    </Template>
+                    <Listeners>
+                        <SelectionChange Fn="selectionChanged" />
+                        <ContainerClick Fn="viewClick" />
+                    </Listeners>
+                </ext:DataView>
             </ext:FitLayout>
         </Body>
-    </ext:ViewPort>--%>
+    </ext:Panel>
 </body>
 </html>

@@ -122,8 +122,8 @@
                         <Body>
                             <ext:BorderLayout runat="server">
                                 <North>
-                                    <ext:Panel runat="server" Title="Sales Summary" Height="225">
-                                        <AutoLoad Url="/Chart/TotalByEmployee/" PassParentSize="true" />
+                                    <ext:Panel runat="server" Title="Sales By Year Summary" Height="225">
+                                        <AutoLoad Url="/Chart/SalesByYear/" ShowMask="true" PassParentSize="true" />
                                     </ext:Panel>
                                 </North>
                                 <Center MarginsSummary="4 0 0 0">

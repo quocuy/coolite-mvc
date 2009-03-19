@@ -37,15 +37,13 @@ namespace Coolite.Toolkit.MVC.Controllers
             return this.View();
         }
 
-        public AjaxResult SaveForm(string txtName, string txtEmail, string txtComments)
+        public AjaxFormResult SaveForm(string txtName, string txtEmail, string txtComments)
         {
-            AjaxResult result = new AjaxResult();
+            AjaxFormResult result = new AjaxFormResult();
 
-            result.Script = "Ext.Msg.alert('Success', 'Bug report sent');";
-
+            result.Success = true;
+            result.ExtraParams["script"] = "Ext.Msg.alert('Success', 'Bug report sent');";
             return result;
-
-            //CompressionUtils.GZipResponse("{success: true, errors:[{id:'0',msg:'Send is complete!!!'}]}");
         }
     }
 }

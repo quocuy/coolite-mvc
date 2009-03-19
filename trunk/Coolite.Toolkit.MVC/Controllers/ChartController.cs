@@ -42,5 +42,21 @@ namespace Coolite.Toolkit.MVC.Controllers
             this.ViewData["year"] = year;
             return this.View(query.ToList());
         }
+
+        public ActionResult SalesByYear()
+        {
+            var query = (from o in this.DBContext.Orders
+                         group o by o.OrderDate.Value.Year into orders
+                         select new
+                         {
+                             Year = orders.Key,
+                             Total = (from oy in orders
+                                      join od in this.DBContext.Order_Details on oy.OrderID equals od.OrderID 
+                                      select od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)
+                                     ).Sum()
+                         }).OrderBy("Total DESC");
+
+            return this.View(query.ToList());
+        }
     }
 }
