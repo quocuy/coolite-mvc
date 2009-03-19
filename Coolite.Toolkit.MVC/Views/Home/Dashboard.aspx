@@ -13,7 +13,7 @@
 <body>
     <ext:ScriptManager ID="ScriptManager1" runat="server"/>
     
-    <ext:Panel ID="Panel1" runat="server" Border="false" AutoHeight="true" BodyStyle="padding:5px;" Html="Dashboard Here... need stuff here" />
+    <ext:Panel ID="Panel1" runat="server" Border="false" AutoHeight="true" BodyStyle="padding:5px;" Html="Dashboard Here... need stuff" />
     
     <%--<ext:Store runat="server" ID="Store1" AutoLoad="true" DataSource='<%# ViewData["Data"] as List<string> %>'>
         <Reader>

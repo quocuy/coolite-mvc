@@ -9,13 +9,14 @@
 <head runat="server">
     <title>Northwind Traders - Sample web application using the Coolite Toolkit, ExtJS and ASP.NET MVC</title>    
     <style type="text/css">
-        h1, h2  {
+        h1 {
             font: normal 60px tahoma, arial, verdana;
             color: #E1E1E1;
         }
         
         h2 {
-            font-size: 20px;
+            font: normal 20px tahoma, arial, verdana;
+            color: #E1E1E1;
         }
         
         h2 a {
@@ -84,12 +85,6 @@
             </ext:FitLayout>
         </Body>
         <Buttons>
-            <%--<ext:Button ID="Button1" runat="server" Text="Login" Icon="Accept">     
-                <Listeners>
-                    <Click Handler="#{FormPanel1}.form.submit({waitMsg:'Checking...'});" />
-                </Listeners>                           
-            </ext:Button>--%>
-            <%--<ext:LinkButton ID="btnForgot" runat="server" Text="Forgot Password" />--%>
             <ext:Button runat="server" Text="Login" Icon="Accept">
                 <AjaxEvents>
                     <Click 
