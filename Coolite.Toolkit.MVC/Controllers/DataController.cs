@@ -4,9 +4,11 @@ using System.Data.Linq;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Coolite.Ext.Web;
 using Coolite.Ext.Web.MVC;
 using System.Linq.Dynamic;
+using System.Xml.Linq;
 using Coolite.Toolkit.MVC.Models;
 
 namespace Coolite.Toolkit.MVC.Controllers
@@ -14,6 +16,28 @@ namespace Coolite.Toolkit.MVC.Controllers
     [HandleError]
     public class DataController : BaseDataController
     {
+        public AjaxStoreResult GetHomeSchema()
+        {
+            XElement document = XElement.Load(Server.MapPath("~/Content/HomeSchema.xml"));
+            var defaultIcon = document.Attribute("defaultIcon") != null ? document.Attribute("defaultIcon").Value : "";
+            var query = from g in document.Elements("group")
+                        select new
+                                   {
+                                       Title = g.Attribute("title") != null ? g.Attribute("title").Value : "",
+                                       Items = (from i in g.Elements("item") 
+                                                select new
+                                                           {
+                                                               Title = i.Element("title") != null ? i.Element("title").Value : "",
+                                                               Icon = i.Element("item-icon") != null ? i.Element("item-icon").Value : defaultIcon,
+                                                               Accordion = i.Element("accordion-item") != null ? i.Element("accordion-item").Value : "",
+                                                               MenuItem = i.Element("menu-item") != null ? i.Element("menu-item").Value : ""
+                                                           }
+                                                )
+                                   };
+
+            return new AjaxStoreResult(query);
+        }
+        
         //********************//
         //      Customer      //
         //********************//

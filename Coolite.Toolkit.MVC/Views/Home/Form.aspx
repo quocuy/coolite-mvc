@@ -35,8 +35,8 @@
             });
         };
         
-        var success = function (result) {
-            eval(result.script);  
+        var success = function (form,action) {
+            eval(action.result.extraParams.script);  
         };
     </script>
 
