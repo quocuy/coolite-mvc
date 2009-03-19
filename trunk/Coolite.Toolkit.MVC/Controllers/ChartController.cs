@@ -1,7 +1,6 @@
 using System.Linq;
-using System.Web.Mvc;
 using System.Linq.Dynamic;
-using Coolite.Toolkit.MVC.Models;
+using System.Web.Mvc;
 
 namespace Coolite.Toolkit.MVC.Controllers
 {
@@ -19,12 +18,12 @@ namespace Coolite.Toolkit.MVC.Controllers
                                     ).Sum()
                         }).OrderBy("Total DESC");
 
-            return View(query.ToList());
+            return this.View(query.ToList());
         }
 
         public ActionResult ProductSalesByCategory()
         {
-            return View();
+            return this.View();
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -40,8 +39,8 @@ namespace Coolite.Toolkit.MVC.Controllers
                                       select od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount)
                                      ).Sum()
                          }).OrderBy("Total DESC");
-            ViewData["year"] = year;
-            return View(query.ToList());
+            this.ViewData["year"] = year;
+            return this.View(query.ToList());
         }
     }
 }
