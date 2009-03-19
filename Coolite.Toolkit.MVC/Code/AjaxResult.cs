@@ -11,8 +11,13 @@ namespace Coolite.Ext.Web.MVC
             this.Script = script;
         }
 
+        public AjaxResult(object result)
+        {
+            this.Result = result;
+        }
+
         public string Script { get; set; }
-        public string Result { get; set; }
+        public object Result { get; set; }
         public string ErrorMessage { get; set; }
 
         private ParameterCollection extraParamsResponse;
