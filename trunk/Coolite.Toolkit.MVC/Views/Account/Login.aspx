@@ -99,7 +99,7 @@
                            buttons: Ext.Msg.OK,
                            icon:    Ext.MessageBox.ERROR
                         });">
-                        <EventMask MinDelay="1000" />
+                        <EventMask MinDelay="500" />
                         <ExtraParams>
                             <ext:Parameter Name="ReturnUrl" Value="Ext.urlDecode(String(document.location).split('?')[1]).r || '/'" Mode="Raw" />
                         </ExtraParams>
