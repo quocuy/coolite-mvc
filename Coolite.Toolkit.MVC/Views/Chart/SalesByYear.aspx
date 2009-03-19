@@ -1,52 +1,56 @@
 <%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
 
 <%@ Import Namespace="Coolite.Toolkit.MVC" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
-
-    <script runat="server">
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            IEnumerable data = this.Model as IEnumerable;
-
-            if (!string.IsNullOrEmpty(this.Request["height"]))
-            {
-                Chart1.Height = int.Parse(this.Request["height"]);
-            }
-
-            if (!string.IsNullOrEmpty(this.Request["width"]))
-            {
-                Chart1.Width = int.Parse(this.Request["width"]);
-            }
-
-            Chart1.Series["Default"].Points.DataBind(data, "Year", "Total", "");
-            Chart1.Series["Default"]["PieLabelStyle"] = "Inside";
-
-            double max = 0;
-            DataPoint maxPoint = null;
-            foreach (DataPoint point in Chart1.Series["Default"].Points)
-            {
-                point["Exploded"] = "false";
-                if (point.YValues[0] > max)
-                {
-                    max = point.YValues[0];
-                    maxPoint = point;
-                }
-            }
-            if (maxPoint != null)
-            {
-                maxPoint["Exploded"] = "true";
-            }
-
-            Chart1.Series[0]["PieDrawingStyle"] = "Concave";
+    <style type="text/css">
+        body {
+            padding: 0px;
+            margin: 0px;
         }
-    </script>
-
+    </style>
 </head>
-<body style="margin: 0px; padding: 0px;" scroll="no">
+<body>
+    <% 
+        IEnumerable data = this.Model as IEnumerable;
+
+        if (!string.IsNullOrEmpty(this.Request["height"]))
+        {
+            Chart1.Height = int.Parse(this.Request["height"]);
+        }
+
+        if (!string.IsNullOrEmpty(this.Request["width"]))
+        {
+            Chart1.Width = int.Parse(this.Request["width"]);
+        }
+
+        Chart1.Series["Default"].Points.DataBind(data, "Year", "Total", "");
+        Chart1.Series["Default"]["PieLabelStyle"] = "Inside";
+
+        double max = 0;
+        DataPoint maxPoint = null;
+        foreach (DataPoint point in Chart1.Series["Default"].Points)
+        {
+            point["Exploded"] = "false";
+            if (point.YValues[0] > max)
+            {
+                max = point.YValues[0];
+                maxPoint = point;
+            }
+        }
+        if (maxPoint != null)
+        {
+            maxPoint["Exploded"] = "true";
+        }
+
+        Chart1.Series[0]["PieDrawingStyle"] = "Concave";
+    %>
+
     <asp:Chart ID="Chart1" runat="server" Palette="BrightPastel" BackColor="WhiteSmoke"
         Height="400px" Width="800px" BorderDashStyle="Solid" BackSecondaryColor="White"
         BackGradientStyle="TopBottom" BorderWidth="0" BorderColor="26, 59, 105">
