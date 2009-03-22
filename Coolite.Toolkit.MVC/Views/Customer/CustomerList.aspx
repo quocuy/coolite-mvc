@@ -60,12 +60,6 @@
             <ext:Parameter Name="sort" Value="CustomerID" />
         </BaseParams>
         <SortInfo Field="CustomerID" Direction="ASC" />
-        <%--<Listeners>
-            <LoadException Handler="Ext.Msg.alert('Customers - Load failed', e.message || e )" />
-            <CommitFailed Handler="Ext.Msg.alert('Customers - Commit failed', 'Reason: ' + msg)" />
-            <SaveException Handler="Ext.Msg.alert('Customers - Save failed', e.message || e)" />
-            <CommitDone Handler="Ext.Msg.alert('Customers - Commit', 'The data successfully saved');" />
-        </Listeners>--%>   
     </ext:Store>
     
     <ext:ViewPort runat="server">
@@ -84,7 +78,7 @@
                         <Columns>
                             <ext:Column ColumnID="CustomerID" DataIndex="CustomerID" Header="ID">
                                 <Editor>
-                                    <ext:TextField runat="server" MaxLength="5" AllowBlank="false"></ext:TextField>
+                                    <ext:TextField runat="server" MaxLength="5" AllowBlank="false" />
                                 </Editor>
                             </ext:Column>                               
                             <ext:Column ColumnID="CompanyName" DataIndex="CompanyName" Header="Company Name">
@@ -92,13 +86,11 @@
                                     <ext:TextField runat="server" AllowBlank="false" />
                                 </Editor>
                             </ext:Column>
-                            
                             <ext:Column ColumnID="ContactName" DataIndex="ContactName" Header="Contact Name" Width="150">
                                 <Editor>
                                     <ext:TextField runat="server" AllowBlank="false" />
                                 </Editor>
                             </ext:Column>
-                            
                             <ext:Column ColumnID="Email" DataIndex="Email" Header="Email">
                                 <Editor>
                                     <ext:TextField runat="server" Vtype="email" />
@@ -119,11 +111,16 @@
                                     <ext:TextField runat="server" />
                                 </Editor>
                             </ext:Column>
-                            <ext:CommandColumn Width="50" Hideable="false">
+                            <ext:CommandColumn Width="25" Hideable="false">
                                 <Commands>
                                     <ext:GridCommand CommandName="edit" Icon="ApplicationFormEdit">
-                                        <ToolTip Text="Edit"></ToolTip>
+                                        <ToolTip Text="Edit" />
                                     </ext:GridCommand>
+                                </Commands>
+                                <PrepareToolbar Handler="toolbar.setVisible(!record.newRecord);" />
+                            </ext:CommandColumn>
+                            <ext:CommandColumn Width="25" Hideable="false">
+                                <Commands>
                                     <ext:GridCommand CommandName="delete" Icon="Cross">
                                         <ToolTip Text="Delete" />
                                     </ext:GridCommand>
@@ -132,9 +129,6 @@
                             </ext:CommandColumn>
                         </Columns>
                     </ColumnModel>
-                    <%--<SelectionModel>
-                        <ext:RowSelectionModel ID="RowSelectionModel1" runat="server" SingleSelect="true" />
-                    </SelectionModel>--%>
                     <TopBar>
                         <ext:Toolbar ID="Toolbar1" runat="server">
                             <Items>
