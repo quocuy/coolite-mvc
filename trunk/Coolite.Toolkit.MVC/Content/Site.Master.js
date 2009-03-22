@@ -38,6 +38,7 @@ Northwind = {
             });
         } else {
             tp.setActiveTab(tab);
+            Ext.get(tab.tabEl).frame();
         }
     }
 };
