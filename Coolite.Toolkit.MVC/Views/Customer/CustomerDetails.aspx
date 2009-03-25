@@ -109,7 +109,7 @@
     
     <ext:Store ID="dsCustomer" runat="server" ShowWarningOnFailure="true">
         <Proxy>
-            <ext:HttpProxy Url="/Data/GetCustomer/"/>
+            <ext:HttpProxy Url="/Data/GetCustomer/" />
         </Proxy>
         <Reader>
             <ext:JsonReader ReaderID="CustomerID" Root="data" TotalProperty="totalCount">
@@ -257,9 +257,14 @@
                                                 </table>
                                             </tpl>
                                         </tpl>
-                                    </Template>    
+                                    </Template>
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" HideTrigger="true" />
+                                    </Triggers>
                                     <Listeners>
-                                        <Select Handler="#{txtSearch}.setValue('');#{txtFilter}.setValue(el.getValue());" />
+                                        <BeforeQuery Handler="this.triggers[0][ this.getRawValue().toString().length == 0 ? 'hide' : 'show']();" />
+                                        <TriggerClick Handler="if(index == 0) { el.focus().clearValue(); trigger.hide(); #{txtFilter}.setValue(''); }" />
+                                        <Select Handler="el.triggers[0].show(); #{txtSearch}.setValue(''); #{txtFilter}.setValue(el.getValue());" />
                                         <Blur Handler="if(Ext.isEmpty(el.getText())) { el.setValue(''); #{txtFilter}.setValue(''); };" />
                                     </Listeners>
                                 </ext:ComboBox>                                   
