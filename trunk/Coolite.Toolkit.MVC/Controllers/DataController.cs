@@ -18,7 +18,7 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         public AjaxStoreResult GetHomeSchema()
         {
-            XElement document = XElement.Load(Server.MapPath("~/Content/HomeSchema.xml"));
+            XElement document = XElement.Load(Server.MapPath("~/resources/images/HomeSchema.xml"));
             var defaultIcon = document.Attribute("defaultIcon") != null ? document.Attribute("defaultIcon").Value : "";
             var query = from g in document.Elements("group")
                         select new
