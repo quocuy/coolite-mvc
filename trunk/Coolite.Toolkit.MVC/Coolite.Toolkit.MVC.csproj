@@ -116,16 +116,18 @@
     <Content Include="App_Data\NORTHWND_log.ldf">
       <DependentUpon>NORTHWND.MDF</DependentUpon>
     </Content>
-    <Content Include="Content\group-expand-sprite.gif" />
-    <Content Include="Content\HomeSchema.xml" />
-    <Content Include="Content\icon.png" />
-    <Content Include="Content\ui.css" />
+    <Content Include="Build\ReferenceAssemblies\Coolite.Ext.Web.dll" />
+    <Content Include="Build\ReferenceAssemblies\Coolite.Utilities.dll" />
+    <Content Include="Build\ReferenceAssemblies\Newtonsoft.Json.dll" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="License\License.txt" />
-    <Content Include="Resources\ReferenceAssemblies\Coolite.Ext.Web.dll" />
-    <Content Include="Resources\ReferenceAssemblies\Coolite.Utilities.dll" />
-    <Content Include="Resources\ReferenceAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="Resources\css\site.css" />
+    <Content Include="Resources\css\ui.css" />
+    <Content Include="Resources\images\group-expand-sprite.gif" />
+    <Content Include="Resources\images\HomeSchema.xml" />
+    <Content Include="Resources\images\icon.png" />
+    <Content Include="Resources\js\site.js" />
     <Content Include="Views\Chart\SalesByYear.aspx" />
     <Content Include="Views\Chart\GetProductsSalesByCategoryImage.aspx" />
     <Content Include="Views\Chart\ProductSalesByCategory.aspx" />
@@ -143,9 +145,7 @@
     <Content Include="Views\Report\CustomerAddressBook.aspx" />
     <Content Include="Views\Shared\HelpWindow.ascx" />
     <Content Include="Views\Shared\WestMenu.ascx" />
-    <Content Include="Content\Site.Master.js" />
     <Content Include="Web.config" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Account\ChangePassword.aspx" />
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\Login.aspx" />
