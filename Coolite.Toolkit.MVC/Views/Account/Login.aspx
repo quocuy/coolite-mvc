@@ -89,6 +89,7 @@
                 <AjaxEvents>
                     <Click 
                         Url="/Account/Login/" 
+                        Timeout="60000"
                         FormID="form1"
                         CleanRequest="true" 
                         Method="POST"

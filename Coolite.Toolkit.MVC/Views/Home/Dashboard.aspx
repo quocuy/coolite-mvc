@@ -43,7 +43,7 @@
         }
 
         #items-ct h2 div {
-            background:transparent url(/Content/group-expand-sprite.gif) no-repeat 3px -47px;
+            background:transparent url(/resources/images/group-expand-sprite.gif) no-repeat 3px -47px;
             padding:4px 4px 4px 17px;
             font-family: tahoma,arial,san-serif;
             font-size: 12px;
@@ -86,7 +86,7 @@
     
     <ext:Store runat="server" ID="Store1" AutoLoad="true">
         <Proxy>
-            <ext:HttpProxy Url="/Data/GetHomeSchema/"></ext:HttpProxy>
+            <ext:HttpProxy Url="/Data/GetHomeSchema/" />
         </Proxy>
         <Reader>
             <ext:JsonReader Root="data">
