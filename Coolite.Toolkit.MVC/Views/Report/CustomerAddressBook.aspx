@@ -47,7 +47,7 @@
         #customers-ct .letter-row div {
             border-bottom: 2px solid #99bbe8;
             cursor: pointer;
-            background: transparent url(/Content/group-expand-sprite.gif) no-repeat 0px -39px;
+            background: transparent url(/resources/images/group-expand-sprite.gif) no-repeat 0px -39px;
             margin-bottom: 5px;
         }
 
