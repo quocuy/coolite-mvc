@@ -39,11 +39,10 @@ namespace Coolite.Toolkit.MVC.Controllers
 
         public AjaxFormResult SaveForm(string txtName, string txtEmail, string txtComments)
         {
+
             AjaxFormResult result = new AjaxFormResult();
 
-            result.Success = true;
-
-            result.ExtraParams["script"] = "Ext.Msg.alert('Success', 'Bug report sent');";
+            result.Script = Ext.Web.Ext.Msg.Alert("Success", "Bug report sent").InstanceScript;
             
             return result;
         }

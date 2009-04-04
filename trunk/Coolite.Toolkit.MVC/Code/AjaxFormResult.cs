@@ -9,6 +9,11 @@ namespace Coolite.Ext.Web.MVC
 {
     public class AjaxFormResult : ActionResult
     {
+        public AjaxFormResult() { }
+
+        [ClientConfig]
+        public string Script { get; set; }
+
         private bool success = true;
 
         [ClientConfig]

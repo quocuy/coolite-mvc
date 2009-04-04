@@ -35,14 +35,16 @@
             });
         };
         
-        var success = function (form,action) {
-            eval(action.result.extraParams.script);  
+        var success = function (form, action) {
+            eval(action.result.script);  
         };
     </script>
 
 </head>
+
 <body>
-    <% Ext.Msg.Alert("Hello","World"); %>
+
+    <% Ext.Msg.Alert("Alert", "Inline MessageBox"); %>
     
     <ext:ScriptManager runat="server" />
     
