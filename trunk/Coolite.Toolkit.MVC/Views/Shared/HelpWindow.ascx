@@ -17,10 +17,10 @@
                 <Tabs>
                     <ext:Tab ID="tabInfo" runat="server" Title="Info" BodyStyle="padding:5px;background-color:#fff;">
                         <Body>
-                            Northind Traders Web Administration v1.0 using 
-                            <a href="http://www.coolite.com/" target="_blank">Coolite Toolkit</a>, 
-                            <a href="http://www.extjs.com/" target="_blank">ExtJS</a> and 
-                            <a href="http://www.asp.net/mvc/" target="_blank">ASP.NET MVC</a>
+                            Northind Traders Web Administration v0.8 using:<br /><br />
+                            <a href="http://www.coolite.com/" target="_blank">Coolite Toolkit v0.8</a><br /><br />
+                            <a href="http://www.extjs.com/" target="_blank">ExtJS v2.2.1</a><br /><br /> 
+                            <a href="http://www.asp.net/mvc/" target="_blank">ASP.NET MVC V1.0</a>
                         </Body>
                     </ext:Tab>
                     <ext:Tab ID="tabCredits" runat="server" Title="Credits" BodyStyle="padding:5px;background-color:#fff;">
