@@ -42,7 +42,7 @@ namespace Coolite.Toolkit.MVC.Controllers
 
             AjaxFormResult result = new AjaxFormResult();
 
-            result.Script = Ext.Web.Ext.Msg.Alert("Success", "Bug report sent").InstanceScript;
+            result.Script = Ext.Web.Ext.Msg.Alert("Success", "Bug report sent").ToScript();
             
             return result;
         }
