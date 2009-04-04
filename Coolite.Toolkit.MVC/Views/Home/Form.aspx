@@ -42,6 +42,8 @@
 
 </head>
 <body>
+    <% Ext.Msg.Alert("Hello","World"); %>
+    
     <ext:ScriptManager runat="server" />
     
     <ext:FormPanel 

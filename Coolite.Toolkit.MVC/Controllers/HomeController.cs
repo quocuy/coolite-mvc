@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Coolite.Utilities;
+using Coolite.Ext.Web;
 using Coolite.Ext.Web.MVC;
 
 namespace Coolite.Toolkit.MVC.Controllers
@@ -10,7 +10,7 @@ namespace Coolite.Toolkit.MVC.Controllers
     {
         public ActionResult Index()
         {
-            this.ViewData["AppName"] = "<b>Northwind Traders</b>";
+            this.ViewData["AppName"] = "<b>Northwind Traders</b> (v0.8)";
             this.ViewData["Username"] = this.HttpContext.User.Identity.Name;
 
             return this.View();
@@ -42,7 +42,9 @@ namespace Coolite.Toolkit.MVC.Controllers
             AjaxFormResult result = new AjaxFormResult();
 
             result.Success = true;
+
             result.ExtraParams["script"] = "Ext.Msg.alert('Success', 'Bug report sent');";
+            
             return result;
         }
     }
