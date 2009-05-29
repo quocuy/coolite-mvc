@@ -62,7 +62,7 @@ namespace Coolite.Ext.Web.MVC
             {
                 if (this.ExtraParams.Count > 0)
                 {
-                   return ExtraParams.ToJsonObject();
+                   return ExtraParams.ToJson();
                 }
 
                 return "";
@@ -71,7 +71,7 @@ namespace Coolite.Ext.Web.MVC
 
         public override void ExecuteResult(ControllerContext context)
         {
-            CompressionUtils.GZipResponse(new ClientConfig().Serialize(this));
+            CompressionUtils.GZip(new ClientConfig().Serialize(this));
         }
     }
 
