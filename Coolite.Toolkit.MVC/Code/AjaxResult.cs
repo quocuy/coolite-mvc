@@ -54,7 +54,7 @@ namespace Coolite.Ext.Web.MVC
 
                 if (this.ExtraParamsResponse.Count > 0)
                 {
-                    response.ExtraParamsResponse = this.ExtraParamsResponse.ToJsonObject();
+                    response.ExtraParamsResponse = this.ExtraParamsResponse.ToJson();
                 }
             }
             

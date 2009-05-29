@@ -36,6 +36,7 @@
     <h1>Northwind Traders</h1>
     <h2>Powered by the <a href="http://www.coolite.com/">Coolite Toolkit</a>, <a href="http://www.extjs.com/">ExtJS</a> and <a href="http://www.asp.net/mvc/">ASP.NET MVC</a></h2>
     <ext:Window 
+        ID="LoginWindow"
         runat="server" 
         Closable="false"
         Resizable="false"
