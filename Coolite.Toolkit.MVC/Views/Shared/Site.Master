@@ -29,7 +29,7 @@
                         <Items>
                             <ext:Label ID="lblTitle" runat="server" Html='<%# this.ViewData["AppName"] %>' Icon="Coolite" />
                             <ext:ToolbarFill ID="fill1" runat="server" />
-                            <ext:ToolbarButton ID="btnName" runat="server" Icon="StatusOnline" Text='<%# this.ViewData["Username"] %>'>
+                            <ext:ToolbarButton ID="btnName" runat="server" Icon="StatusOnline" Text='<%# this.ViewData["Username"] %>' AutoDataBind="true">
                                 <Menu>
                                     <ext:Menu ID="menu1" runat="server">
                                         <Items>
@@ -132,7 +132,7 @@
                                 <Center MarginsSummary="4 0 0 0">
                                     <ext:Panel 
                                         runat="server" 
-                                        Title="Company Chat" 
+                                        Title="Chat" 
                                         Icon="Comments" 
                                         BodyStyle="padding:5px;" 
                                         Html="<span style='color:#999'>admin:</span> chat is coming...">

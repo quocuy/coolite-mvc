@@ -94,7 +94,7 @@
                         FormID="form1"
                         CleanRequest="true" 
                         Method="POST"
-                        Before="Ext.Msg.wait('Verifying...', 'Login');"
+                        Before="Ext.Msg.wait('Verifying...', 'Authentication');"
                         Failure="Ext.Msg.show({
                            title:   'Login Error',
                            msg:     result.errorMessage,
