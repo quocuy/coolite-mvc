@@ -410,7 +410,7 @@ namespace Coolite.Toolkit.MVC.Controllers
                                             cust.CustomerID,
                                             cust.CompanyName,
                                             Email = cust.Email ?? "",
-                                            ContactName = cust.ContactName ?? "",
+                                            ContactName = cust.ContactName ?? "-[no name]",
                                             Address = cust.Address ?? "",
                                             City = cust.City ?? "",
                                             Region = cust.Region ?? "",

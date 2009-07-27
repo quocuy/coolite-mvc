@@ -221,7 +221,7 @@
                                 </ext:ToolbarButton>
                                 
                                 <ext:ToolbarFill runat="server" />
-                                <ext:Hidden ID="txtFilter" runat="server" Text='<%# ViewData["id"] %>'>
+                                <ext:Hidden ID="txtFilter" runat="server" Text='<%# ViewData["id"] %>' AutoDataBind="true">
                                     <Listeners>
                                         <Change Handler="#{CustomerPager}.changePage(1)" />
                                     </Listeners>

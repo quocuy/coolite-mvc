@@ -5738,7 +5738,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_ContactName", DbType="NVarChar(30)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		[Column(Storage="_ContactName", DbType="NVarChar(30)", UpdateCheck=UpdateCheck.Never)]
 		public string ContactName
 		{
 			get

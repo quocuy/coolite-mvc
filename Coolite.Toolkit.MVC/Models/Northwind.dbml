@@ -329,7 +329,7 @@
     <Type Name="Customer">
       <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="ContactName" AutoSync="Never" Type="System.String" DbType="NVarChar(30)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Never" />
