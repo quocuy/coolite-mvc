@@ -763,7 +763,7 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string CustomerID
 		{
 			get
@@ -2122,7 +2122,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string CustomerID
 		{
 			get
@@ -5698,7 +5698,7 @@ namespace Coolite.Toolkit.MVC.Models
 			OnCreated();
 		}
 		
-		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[Column(Storage="_CustomerID", DbType="NChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string CustomerID
 		{
 			get
@@ -5718,7 +5718,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false)]
+		[Column(Storage="_CompanyName", DbType="NVarChar(40) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string CompanyName
 		{
 			get
@@ -5738,7 +5738,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_ContactName", DbType="NVarChar(30)")]
+		[Column(Storage="_ContactName", DbType="NVarChar(30)", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
 		public string ContactName
 		{
 			get
@@ -5758,7 +5758,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_ContactTitle", DbType="NVarChar(30)")]
+		[Column(Storage="_ContactTitle", DbType="NVarChar(30)", UpdateCheck=UpdateCheck.Never)]
 		public string ContactTitle
 		{
 			get
@@ -5778,7 +5778,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Address", DbType="NVarChar(60)")]
+		[Column(Storage="_Address", DbType="NVarChar(60)", UpdateCheck=UpdateCheck.Never)]
 		public string Address
 		{
 			get
@@ -5798,7 +5798,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_City", DbType="NVarChar(15)")]
+		[Column(Storage="_City", DbType="NVarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string City
 		{
 			get
@@ -5818,7 +5818,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Region", DbType="NVarChar(15)")]
+		[Column(Storage="_Region", DbType="NVarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string Region
 		{
 			get
@@ -5838,7 +5838,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_PostalCode", DbType="NVarChar(10)")]
+		[Column(Storage="_PostalCode", DbType="NVarChar(10)", UpdateCheck=UpdateCheck.Never)]
 		public string PostalCode
 		{
 			get
@@ -5858,7 +5858,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Country", DbType="NVarChar(15)")]
+		[Column(Storage="_Country", DbType="NVarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string Country
 		{
 			get
@@ -5878,7 +5878,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Phone", DbType="NVarChar(24)")]
+		[Column(Storage="_Phone", DbType="NVarChar(24)", UpdateCheck=UpdateCheck.Never)]
 		public string Phone
 		{
 			get
@@ -5898,7 +5898,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Fax", DbType="NVarChar(24)")]
+		[Column(Storage="_Fax", DbType="NVarChar(24)", UpdateCheck=UpdateCheck.Never)]
 		public string Fax
 		{
 			get
@@ -5918,7 +5918,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Mobile", DbType="NVarChar(24)")]
+		[Column(Storage="_Mobile", DbType="NVarChar(24)", UpdateCheck=UpdateCheck.Never)]
 		public string Mobile
 		{
 			get
@@ -5938,7 +5938,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Email", DbType="NVarChar(50)")]
+		[Column(Storage="_Email", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string Email
 		{
 			get
@@ -5958,7 +5958,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_WebPage", DbType="NVarChar(100)")]
+		[Column(Storage="_WebPage", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
 		public string WebPage
 		{
 			get
@@ -5978,7 +5978,7 @@ namespace Coolite.Toolkit.MVC.Models
 			}
 		}
 		
-		[Column(Storage="_Notes", DbType="NVarChar(100)")]
+		[Column(Storage="_Notes", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
 		public string Notes
 		{
 			get
