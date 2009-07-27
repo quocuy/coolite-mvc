@@ -71,7 +71,7 @@ namespace Coolite.Ext.Web.MVC
 
         public override void ExecuteResult(ControllerContext context)
         {
-            CompressionUtils.GZip(new ClientConfig().Serialize(this));
+            CompressionUtils.GZipAndSend(new ClientConfig().Serialize(this));
         }
     }
 

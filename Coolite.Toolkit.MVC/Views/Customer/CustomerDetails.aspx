@@ -49,7 +49,7 @@
                 DetailsForm.form.reset();
                 dsCustomer.removeAll();
                 dsOrders.removeAll();
-                
+
                 var rec = new dsCustomer.recordType();
                 rec.newRecord = true;
                 dsCustomer.add(rec);

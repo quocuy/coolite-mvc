@@ -36,7 +36,7 @@
         </Reader>
     </ext:Store>
     
-    <ext:ViewPort runat="server">
+    <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
             <ext:FitLayout runat="server">
                 <ext:Panel ID="ImgContainer" runat="server" Border="false">

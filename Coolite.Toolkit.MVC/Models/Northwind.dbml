@@ -21,7 +21,7 @@
   </Table>
   <Table Name="dbo.CustomerCustomerDemo" Member="CustomerCustomerDemos">
     <Type Name="CustomerCustomerDemo">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="CustomerTypeID" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="CustomerDemographic_CustomerCustomerDemo" Member="CustomerDemographic" ThisKey="CustomerTypeID" OtherKey="CustomerTypeID" Type="CustomerDemographic" IsForeignKey="true" />
       <Association Name="Customer_CustomerCustomerDemo" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
@@ -82,7 +82,7 @@
   <Table Name="dbo.Orders" Member="Orders">
     <Type Name="Order">
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="RequiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -327,21 +327,21 @@
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
     <Type Name="Customer">
-      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
-      <Column Name="ContactName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="Region" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Column Name="Mobile" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="WebPage" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Notes" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="NChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ContactName" AutoSync="Never" Type="System.String" DbType="NVarChar(30)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactTitle" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Mobile" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WebPage" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Customer_CustomerCustomerDemo" Member="CustomerCustomerDemos" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerCustomerDemo" />
       <Association Name="Customer_Order" Member="Orders" AccessModifier="Internal" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
     </Type>

@@ -62,7 +62,7 @@
         <SortInfo Field="CustomerID" Direction="ASC" />
     </ext:Store>
     
-    <ext:ViewPort runat="server">
+    <ext:ViewPort ID="ViewPort1" runat="server">
         <Body>
             <ext:FitLayout runat="server">
                 <ext:GridPanel 
