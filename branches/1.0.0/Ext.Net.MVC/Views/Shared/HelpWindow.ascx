@@ -11,7 +11,7 @@
     Height="225" 
     Width="350"
     Layout="fit"
-    InitHidden="true">
+    Hidden="true">
     <Items>
             <ext:TabPanel ID="tpHelp" runat="server" Border="false">
                 <Items>

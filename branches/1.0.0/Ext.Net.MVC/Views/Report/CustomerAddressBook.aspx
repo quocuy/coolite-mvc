@@ -188,7 +188,7 @@
         Icon="ApplicationFormEdit" 
         Width="800" 
         Height="610" 
-        InitHidden="true" 
+        Hidden="true" 
         Modal="true"
         Constrain="true">
         <AutoLoad 

@@ -103,7 +103,7 @@
                 </West> 
                 <Center MarginsSummary="0 0 4 0">
                     <ext:TabPanel ID="tpMain" runat="server" EnableTabScroll="true">
-                        <Tabs>
+                        <Items>
                             <ext:Panel 
                                 ID="Tab1" 
                                 runat="server" 
@@ -112,7 +112,7 @@
                                 Border="false">
                                 <AutoLoad Url="/Home/Dashboard/" Mode="IFrame" ShowMask="true" MaskMsg="Loading 'Dashboard'..." />
                             </ext:Panel>                        
-                        </Tabs>
+                        </Items>
                         <Plugins>
                             <ext:TabCloseMenu ID="TabCloseMenu1" runat="server" />
                         </Plugins>
