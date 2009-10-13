@@ -168,7 +168,7 @@
                     LayoutOnTabChange="true" 
                     DeferredRender="false" 
                     Border="false">
-                    <Tabs>
+                    <Items>
                         <ext:Panel ID="tabOrderDetails" runat="server" Title="Products" Layout="fit">
                             <Items>
                                     <ext:GridPanel 
@@ -311,7 +311,7 @@
                                     </ext:FormPanel>
                             </Items>
                         </ext:Panel>
-                    </Tabs>
+                    </Items>
                 </ext:TabPanel>                    
             </Items>
         </ext:Panel>

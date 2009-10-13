@@ -293,7 +293,7 @@
                      </TopBar>
                      <Items>
                         <ext:TabPanel ID="CustomerPanel" runat="server" Border="false" LayoutOnTabChange="true">
-                            <Tabs>
+                            <Items>
                                 <ext:Panel ID="tabGeneralDetails" runat="server" Title="General" BodyStyle="padding:6px;" Layout="Fit">
                                     <Items>
                                         <ext:FormPanel ID="DetailsForm" runat="server" Border="false" Url="/Data/SaveCustomer/" Layout="form" LabelWidth="130">
@@ -466,7 +466,7 @@
                                         <Activate Handler="#{dsOrders}.reload();" />
                                     </Listeners>
                                 </ext:Panel>
-                            </Tabs>
+                            </Items>
                              <BottomBar>
                                 <ext:PagingToolbar 
                                     ID="CustomerPager" 

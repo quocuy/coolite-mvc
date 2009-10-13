@@ -14,7 +14,7 @@
     InitHidden="true">
     <Items>
             <ext:TabPanel ID="tpHelp" runat="server" Border="false">
-                <Tabs>
+                <Items>
                     <ext:Panel ID="tabInfo" runat="server" Title="Info" BodyStyle="padding:5px;background-color:#fff;">
                         <Content>
                             Northind Traders Web Administration v1.0 using:<br /><br />
@@ -43,7 +43,7 @@
                             Licensing information and download of the Ext.Net Toolkit for ASP.NET is available at <a href="http://www.ext.net/download/" target="_blank">http://www.ext.net/download/</a>.
                         </Content>
                     </ext:Panel>
-                </Tabs>
+                </Items>
             </ext:TabPanel>
     </Items>
     <BottomBar>
