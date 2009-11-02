@@ -23,7 +23,7 @@
         <Content>
             <ext:BorderLayout ID="BorderLayout1" runat="server">
                 <North Margins-Bottom="4">
-                    <ext:Toolbar ID="tbHeader" runat="server" AutoHeight="true">
+                    <ext:Toolbar ID="tbHeader" runat="server" Height="25">
                         <Items>
                             <ext:Label ID="lblTitle" runat="server" Html='<%# this.ViewData["AppName"] %>' Icon="Application" AutoDataBind="true" />
                             <ext:ToolbarFill ID="fill1" runat="server" />
