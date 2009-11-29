@@ -237,7 +237,7 @@ namespace Ext.Net.MVC.Controllers
             catch (Exception e)
             {
                 ajaxStoreResult.SaveResponse.Success = false;
-                ajaxStoreResult.SaveResponse.ErrorMessage = e.Message;
+                ajaxStoreResult.SaveResponse.Message = e.Message;
             }
 
             return ajaxStoreResult;
@@ -298,7 +298,7 @@ namespace Ext.Net.MVC.Controllers
             catch (Exception e)
             {
                 ajaxStoreResult.SaveResponse.Success = false;
-                ajaxStoreResult.SaveResponse.ErrorMessage = e.Message;
+                ajaxStoreResult.SaveResponse.Message = e.Message;
             }
 
             return ajaxStoreResult;

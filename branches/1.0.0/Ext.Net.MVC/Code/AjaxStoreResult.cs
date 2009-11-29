@@ -69,7 +69,7 @@ namespace Ext.Net.MVC
                 case StoreResponseFormat.Save:
                     Response response = new Response(true);
                     response.Success = this.SaveResponse.Success;
-                    response.Msg = this.SaveResponse.ErrorMessage;
+                    response.Message = this.SaveResponse.Message;
                     StoreResponseData saveResponse = new StoreResponseData();
                     saveResponse.Confirmation = this.SaveResponse.ConfirmationList;
                     response.Data = saveResponse.ToString();
@@ -91,7 +91,7 @@ namespace Ext.Net.MVC
     public class SaveStoreResponse
     {
         private bool success = true;
-        private string errorMessage;
+        private string message;
 
         public bool Success
         {
@@ -99,10 +99,10 @@ namespace Ext.Net.MVC
             set { this.success = value; }
         }
 
-        public string ErrorMessage
+        public string Message
         {
-            get { return this.errorMessage; }
-            set { this.errorMessage = value; }
+            get { return this.message; }
+            set { this.message = value; }
         }
 
         public ConfirmationList ConfirmationList { get; set; }
