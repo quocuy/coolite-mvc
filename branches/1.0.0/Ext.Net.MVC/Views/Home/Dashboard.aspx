@@ -115,24 +115,26 @@
                     AutoHeight="true" 
                     EmptyText="No items to display">
                     <Template runat="server">
-                        <div id="items-ct">
-                            <tpl for=".">
-                                <div>
-                                    <h2><div>{Title}</div></h2>
-                                    <dl>
-                                        <tpl for="Items">
-                                            <div class="item-wrap" ext:panel="{Accordion}" ext:menu="{MenuItem}">
-                                                <img src="{Icon}"/>
-                                                <div>
-                                                    <H6>{Title}</H6>                                                    
+                        <Html>
+                            <div id="items-ct">
+                                <tpl for=".">
+                                    <div>
+                                        <h2><div>{Title}</div></h2>
+                                        <dl>
+                                            <tpl for="Items">
+                                                <div class="item-wrap" ext:panel="{Accordion}" ext:menu="{MenuItem}">
+                                                    <img src="{Icon}"/>
+                                                    <div>
+                                                        <H6>{Title}</H6>                                                    
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </tpl>
-                                        <div style="clear:left"></div>
-                                     </dl>
-                                </div>
-                            </tpl>
-                        </div>
+                                            </tpl>
+                                            <div style="clear:left"></div>
+                                         </dl>
+                                    </div>
+                                </tpl>
+                            </div>
+                        </Html>
                     </Template>
                     <Listeners>
                         <SelectionChange Fn="selectionChanged" />

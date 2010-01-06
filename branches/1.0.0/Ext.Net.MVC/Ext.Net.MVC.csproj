@@ -87,6 +87,7 @@
     <Compile Include="Code\DynamicLibrary.cs" />
     <Compile Include="Code\AjaxStoreResult.cs" />
     <Compile Include="Code\AjaxResult.cs" />
+    <Compile Include="Code\PartialViewResult.cs" />
     <Compile Include="Code\RestResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseDataController.cs" />

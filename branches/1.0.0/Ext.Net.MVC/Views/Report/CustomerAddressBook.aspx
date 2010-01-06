@@ -142,6 +142,7 @@
         OverClass="cust-name-over"
         EmptyText="No customers to display">
         <Template ID="Template1" runat="server">
+			<Html>
                 <div id="customers-ct">
                     <div class="header">
                         <p>Customer Address Book</p>                                                                        
@@ -175,6 +176,7 @@
                         </tpl>                    
                     </table>
                 </div>
+			</Html>
         </Template>
         <Listeners>
             <ContainerClick Fn="viewClick" />

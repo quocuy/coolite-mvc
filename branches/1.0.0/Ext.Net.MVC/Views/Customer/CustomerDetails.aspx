@@ -242,22 +242,24 @@
                                     PageSize="10"
                                     ItemSelector="tr.list-item">
                                     <Template ID="Template1" runat="server">
-                                        <tpl for=".">
-                                            <tpl if="[xindex] == 1">
-                                                <table class="txtCustomers-list">
-                                                    <tr>
-                                                        <th>Company</th>
-                                                        <th>Contact Name</th>
-                                                    </tr>
-                                            </tpl>
-                                            <tr class="list-item">
-                                                <td style="padding:3px 0px;">{CompanyName}</td>
-                                                <td>{ContactName}</td>
-                                            </tr>
-                                            <tpl if="[xcount-xindex]==0">
-                                                </table>
-                                            </tpl>
-                                        </tpl>
+                                        <Html>
+											<tpl for=".">
+												<tpl if="[xindex] == 1">
+													<table class="txtCustomers-list">
+														<tr>
+															<th>Company</th>
+															<th>Contact Name</th>
+														</tr>
+												</tpl>
+												<tr class="list-item">
+													<td style="padding:3px 0px;">{CompanyName}</td>
+													<td>{ContactName}</td>
+												</tr>
+												<tpl if="[xcount-xindex]==0">
+													</table>
+												</tpl>
+											</tpl>
+										</Html>
                                     </Template>
                                     <Triggers>
                                         <ext:FieldTrigger Icon="Clear" HideTrigger="true" />
