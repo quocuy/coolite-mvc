@@ -101,7 +101,11 @@ namespace Ext.Net.MVC
 
             string script = p.ToScript(this.RenderMode, ct, true);
 
-            if(this.WrapByScriptTag)
+            if(X.IsAjaxRequest)
+            {
+                script = "<Ext.Net.AjaxResponse>" + script + "</Ext.Net.AjaxResponse>";
+            }
+            else if(this.WrapByScriptTag)
             {
                 script = "<script type=\"text/javascript\">" + script + "</script>";
             }
